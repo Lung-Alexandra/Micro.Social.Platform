@@ -18,6 +18,7 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
         options.SignIn.RequireConfirmedAccount = false;
         options.User.RequireUniqueEmail = true;
     })
+    .AddSignInManager<MySignInManager>()
     .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
