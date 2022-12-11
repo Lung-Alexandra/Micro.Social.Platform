@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MicroSocialPlatform.Models;
 
@@ -23,7 +24,7 @@ public class Profile
     public AppUser User { get; set; }
 
     // Data about the user.
-    public string AboutMe { get; set; }
+    public string? AboutMe { get; set; }
 
     // The gender of the user.
     public Gender Gender { get; set; }

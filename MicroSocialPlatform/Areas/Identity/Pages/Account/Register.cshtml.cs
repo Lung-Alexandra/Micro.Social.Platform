@@ -6,6 +6,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
+using MicroSocialPlatform.Data;
 using MicroSocialPlatform.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -25,6 +26,7 @@ public class RegisterModel : PageModel
     private readonly SignInManager<AppUser> _signInManager;
     private readonly UserManager<AppUser> _userManager;
     private readonly IUserStore<AppUser> _userStore;
+    private readonly ApplicationDbContext _db;
 
     public RegisterModel(
         UserManager<AppUser> userManager,
@@ -32,7 +34,8 @@ public class RegisterModel : PageModel
         SignInManager<AppUser> signInManager,
         ILogger<RegisterModel> logger,
         IEmailSender emailSender,
-        RoleManager<IdentityRole> roleManager)
+        RoleManager<IdentityRole> roleManager,
+        ApplicationDbContext db)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -41,6 +44,7 @@ public class RegisterModel : PageModel
         _logger = logger;
         _emailSender = emailSender;
         _roleManager = roleManager;
+        _db = db;
     }
 
     /// <summary>
@@ -85,13 +89,22 @@ public class RegisterModel : PageModel
             {
                 _logger.LogInformation("User created a new account with password.");
 
+                // If the user was created successfully, add its default role.
                 var user_role = await _roleManager.FindByNameAsync("User");
                 // Check if it exists.
                 if (user_role != null)
                 {
                     await _userManager.AddToRoleAsync(user, user_role.Name);
                 }
-                
+
+                // Create an empty profile.
+                var profile = new Profile();
+                profile.User = user;
+                profile.AboutMe = null;
+                profile.Gender = Gender.Unspecified;
+                _db.Profiles.Add(profile);
+                _db.SaveChanges();
+
 
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -154,11 +167,13 @@ public class RegisterModel : PageModel
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
-        
+
         [Required]
-        [RegularExpression(@"^[a-z]+\d*$",ErrorMessage = "The username must contain lowercase letters and can include trailing digits.")]
-        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 4)]
-        [Display(Name="Username")]
+        [RegularExpression(@"^[a-z]+\d*$",
+            ErrorMessage = "The username must contain lowercase letters and can include trailing digits.")]
+        [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            MinimumLength = 4)]
+        [Display(Name = "Username")]
         public string Username { get; set; }
 
         /// <summary>
