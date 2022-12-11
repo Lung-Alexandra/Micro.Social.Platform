@@ -10,6 +10,13 @@ public enum Gender
     Unspecified
 }
 
+// The visibility of the profile.
+public enum Visibility
+{
+    Public,
+    Private
+}
+
 // This class defines the profile of the user. 
 public class Profile
 {
@@ -28,4 +35,7 @@ public class Profile
 
     // The gender of the user.
     public Gender Gender { get; set; }
+   
+    // If the profile is private or not.
+    public Visibility Visibility { get; set; }
 }

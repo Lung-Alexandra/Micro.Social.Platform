@@ -99,9 +99,11 @@ public class RegisterModel : PageModel
 
                 // Create an empty profile.
                 var profile = new Profile();
+                // Default settings.
                 profile.User = user;
                 profile.AboutMe = null;
                 profile.Gender = Gender.Unspecified;
+                profile.Visibility = Visibility.Private;
                 _db.Profiles.Add(profile);
                 _db.SaveChanges();
 
