@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using MicroSocialPlatform.Data;
 using MicroSocialPlatform.Misc;
 using Microsoft.AspNetCore.Identity;
@@ -8,9 +9,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-var server_version = ServerVersion.AutoDetect(connectionString);
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseMySql(connectionString,server_version));
+
+// Check if the platform is linux.
+if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+{
+    //Use mysql server on this platform.
+    var server_version = ServerVersion.AutoDetect(connectionString);
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseMySql(connectionString, server_version));
+}
+else
+{
+    builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(connectionString));
+}
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<AppUser>(options =>
