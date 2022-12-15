@@ -130,7 +130,7 @@ body{
     letter-spacing: 0.1em;
     font-weight: 500;
 }
-#lll{
+#buttonColor{
     width: 120px;
     background-color: #8e4ca9;
     box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
@@ -138,7 +138,7 @@ body{
     15px 10px 15px rgba(0,0,0,0.025);
 }
 
-#lll:hover{
+#buttonColor:hover{
     width: 150px;
 }
 

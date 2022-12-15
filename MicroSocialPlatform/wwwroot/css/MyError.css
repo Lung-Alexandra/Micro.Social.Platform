@@ -1,0 +1,80 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: radial-gradient(#412752,#0d0d0d);
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    text-align: center;
+    overflow: hidden;
+    
+}
+.container{
+    align-items: center;
+    text-align: center;
+}
+.page_error{
+    padding:40px 0;
+    font-family: 'Poppins', serif;
+    height: 100vh;
+}
+.page_error  img{
+    width:100%;
+}
+
+.error_bg{
+    margin-top: 30px;
+    background-image: url('../gif/output-onlinegiftools.gif');
+    height: 60vh;
+    width: 90vh;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+h1{
+    font-size:80px;
+    color:beige;
+}
+.error_bg h1{
+    margin-top: -50px;
+    font-size:15px;
+    color:beige;
+}
+.error_bg h3{
+    margin-top: -10px;
+    font-size:15px;
+    color:beige;
+}
+
+.link_error{
+    margin-top:-100px!important;
+    color: beige!important;
+    padding: 10px 10px;
+    width: 130px;
+    border-radius: 50px;
+    background: #412752;
+    box-shadow: inset -20px -20px 18px #544569,
+    inset 20px 20px 18px #653c7f;
+}
+
+
+.link_error:hover{
+    width: 150px;
+    cursor: pointer;
+    background: #0a0a0a;
+    box-shadow: inset -20px -20px 18px #656466,
+    inset 20px 20px 18px #343334;
+    color: #f5f3f3 !important;
+}
+
+.contant_box_error{
+    margin-top:-70px;
+    color: bisque;
+}

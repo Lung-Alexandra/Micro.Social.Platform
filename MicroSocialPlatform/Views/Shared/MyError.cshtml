@@ -3,11 +3,22 @@
 
 <html>
 <head>
-    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="/css/MyError.css">
 </head>
 <body>
-<div>
-    <p> An error has occured : @Model.Error</p>
-</div>
+	<section class="page_error">
+		<div class="container">
+			<h1 class="text-center ">Error</h1>
+			<div class="error_bg">
+				<h1>An error has occured :</h1>
+				<h3>@Model.Error</h3>
+			</div>
+			
+			<div class="contant_box_error">
+				<a class="link_error" asp-route="start">Go to Home</a>
+			</div>
+			
+		</div>
+	</section>
 </body>
 </html>
