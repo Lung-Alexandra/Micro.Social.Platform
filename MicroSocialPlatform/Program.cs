@@ -64,8 +64,23 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    "default",
-    "{controller=Home}/{action=Index}/");
+    name: "start",
+    pattern: "/",
+    defaults:
+    new { controller = "Home", action = "Index" }
+);
+app.MapControllerRoute(
+    name: "profile",
+    pattern: "/profile/{id}",
+    defaults:
+    new { controller = "Profile", action = "Index" }
+);
+app.MapControllerRoute(
+    name: "edit_profile",
+    pattern: "/profile/edit/{id}",
+    defaults:
+    new { controller = "Profile", action = "Edit" }
+);
 app.MapRazorPages();
 
 app.Run();

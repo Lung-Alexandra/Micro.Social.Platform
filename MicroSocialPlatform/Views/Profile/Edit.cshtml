@@ -1,0 +1,24 @@
+@model MicroSocialPlatform.Models.Profile; 
+
+<h1> Edit profile</h1>
+
+<div>
+    @using (Html.BeginForm(actionName: "Edit",
+        controllerName: "Profile",
+        method: FormMethod.Post,
+        routeValues: new { id = Model.Id}
+        ))
+    {
+        @Html.Label("AboutMe", "About me")
+        <br/>
+        @Html.EditorFor(m => m.AboutMe)
+        <br/>
+
+        @Html.Label("Gender", "My gender")
+        <br/>
+        @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList))
+        <br/>
+        <button type="submit">Edit profile</button>
+    }
+
+</div>

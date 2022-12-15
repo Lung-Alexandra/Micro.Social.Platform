@@ -19,36 +19,78 @@ public class ProfileController : Controller
         _userManager = userManager;
     }
 
-    // Shows the profile of the user.
     [Authorize(Roles = "User,Admin")]
-    public IActionResult Index()
+    // Shows the profile given by id.
+    public IActionResult Index(int id)
     {
-        var userId = _userManager.GetUserId(User);
-        if (userId == null)
+        var profile = _db.Profiles.Find(id);
+        if (profile == null)
         {
-            ViewBag.Error = "The user does not exist.";
+            ViewBag.Error = "The given profile does not exist.";
             return View("MyError");
         }
 
-        // Try to read the user data from the database.
-        try
-        {
-            var user = _db.Users.Include("UserProfile").First(x => x.Id == userId);
-            ViewBag.Profile = user.UserProfile;
-            ViewBag.User = user;
-        }
-        catch (InvalidOperationException e)
-        {
-            ViewBag.Error = "The user does not exist.";
-            return View("MyError");
-        }
+        ViewBag.Profile = profile;
         return View();
     }
 
-    // Edits the profile of the user.
     [Authorize(Roles = "User,Admin")]
-    public IActionResult Edit()
+    [HttpGet]
+    // Shows the edit page for the profile with the given id.
+    public IActionResult Edit(int id)
     {
-        return View();
+        Profile profile;
+        // Try to read the profile from the database.
+        try
+        {
+            profile = _db.Profiles.Include("User").First(x => x.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            ViewBag.Error = "The profile does not exist.";
+            return View("MyError");
+        }
+
+        // Only the user owning the profile or an admin can change the profile.
+        var userId = _userManager.GetUserId(User);
+        if (userId == profile.User.Id || User.IsInRole("Admin"))
+        {
+            var genderList = new List<Gender> { Gender.Male, Gender.Female, Gender.Unspecified };
+            ViewBag.GenderList = genderList;
+            return View(profile);
+        }
+
+        ViewBag.Error = "You cannot edit another user's profile.";
+        return View("MyError");
+    }
+
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Edits the profile with the given id.
+    public IActionResult Edit(int id, Profile new_profile)
+    {
+        Profile profile;
+        // Try to read the profile from the database.
+        try
+        {
+            profile = _db.Profiles.Include("User").First(x => x.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            ViewBag.Error = "The profile does not exist.";
+            return View("MyError");
+        }
+
+        var userId = _userManager.GetUserId(User);
+        if (userId == profile.User.Id || User.IsInRole("Admin"))
+        {
+            profile.AboutMe = new_profile.AboutMe;
+            profile.Gender = new_profile.Gender;
+            _db.SaveChanges();
+            return RedirectToAction("Index", new { id });
+        }
+
+        ViewBag.Error = "You cannot edit another user's profile.";
+        return View("MyError");
     }
 }
