@@ -12,11 +12,13 @@ public class ProfileController : Controller
 {
     private readonly ApplicationDbContext _db;
     private readonly UserManager<AppUser> _userManager;
+    private readonly List<Gender> _genderList;
 
     public ProfileController(ApplicationDbContext db, UserManager<AppUser> userManager)
     {
         _db = db;
         _userManager = userManager;
+        _genderList = new List<Gender> { Gender.Male, Gender.Female, Gender.Unspecified };
     }
 
     [Authorize(Roles = "User,Admin")]
@@ -52,8 +54,7 @@ public class ProfileController : Controller
         var userId = _userManager.GetUserId(User);
         if (userId == profile.User.Id || User.IsInRole("Admin"))
         {
-            var genderList = new List<Gender> { Gender.Male, Gender.Female, Gender.Unspecified };
-            ViewBag.GenderList = genderList;
+            ViewBag.GenderList = _genderList;
             return View(profile);
         }
 
@@ -76,15 +77,22 @@ public class ProfileController : Controller
             return View("MyError", new ErrorView("The profile does not exist."));
         }
 
-        var userId = _userManager.GetUserId(User);
-        if (userId == profile.User.Id || User.IsInRole("Admin"))
+        // Check if the model respects all constraints.
+        if (ModelState.IsValid)
         {
-            profile.AboutMe = new_profile.AboutMe;
-            profile.Gender = new_profile.Gender;
-            _db.SaveChanges();
-            return RedirectToAction("Index", new { id });
+            var userId = _userManager.GetUserId(User);
+            if (userId == profile.User.Id || User.IsInRole("Admin"))
+            {
+                profile.AboutMe = new_profile.AboutMe;
+                profile.Gender = new_profile.Gender;
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id });
+            }
+
+            return View("MyError", new ErrorView("You cannot edit another user's profile"));
         }
 
-        return View("MyError", new ErrorView("You cannot edit another user's profile"));
+        ViewBag.GenderList = _genderList;
+        return View(profile);
     }
 }

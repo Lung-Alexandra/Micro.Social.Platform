@@ -12,6 +12,7 @@
         @Html.Label("AboutMe", "About me")
         <br/>
         @Html.EditorFor(m => m.AboutMe)
+        @Html.ValidationMessageFor(m => m.AboutMe, null)
         <br/>
 
         @Html.Label("Gender", "My gender")
