@@ -26,12 +26,10 @@ public class ProfileController : Controller
         var profile = _db.Profiles.Find(id);
         if (profile == null)
         {
-            ViewBag.Error = "The given profile does not exist.";
-            return View("MyError");
+            return View("MyError", new ErrorView("The profile does not exist."));
         }
 
-        ViewBag.Profile = profile;
-        return View();
+        return View(profile);
     }
 
     [Authorize(Roles = "User,Admin")]
@@ -47,8 +45,7 @@ public class ProfileController : Controller
         }
         catch (InvalidOperationException)
         {
-            ViewBag.Error = "The profile does not exist.";
-            return View("MyError");
+            return View("MyError", new ErrorView("The profile does not exist."));
         }
 
         // Only the user owning the profile or an admin can change the profile.
@@ -60,8 +57,7 @@ public class ProfileController : Controller
             return View(profile);
         }
 
-        ViewBag.Error = "You cannot edit another user's profile.";
-        return View("MyError");
+        return View("MyError", new ErrorView("You cannot edit another user's profile"));
     }
 
     [Authorize(Roles = "User,Admin")]
@@ -77,8 +73,7 @@ public class ProfileController : Controller
         }
         catch (InvalidOperationException)
         {
-            ViewBag.Error = "The profile does not exist.";
-            return View("MyError");
+            return View("MyError", new ErrorView("The profile does not exist."));
         }
 
         var userId = _userManager.GetUserId(User);
@@ -90,7 +85,6 @@ public class ProfileController : Controller
             return RedirectToAction("Index", new { id });
         }
 
-        ViewBag.Error = "You cannot edit another user's profile.";
-        return View("MyError");
+        return View("MyError", new ErrorView("You cannot edit another user's profile"));
     }
 }

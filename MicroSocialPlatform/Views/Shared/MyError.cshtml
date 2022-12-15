@@ -1,4 +1,4 @@
-@using Microsoft.EntityFrameworkCore.Metadata.Internal
+@model ErrorView;
 <!DOCTYPE html>
 
 <html>
@@ -7,7 +7,7 @@
 </head>
 <body>
 <div>
-    <p> An error has occured : @ViewBag.Error</p>
+    <p> An error has occured : @Model.Error</p>
 </div>
 </body>
 </html>
