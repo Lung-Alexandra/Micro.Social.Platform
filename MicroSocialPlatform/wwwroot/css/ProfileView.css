@@ -1,0 +1,21 @@
+﻿*{
+
+}
+body{
+    /*display: flex;*/
+    text-align: center;
+}
+.container{
+    left: 45%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    
+}
+.container .info{
+    position: relative;
+    
+}
+.container .info p{
+    color: bisque!important;
+}
