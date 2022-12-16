@@ -6,15 +6,18 @@ body{
     text-align: center;
 }
 .container{
-    left: 45%;
+    left: 40%;
     position: fixed;
     justify-content: center;
     align-items: center;
+    z-index: -1;
     
 }
 .container .info{
     position: relative;
-    
+    text-align: center;
+    inline-size: 30%;
+    overflow-wrap : break-word;
 }
 .container .info p{
     color: bisque!important;
