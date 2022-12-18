@@ -1,17 +1,97 @@
-﻿.container{
-    left: 40%;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    z-index: -1;
-    
+﻿.profile-container{
+    margin-left:10%;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 3vh 20px;
+    border-radius: 50px;
+    background:  #996678;
+    box-shadow: inset 20px 20px 20px #9f6f80,
+    11px 2px 15px #9f6f80,
+    4px -4px 30px #9f6f80,
+    inset -20px -18px 25px #342636;
+    overflow-x: hidden;
 }
-.container .info{
-    position: relative;
-    text-align: center;
-    inline-size: 30%;
+.user-info{
+    display: flex;
+    flex-direction: row;
+    margin-top:10px;
+    width: auto;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-dp{
+    width: 15vh;
+    height: 15vh;
+    border-radius: 100%;
+}
+.info-container{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+}
+.info-container .username{
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: rgb(25, 25, 25);
+}
+.info-container .name{
+    font-size: 0.8rem;
+}
+.info-container .aboutme{
+    font-size: 0.7rem;
+    inline-size: auto;
     overflow-wrap : break-word;
 }
-.container .info p{
-    color: bisque!important;
+.info-container .website-link{
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: rgba(255, 72, 0, 0.479);
+    font-weight: 500;
+}
+.number-card{
+    font-size: 0.8rem;
+    line-height: 0.01rem;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+}
+.number-card p{
+    display: flex;
+    flex-direction: column;
+
+}
+.number-card span{
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 20px;
+    text-transform: capitalize;
+
+}
+.btn-container{
+    margin-top: 20px;
+    gap:10px;
+    display: flex;
+    flex-direction: row;
+}
+.btn-container .btn{
+    width: 100px;
+    height: 5vh;
+    margin: 0;
+    text-transform: capitalize;
+    cursor: pointer;
+    background: #996678;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.5);
+    border-radius: 49% ;
+}
+.btn a{
+    text-decoration: none;
+    color: black;
 }

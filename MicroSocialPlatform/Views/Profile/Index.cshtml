@@ -3,10 +3,43 @@
     ViewData["Title"] = "Show Profile";
     Layout = "MyLayout";
 }
-<div class="container">
-    <div class="info">
-        <p> User Profile</p>
-        <p> About me : @Model.AboutMe</p>
-        <p> Gender: @Model.Gender</p>
+<div class="profile-container" xmlns="http://www.w3.org/1999/html">
+    <div class ="user-info">
+        <img class="user-dp" src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg"  alt="">
+        <div class = "info-container">
+            <h1 class="name">nume</h1>
+            <p class ="username">nume</p>
+            <p class="aboutme">About me : @Model.AboutMe
+                Gender: @Model.Gender
+            </p>
+            <a herf="cdnksd" class ="website-link"></a>
+        </div>
+        <div class="number-card">
+            <p class ="following-card">
+                2928k<span>Following</span>
+            </p>
+            <p class ="followers-card">
+                28k<span>followers</span>
+            </p>
+            <p class ="posts-card">
+                28<span>posts</span>
+            </p>
+        </div>
+    </div>
+    <div class="btn-container">
+        <button class="btn follow-btn"> follow</button>
+        <button class="btn edit-btn"> <a asp-route="edit_profile">edit profile </a></button>
+        @{
+                if (User.Identity.IsAuthenticated)
+                {
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                        <button type="submit" class="btn logout-btn">Logout</button>
+                    </form>
+                }
+                else
+                {
+                    <p>You have successfully logged out of the application.</p>
+                }
+            }
     </div>
 </div>
