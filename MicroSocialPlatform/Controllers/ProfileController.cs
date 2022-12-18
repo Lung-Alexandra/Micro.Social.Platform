@@ -24,7 +24,7 @@ public class ProfileController : Controller
     // Shows the profile given by id.
     public IActionResult Index(int id)
     {
-        var profile = _db.Profiles.Find(id);
+        var profile = _db.Profiles.Include("User").First(p => p.Id == id);
         if (profile == null)
         {
             return View("MyError", new ErrorView("The profile does not exist."));

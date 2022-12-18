@@ -1,21 +1,22 @@
+@using Microsoft.AspNetCore.Identity
 @model Profile; 
+@inject UserManager<AppUser> UserManager;
 @{
     ViewData["Title"] = "Show Profile";
     Layout = "MyLayout";
+    bool owns_profile = UserManager.GetUserId(User) == Model.UserId;
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
-        
+
         <img class="user-dp" src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" alt="">
-       
+
         <div class="info-container">
-            <h1 class="name">nume</h1>
+            <h1 class="name">@Model.User.UserName</h1>
             <p class="aboutme">
                 About me : @Model.AboutMe
-                
             </p>
             <p class="gender">Gender: @Model.Gender</p>
-            <a herf="#" class="website-link">fdzbd</a>
         </div>
         <div class="number-card">
             <p class="following-card">
@@ -30,21 +31,20 @@
         </div>
     </div>
     <div class="btn-container">
-        <button class="btn follow-btn"> follow </button>
-        <button class="btn edit-btn">
-            <a asp-route="edit_profile">edit profile </a>
-        </button>
-        @{
-            if (User.Identity.IsAuthenticated)
-            {
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
-                    <button type="submit" class="btn logout-btn">Logout</button>
-                </form>
-            }
-            else
-            {
-                <p>You have successfully logged out of the application.</p>
-            }
+
+        @if (owns_profile)
+        {
+            <button class="btn edit-btn">
+                <a asp-route="edit_profile" asp-route-id="@Model.Id" >edit profile </a>
+            </button>
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                <button type="submit" class="btn logout-btn">Logout</button>
+            </form>
         }
+        else
+        {
+            <button class="btn follow-btn"> follow </button>
+        }
+
     </div>
 </div>
