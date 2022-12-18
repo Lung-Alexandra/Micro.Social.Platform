@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>title</title>
-    <link rel="stylesheet" type="text/css" href="~/css/Post.css">
-</head>
-<body>
-
+@{
+    Layout = "MyLayout";
+}
 <section class="main">
     <div class="post-container">
         <div class="post">
@@ -167,8 +161,6 @@
         </div>
     </div>
 </section>
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script>
         const slideout = document.querySelector('.cbut')
         const handle = document.querySelector('.comments')
@@ -183,6 +175,4 @@
                 handle.classList.add('hid');
             }
         }
-    </script>
-</body>
-</html>
+</script>

@@ -1,11 +1,4 @@
-﻿*{
-
-}
-body{
-    /*display: flex;*/
-    text-align: center;
-}
-.container{
+﻿.container{
     left: 40%;
     position: fixed;
     justify-content: center;
