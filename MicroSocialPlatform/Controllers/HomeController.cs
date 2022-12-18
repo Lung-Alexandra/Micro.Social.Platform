@@ -1,20 +1,11 @@
-﻿using System.Diagnostics;
-using MicroSocialPlatform.Data;
-using MicroSocialPlatform.Models;
+namespace MicroSocialPlatform.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MicroSocialPlatform.Controllers;
-
-public class HomeController : Controller
+public class HomeController:Controller
 {
-    // The main page.
     public IActionResult Index()
     {
         return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+    }   
+    
 }

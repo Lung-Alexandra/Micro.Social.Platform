@@ -21,7 +21,6 @@ public class ProfileController : Controller
         _genderList = new List<Gender> { Gender.Male, Gender.Female, Gender.Unspecified };
     }
 
-    [Authorize(Roles = "User,Admin")]
     // Shows the profile given by id.
     public IActionResult Index(int id)
     {

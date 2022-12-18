@@ -67,8 +67,16 @@ app.MapControllerRoute(
     name: "start",
     pattern: "/",
     defaults:
+    new { controller = "Start", action = "Index" }
+);
+
+app.MapControllerRoute(
+    name: "home",
+    pattern: "/home",
+    defaults:
     new { controller = "Home", action = "Index" }
 );
+
 app.MapControllerRoute(
     name: "profile",
     pattern: "/profile/{id}",
