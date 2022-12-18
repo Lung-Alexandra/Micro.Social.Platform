@@ -1,6 +1,7 @@
 ﻿.profile-container{
-    margin-left:10%;
-    width: 80%;
+    margin-top: 20px;
+    margin-left:15%;
+    width: 70%;
     display: flex;
     flex-direction: column;
     padding: 0 3vh 20px;
@@ -11,49 +12,59 @@
     4px -4px 30px #9f6f80,
     inset -20px -18px 25px #342636;
     overflow-x: hidden;
+    
 }
+
 .user-info{
     display: flex;
     flex-direction: row;
     margin-top:10px;
     width: auto;
-    align-items: center;
+    align-items: flex-start;
     gap: 10px;
 }
-
 .user-dp{
+    margin-top: 10%;
     width: 15vh;
     height: 15vh;
     border-radius: 100%;
 }
 .info-container{
-    width: 20%;
+    min-width: 5vw;
+    max-width: 100vh;
     display: flex;
     flex-direction: column;
+   
 }
 .info-container .username{
+    width: auto;
     margin-bottom: 10px;
     font-weight: 600;
     font-size: 0.9rem;
     color: rgb(25, 25, 25);
 }
-.info-container .name{
+.info-container .gender{
     font-size: 0.8rem;
+    width: auto;
 }
 .info-container .aboutme{
-    font-size: 0.7rem;
-    inline-size: auto;
-    overflow-wrap : break-word;
+    font-size: 0.8rem;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 .info-container .website-link{
+    width: auto;
     font-size: 0.9rem;
     display: block;
-    margin-top: 20px;
+    margin-top: 5px;
     text-decoration: none;
     color: rgba(255, 72, 0, 0.479);
     font-weight: 500;
 }
 .number-card{
+    margin-top: 10%;
+    height: 2%;
     font-size: 0.8rem;
     line-height: 0.01rem;
     display: flex;
@@ -63,7 +74,6 @@
 .number-card p{
     display: flex;
     flex-direction: column;
-
 }
 .number-card span{
     font-size: 0.9rem;
