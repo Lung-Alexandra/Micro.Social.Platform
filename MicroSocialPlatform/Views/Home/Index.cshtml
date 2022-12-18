@@ -166,7 +166,7 @@
         const handle = document.querySelector('.comments')
 
         slideout.onclick = function() {
-            if(handle.is('hid')){
+            if(handle.classList.contains('hid')){
                 handle.classList.remove('hid');
                 handle.classList.add('active');
             }
