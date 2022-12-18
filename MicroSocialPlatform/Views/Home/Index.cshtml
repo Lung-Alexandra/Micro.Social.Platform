@@ -10,18 +10,23 @@
         }
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-        const slideout = document.querySelector('.cbut')
-        const handle = document.querySelector('.comments')
-
-        slideout.onclick = function() {
-            if(handle.classList.contains('hid')){
-                handle.classList.remove('hid');
-                handle.classList.add('active');
-            }
-            else{
-                handle.classList.remove('active');
-                handle.classList.add('hid');
-            }
-        }
+     const comments_buttons = document.querySelectorAll('.cbut')
+        const comments_divs = document.querySelectorAll('.comments')
+        $(document).ready(function() {
+            $.each(comments_buttons, function(ind, butt) {
+            butt.addEventListener("click",function() {
+                   
+                  if(comments_divs[ind].classList.contains('hid')){
+                      comments_divs[ind].classList.remove('hid');
+                      comments_divs[ind].classList.add('active');
+                  }
+                  else{
+                      comments_divs[ind].classList.remove('active');
+                      comments_divs[ind].classList.add('hid');
+                  }
+                })
+          })
+        });
 </script>

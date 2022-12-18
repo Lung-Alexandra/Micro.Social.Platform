@@ -1,6 +1,7 @@
 @model MicroSocialPlatform.Models.Profile; 
-
-@Html.Partial("MenuBar")
+@{
+    Layout = "MyLayout";
+}
 <h1> Edit profile</h1>
 <div>
     @using (Html.BeginForm(actionName: "Edit",
