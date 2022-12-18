@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using MicroSocialPlatform.Data
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@inject ApplicationDbContext DbContext; 
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,61 +14,87 @@
 </head>
 
 @{
-    var current_controller = ViewContext.RouteData.Values["controller"].ToString();
-    var profile_class = current_controller == "Profile" ? "active" : "";
-    var home_class= current_controller == "Home" ? "active" : "";
+    bool signedIn = SignInManager.IsSignedIn(User);
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+    var profileClass = currentController == "Profile" ? "active" : "";
+    var homeClass = currentController == "Home" ? "active" : "";
+    Profile? profile = null;
+    if (signedIn)
+    {
+        // Get the profile of the user.
+        profile = DbContext.Profiles.First(p => p.UserId == UserManager.GetUserId(User));
+    }
 }
 
 <body>
-    <div class="navigation">
-        <ul>
-            <li class="list @home_class">
-                <a href="#">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title">Home</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
-                    <span class="title">Groups</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
-                    <span class="title">Friends</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="chatbubbles-outline"></ion-icon></span>
-                    <span class="title">Messages</span>
-                </a>
-            </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon"> <ion-icon name="notifications-circle-outline"></ion-icon></span>
-                    <span class="title">Notification</span>
-                </a>
-            </li>
-            <li class="list @profile_class">
-                <a href="#">
-                    <span class="icon"><ion-icon name="person-circle-outline"></ion-icon></span>
+<div class="navigation">
+    <ul>
+        <li class="list @homeClass">
+            <a href="/home">
+                <span class="icon">
+                    <ion-icon name="home-outline"></ion-icon>
+                </span>
+                <span class="title">Home</span>
+            </a>
+        </li>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="people-circle-outline"></ion-icon>
+                </span>
+                <span class="title">Groups</span>
+            </a>
+        </li>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                </span>
+                <span class="title">Friends</span>
+            </a>
+        </li>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="chatbubbles-outline"></ion-icon>
+                </span>
+                <span class="title">Messages</span>
+            </a>
+        </li>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="notifications-circle-outline"></ion-icon>
+                </span>
+                <span class="title">Notification</span>
+            </a>
+        </li>
+
+        @if (signedIn)
+        {
+            <li class="list @profileClass">
+                <a href="/profile/@profile.Id">
+                    <span class="icon">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </span>
                     <span class="title">Profile</span>
                 </a>
             </li>
-            <li class="list">
-                <a href="#">
-                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                    <span class="title">Settings</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+        }
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <li class="list">
+            <a href="#">
+                <span class="icon">
+                    <ion-icon name="settings-outline"></ion-icon>
+                </span>
+                <span class="title">Settings</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
 </html>
