@@ -31,27 +31,34 @@ button {
     border-bottom-right-radius: 10px;
     opacity: .5;
     top: 60vh;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
     margin: auto;
     transition: .3s;
     z-index: 1;
 }
+button a{
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-decoration: none;
+}
 
-    button:hover {
-        border: 2px solid #104F55;
-        background-color: rgba(365,365,365,0.5);
-        cursor: pointer;
-        color: #060707;
-        opacity: .8;
-        transition: .3s;
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
+button:hover {
+    border: 2px solid #104F55;
+    background-color: rgba(365,365,365,0.5);
+    cursor: pointer;
+    color: #060707;
+    opacity: .8;
+    transition: .3s;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
 
-    button:focus {
-        outline: none;
-    }
+button:focus {
+    outline: none;
+}
 
 .header {
     position: absolute;

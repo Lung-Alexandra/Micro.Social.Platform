@@ -5,7 +5,7 @@
     box-sizing: border-box;
     font-family:'Poppins', sans-serif;
 }
-body{
+.body{
     display: flex;
     min-height: 100vh;
     background: radial-gradient(#462d57,#0d0d0d);
