@@ -9,5 +9,8 @@ public class AppUser : IdentityUser
     public DateTime RegisteredAt { get; set; }
 
     // The profile of the user.
-    public Profile UserProfile { get; set; }
+    public Profile? UserProfile { get; set; }
+    
+    // The posts made by the user.
+    public List<Post> UserPosts { get; set; }
 }

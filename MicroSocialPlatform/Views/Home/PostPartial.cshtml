@@ -1,0 +1,78 @@
+@model Post 
+
+<div class="post">
+    <div class="post-header">
+        <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
+        <p class="username">@Model.User.UserName</p>
+    </div>
+    <div class="post-feed">
+        <div class="post-img-container">
+            <div class="text-cont">
+                <p class="text">@Model.Content</p>
+            </div>
+            <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" alt="">
+        </div>
+    </div>
+
+    <div class="post-detail">
+        <div class="detail-intracables">
+            <ion-icon class="lbut" name="heart-outline"></ion-icon>
+            <ion-icon class="cbut" name="chatbubble-ellipses"></ion-icon>
+        </div>
+
+        <span class="likes">3.4k</span>
+        <span class="comment-count">300</span>
+
+    </div>
+    <div class="comments hid">
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+        <div class="comment">
+            <p class="username">user2</p>
+            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
+        </div>
+
+        <div class="comment-box">
+            <input type="text" id="comment-input" placeholder="Add a comment">
+            <button class="add-comment-btn">Post</button>
+        </div>
+    </div>
+</div>
