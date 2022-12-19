@@ -1,26 +1,36 @@
-@model MicroSocialPlatform.Models.Profile; 
+@model Profile; 
 @{
     Layout = "MyLayout";
 }
-<h1> Edit profile</h1>
-<div>
-    @using (Html.BeginForm(actionName: "Edit",
-        controllerName: "Profile",
+
+<div class="profile-container-edit">
+    <h1 class="title-cont"> Edit profile</h1>
+
+    @using (Html.BeginForm("Edit",
+        "Profile",
         method: FormMethod.Post,
-        routeValues: new { id = Model.Id}
+        routeValues: new { id = Model.Id }
         ))
     {
-        @Html.Label("AboutMe", "About me")
-        <br/>
-        @Html.EditorFor(m => m.AboutMe)
-        @Html.ValidationMessageFor(m => m.AboutMe, null)
-        <br/>
+        <div class="date-editare">
+            <div class="about">
+                @Html.Label("AboutMe", "About me",new{htmlAttributes = new{@class ="about-text"}})
+                
+                @Html.EditorFor(m => m.AboutMe,new{htmlAttributes = new{@class ="text"}})
+              
+                @Html.ValidationMessageFor(m => m.AboutMe, null)
+            </div>
+            <div class="gen">
+               
+                    @Html.Label("Gender", "My gender",new{htmlAttributes = new{@class ="title-gender"}})
 
-        @Html.Label("Gender", "My gender")
-        <br/>
-        @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList))
-        <br/>
-        <button type="submit">Edit profile</button>
+              
+                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList),new{htmlAttributes = new{@class ="optiuni"}})
+     
+            </div>
+
+        </div>
+        <button type="submit" class="editare-btn">Edit profile</button>
     }
 
 </div>

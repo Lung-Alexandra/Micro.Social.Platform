@@ -19,11 +19,8 @@
             <p class="gender">Gender: @Model.Gender</p>
         </div>
         <div class="number-card">
-            <p class="following-card">
-                2928k<span>Following</span>
-            </p>
-            <p class="followers-card">
-                28k<span>followers</span>
+            <p class="friends-card">
+                2928k<span>Friends</span>
             </p>
             <p class="posts-card">
                 28<span>posts</span>
@@ -37,7 +34,7 @@
             <button class="btn edit-btn">
                 <a asp-route="edit_profile" asp-route-id="@Model.Id">edit profile </a>
             </button>
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start", new { area = "" })" method="post">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start")" method="post">
                 <button type="submit" class="btn logout-btn">Logout</button>
             </form>
         }
