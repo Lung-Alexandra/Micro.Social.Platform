@@ -20,11 +20,10 @@
     flex-direction: row;
     margin-top:10px;
     width: auto;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
 }
 .user-dp{
-    margin-top: 10%;
     width: 15vh;
     height: 15vh;
     border-radius: 100%;
@@ -63,7 +62,6 @@
     font-weight: 500;
 }
 .number-card{
-    margin-top: 10%;
     height: 2%;
     font-size: 0.8rem;
     line-height: 0.01rem;

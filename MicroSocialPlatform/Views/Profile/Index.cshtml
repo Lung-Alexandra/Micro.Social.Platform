@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Show Profile";
     Layout = "MyLayout";
-    bool owns_profile = UserManager.GetUserId(User) == Model.UserId;
+    var owns_profile = UserManager.GetUserId(User) == Model.UserId;
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
@@ -35,9 +35,9 @@
         @if (owns_profile)
         {
             <button class="btn edit-btn">
-                <a asp-route="edit_profile" asp-route-id="@Model.Id" >edit profile </a>
+                <a asp-route="edit_profile" asp-route-id="@Model.Id">edit profile </a>
             </button>
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start", new { area = "" })" method="post">
                 <button type="submit" class="btn logout-btn">Logout</button>
             </form>
         }
