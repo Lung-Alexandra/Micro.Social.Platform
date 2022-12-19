@@ -96,6 +96,19 @@ app.MapControllerRoute(
     defaults:
     new { controller = "Post", action = "New" }
 );
+app.MapControllerRoute(
+    name: "post",
+    pattern: "/post/{id}",
+    defaults:
+    new { controller = "Post", action = "Index" }
+);
+
+app.MapControllerRoute(
+    name: "edit_post",
+    pattern: "/post/edit/{id}",
+    defaults:
+    new { controller = "Post", action = "Edit" }
+);
 
 app.MapRazorPages();
 
