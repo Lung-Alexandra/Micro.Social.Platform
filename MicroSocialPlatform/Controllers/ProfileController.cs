@@ -67,7 +67,7 @@ public class ProfileController : Controller
     [Authorize(Roles = "User,Admin")]
     [HttpPost]
     // Edits the profile with the given id.
-    public IActionResult Edit(int id, Profile new_profile)
+    public IActionResult Edit(int id, Profile newProfile)
     {
         Profile profile;
         // Try to read the profile from the database.
@@ -84,10 +84,10 @@ public class ProfileController : Controller
         if (ModelState.IsValid)
         {
             var userId = _userManager.GetUserId(User);
-            if (userId == profile.User.Id || User.IsInRole("Admin"))
+            if (userId == profile.UserId || User.IsInRole("Admin"))
             {
-                profile.AboutMe = new_profile.AboutMe;
-                profile.Gender = new_profile.Gender;
+                profile.AboutMe = newProfile.AboutMe;
+                profile.Gender = newProfile.Gender;
                 _db.SaveChanges();
                 return RedirectToAction("Index", new { id });
             }
