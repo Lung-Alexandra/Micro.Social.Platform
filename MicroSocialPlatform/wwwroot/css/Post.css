@@ -4,6 +4,7 @@
     left: 10%;
     position: relative;
     display: flex;
+    flex-direction: column;
     padding :20px 10vw 100px;
     margin-top: 5px;
     gap:50px;
@@ -187,4 +188,21 @@
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     color: bisque;
+}
+.new-post-btn{
+    margin: auto auto;
+    font-family: "Lucida Calligraphy";
+    width: 70vh;
+    height: 6vh;
+    background: #996678;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.5);
+    border-radius: 10px 300px 10px 300px;
+    margin-bottom:0;
+}
+.new-post-btn a{
+    text-decoration: none;
+    color: black;
 }

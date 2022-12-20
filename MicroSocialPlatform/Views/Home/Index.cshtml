@@ -3,6 +3,7 @@
     Layout = "MyLayout";
 }
 <section class="main">
+    <button class="new-post-btn"><a asp-route="new_post">Create a new post</a></button>
     <div class="post-container">
         @foreach (var post in Model.Posts)
         {
