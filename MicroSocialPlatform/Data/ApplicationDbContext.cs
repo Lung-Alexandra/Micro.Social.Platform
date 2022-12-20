@@ -15,8 +15,13 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         builder.Entity<Post>().HasOne(p => p.User).WithMany(u => u.UserPosts);
         builder.Entity<Profile>().HasOne(p => p.User).WithOne(u => u.UserProfile).HasForeignKey<Profile>(p => p.UserId);
+        builder.Entity<Comment>().HasOne(c => c.Post).WithMany(p => p.Comments);
+        builder.Entity<Comment>().HasOne(c => c.User).WithMany(p => p.UserComments);
         base.OnModelCreating(builder);
     }
+
     public DbSet<Profile> Profiles { get; set; }
     public DbSet<Post> Posts { get; set; }
+
+    public DbSet<Comment> Comments { get; set; }
 }

@@ -10,7 +10,8 @@ public class AppUser : IdentityUser
 
     // The profile of the user.
     public Profile? UserProfile { get; set; }
-    
+
     // The posts made by the user.
     public List<Post> UserPosts { get; set; }
+    public List<Comment> UserComments { get; set; }
 }

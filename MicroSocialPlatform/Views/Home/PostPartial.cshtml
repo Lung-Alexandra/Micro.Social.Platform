@@ -25,54 +25,16 @@
 
     </div>
     <div class="comments hid">
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
-        <div class="comment">
-            <p class="username">user2</p>
-            <p class="post-des">sankjdsvn akjbvkjd abdskbvaks jdvb</p>
-        </div>
+        @foreach (var comment in Model.Comments)
+        {
+            @Html.Partial("CommentPartial", comment)
+        }
 
-        <div class="comment-box">
-            <input type="text" id="comment-input" placeholder="Add a comment">
-            <button class="add-comment-btn">Post</button>
-        </div>
+        @{
+            var newComment = new Comment();
+            newComment.PostId = Model.Id;
+            @Html.Partial("NewComment", newComment)
+        }
+
     </div>
 </div>

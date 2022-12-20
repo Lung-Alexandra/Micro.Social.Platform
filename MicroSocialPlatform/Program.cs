@@ -110,6 +110,13 @@ app.MapControllerRoute(
     new { controller = "Post", action = "Edit" }
 );
 
+app.MapControllerRoute(
+    name: "new_comment",
+    pattern: "/comment/new/",
+    defaults:
+    new { controller = "Comment", action = "New" }
+);
+
 app.MapRazorPages();
 
 app.Run();
