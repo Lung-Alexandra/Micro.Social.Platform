@@ -28,4 +28,7 @@ public class Post
 
      // The user owning the post.
      public AppUser? User;
+     
+     // The comments for a post.
+     public List<Comment> PostComments { get; set; }
 }
