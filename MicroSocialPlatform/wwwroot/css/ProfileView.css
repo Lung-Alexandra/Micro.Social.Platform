@@ -6,11 +6,12 @@
     flex-direction: column;
     padding: 0 3vh 20px;
     border-radius: 50px;
-    background:  #996678;
-    box-shadow: inset 20px 20px 20px #9f6f80,
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 10px 20px 20px #9f6f80,
     11px 2px 15px #9f6f80,
     4px -4px 30px #9f6f80,
-    inset -20px -18px 25px #342636;
+    inset -20px -18px 25px rgba(255,255,255,0.1);
     overflow-x: hidden;
     
 }
@@ -34,21 +35,22 @@
     max-width: 100vh;
     display: flex;
     flex-direction: column;
+    color: whitesmoke;
     width: -webkit-fill-available;
 }
 .info-container .username{
     width: auto;
     margin-bottom: 10px;
     font-weight: 600;
-    font-size: 0.9rem;
-    color: rgb(25, 25, 25);
+    font-size: 1rem;
+    color: whitesmoke;
 }
 .info-container .gender{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     width: auto;
 }
 .info-container .aboutme{
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
@@ -64,18 +66,19 @@
 }
 .number-card{
     height: 2%;
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     line-height: 0.01rem;
     display: flex;
     flex-direction: row;
     gap:10px;
+    color:whitesmoke;
 }
 .number-card p{
     display: flex;
     flex-direction: column;
 }
 .number-card span{
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-align: center;
     margin-top: 20px;
     text-transform: capitalize;
@@ -88,21 +91,24 @@
     flex-direction: row;
 }
 .btn-container .btn{
-    width: 100px;
+    width: 20vh;
     height: 5vh;
-    margin: 0;
     text-transform: capitalize;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 400;
-    background: #996678;
     box-shadow: inset 10px 10px 10px #79525f,
     15px 25px 10px rgba(138, 89, 118, 0.1),
     15px 20px 20px rgba(151, 95, 147, 0.1),
     inset -10px -10px 15px rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     border-radius: 10px 300px 10px 300px;
+    margin: 0 0 15px;
+    color: whitesmoke;
+
 }
 .btn a{
     text-decoration: none;
-    color: black;
+    color: whitesmoke;
 }

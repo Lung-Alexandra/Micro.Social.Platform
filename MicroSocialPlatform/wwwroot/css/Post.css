@@ -1,39 +1,41 @@
 ﻿/*Post part*/
 .main{
     width: 90%;
-    left: 10%;
     position: relative;
     display: flex;
     flex-direction: column;
     padding :20px 10vw 100px;
-    margin-top: 5px;
+    margin:auto auto;
     gap:50px;
     z-index: 1;
 }
 /*post section*/
 
 .post-container{
-    width: 70%;
+    width: 80%;
+    margin: auto auto;
 }
 
 .post{
     display: flex;
     flex-direction: column;
-    width: 100%;
-    border:1px solid;
+    width: 80%;
     margin-bottom: 30px;
     border-radius: 50px;
-    background:  #996678;
-    box-shadow: inset 20px 20px 20px #9f6f80,
+    border: 1px solid;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 10px 20px 20px #9f6f80,
     11px 2px 15px #9f6f80,
     4px -4px 30px #9f6f80,
-    inset -20px -18px 25px #342636;
+    inset -20px -18px 25px rgba(255,255,255,0.1);
 }
 .post-header{
     display: flex;
     align-items: center;
     padding: 1.2em;
-    gap:10px;
+    gap: 10px;
+    justify-content: space-around;
 }
 .post-header .user-icon{
     width: 30px;
@@ -43,6 +45,13 @@
 .post-header .username{
     font-size: 0.9em;
     font-weight: 600;
+    color: whitesmoke;
+    margin: auto;
+    width: -webkit-fill-available;
+}
+.edit-post-btn{
+    color: whitesmoke;
+    margin-right: 10px;
 }
 .post-feed{
     width: 100%;
@@ -70,7 +79,7 @@
 }
 .post-img-container .text-cont .text{
     margin-top: 3px;
-    color:black;
+    color:whitesmoke;
     scale: 0.9;
     inline-size: 100%;
     overflow-wrap : break-word;
@@ -89,14 +98,12 @@
     cursor: pointer;
 }
 .likes,.comment-count,.date{
-    color: #212121;
+    color: whitesmoke;
     margin-top: 10px;
     margin-bottom: 10px;
     margin-right: 15px;
 }
-.post-detail:last-child{
-    position: relative;
-}
+
 .active{
     visibility: visible;
 }
@@ -108,47 +115,52 @@
     flex-direction: column;
     position: absolute;
     float:right;
-    right: 5vh;
-    width: 28%;
+    right: -55%;
+    width: 50%;
     height: 50vh;
     transition: left .3s ease-out;
-    border-radius: 20px;
-    background:  #996678;
-    box-shadow: inset 20px 20px 20px #9f6f80,
-    11px 2px 15px #9f6f80,
-    4px -4px 30px #9f6f80,
-    inset -20px -18px 25px #342636;
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
     border: 1px solid;
     overflow: scroll;
     gap:10px;
-
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
 }
 .comment{
     width: 90%;
     margin-top: 10px;
     margin-left: 13px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    background:  rgba(97, 97, 97, 0.45);
+    border-radius: 0 10px 10px 10px;
     border: 1px solid;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    overflow-wrap : break-word;
 }
 
-.post-username{
+.username{
     font-weight: 600;
+    color: whitesmoke;
+    padding: 2px 0 0 4px;
 }
-.post-des{
+.comment-text{
     margin: 10px 0;
     font-size: 0.9rem;
     line-height: 1.5rem;
     opacity: 0.85;
+    color: whitesmoke;
+    padding: 0 0 0 4px;
 }
 .comment-box{
     width: 100%;
     height: 40px;
     display: flex;
     position: sticky;
-    bottom:0;
+    bottom:1rem;
+    align-self: flex-end;
 }
 
 #comment-input{
@@ -159,7 +171,6 @@
     inset -10px -10px 15px #49354b;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    border: none;
     padding: 10px;
     line-height: 40px;
     border: 1px solid #0d0d0d;
@@ -190,19 +201,210 @@
     color: bisque;
 }
 .new-post-btn{
-    margin: auto auto;
-    font-family: "Lucida Calligraphy";
     width: 70vh;
     height: 6vh;
-    background: #996678;
     box-shadow: inset 10px 10px 10px #79525f,
     15px 25px 10px rgba(138, 89, 118, 0.1),
     15px 20px 20px rgba(151, 95, 147, 0.1),
     inset -10px -10px 15px rgba(255,255,255,0.5);
     border-radius: 10px 300px 10px 300px;
-    margin-bottom:0;
+    margin: auto auto 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
 }
 .new-post-btn a{
     text-decoration: none;
-    color: black;
+    color: whitesmoke;
+    font-size: 1rem;
 }
+
+
+.go-to-post{
+    text-align: center;
+    cursor: pointer;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.1);
+    overflow-wrap : break-word;
+    margin: auto auto 0;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+.go-to-post a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 1rem;
+}
+/*galery-post-for-profile*/
+/*
+
+All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
+        
+The 'supports' rule will only run if your browser supports CSS grid.
+
+Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
+
+*/
+
+
+
+img {
+    display: block;
+}
+
+.gcontainer {
+    max-width: 93.5rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+/* Gallery Section */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -1rem -1rem;
+    padding-bottom: 3rem;
+}
+
+.gallery-item {
+    position: relative;
+    flex: 1 0 22rem;
+    margin: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.gallery-item:hover .gallery-item-info,
+.gallery-item:focus .gallery-item-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item-info {
+    display: none;
+}
+
+.gallery-item-info li {
+    display: inline-block;
+    font-size: 1.7rem;
+    font-weight: 600;
+}
+
+.gallery-item-likes {
+    margin-right: 2.2rem;
+}
+
+.gallery-item-type {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.5rem;
+    text-shadow: 0.2rem 0.2rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.fa-clone,
+.fa-comment {
+    transform: rotateY(180deg);
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Loader */
+
+.loader {
+    width: 5rem;
+    height: 5rem;
+    border: 0.6rem solid #999;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    margin: 0 auto;
+    animation: loader 500ms linear infinite;
+}
+
+/*
+
+The following code will only run if your browser supports CSS grid.
+
+Remove or comment-out the code block below to see how the browser will fall-back to flexbox & floated styling. 
+
+*//*
+@supports (display: grid) {
+    .profile {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        grid-template-rows: repeat(3, auto);
+        grid-column-gap: 3rem;
+        align-items: center;
+    }
+
+    .profile-image {
+        grid-row: 1 / -1;
+    }
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+        grid-gap: 2rem;
+    }
+
+    .profile-image,
+    .profile-user-settings,
+    .profile-stats,
+    .profile-bio,
+    .gallery-item,
+    .gallery {
+        width: auto;
+        margin: 0;
+    }
+
+    @media (max-width: 40rem) {
+        .profile {
+            grid-template-columns: auto 1fr;
+            grid-row-gap: 1.5rem;
+        }
+
+        .profile-image {
+            grid-row: 1 / 2;
+        }
+
+        .profile-user-settings {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            grid-gap: 1rem;
+        }
+
+        .profile-edit-btn,
+        .profile-stats,
+        .profile-bio {
+            grid-column: 1 / -1;
+        }
+
+        .profile-user-settings,
+        .profile-edit-btn,
+        .profile-settings-btn,
+        .profile-bio,
+        .profile-stats {
+            margin: 0;
+        }
+    }
+}*/

@@ -4,6 +4,9 @@
     <div class="post-header">
         <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
         <p class="username">@Model.User.UserName</p>
+        <div class="edit-post-btn">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        </div>
     </div>
     <div class="post-feed">
         <div class="post-img-container">
@@ -29,12 +32,12 @@
         {
             @Html.Partial("CommentPartial", comment)
         }
-
-        @{
+        <div class = "go-to-post"><a href = "#">View Post/Add Comments</a></div>
+        <!--@{
             var newComment = new Comment();
             newComment.PostId = Model.Id;
             @Html.Partial("NewComment", newComment)
-        }
+        }-->
 
     </div>
 </div>

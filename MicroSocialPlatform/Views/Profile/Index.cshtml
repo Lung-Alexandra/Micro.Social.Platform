@@ -44,4 +44,13 @@
         }
 
     </div>
+    <div class="gcontainer">
+        <div class="gallery">
+         @foreach (var postare in Model.User.UserPosts)
+         {
+             @Html.Partial("GaleryPostPartial", postare);
+         }
+
+        </div>
+    </div>
 </div>

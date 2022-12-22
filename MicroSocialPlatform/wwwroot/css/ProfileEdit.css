@@ -5,19 +5,21 @@
     display: flex;
     flex-direction: column;
     padding: 0 3vh 20px;
-    background:  #996678;
-    box-shadow: inset 20px 20px 20px #9f6f80,
-    11px 2px 15px #9f6f80,
-    4px -4px 30px #9f6f80,
-    inset -20px -18px 25px #342636;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     overflow-x: hidden;
     align-items: center;
     text-align: center;
     line-height: 5rem;
     border-radius: 10px 200px 10px 200px;
+    color: whitesmoke;
 }
 .title-cont{
-    font-family: "Lucida Calligraphy";
+    margin: 10% 20% 3% 20%;
     font-size: 2rem;
     font-weight: 500;
 }
@@ -34,10 +36,10 @@
     flex-direction: column;
 }
 .about .about-text{
-    font-family: "Lucida Calligraphy";
+   
 }
 .about .text{
-    font-family: "Lucida Calligraphy"!important;
+   
     width: 30vh;
     height: 20vh;
     overflow-x: hidden;
@@ -53,14 +55,17 @@
     height: 10%!important;
 }
 .editare-btn{
-    font-family: "Lucida Calligraphy";
-    width: 15vh;
+    margin: auto auto;
+    width: 20vh;
     height: 5vh;
-    background: #996678;
     box-shadow: inset 10px 10px 10px #79525f,
     15px 25px 10px rgba(138, 89, 118, 0.1),
     15px 20px 20px rgba(151, 95, 147, 0.1),
     inset -10px -10px 15px rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
     border-radius: 10px 300px 10px 300px;
-    margin-bottom:0;
+    align-self: flex-end;
+    color: whitesmoke;
+    font-size: 1rem;
 }

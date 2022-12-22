@@ -27,7 +27,7 @@ public class ProfileController : Controller
         Profile profile;
         try
         {
-            profile = _db.Profiles.Include("User").First(x => x.Id == id);
+            profile = _db.Profiles.Include(p => p.User).ThenInclude(p => p.UserPosts).First(x => x.Id == id);
         }
         catch (InvalidOperationException)
         {
