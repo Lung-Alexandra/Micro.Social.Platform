@@ -32,8 +32,11 @@
         {
             @Html.Partial("CommentPartial", comment)
         }
-        <div class = "go-to-post"><a href = "#">View Post/Add Comments</a></div>
-        <!--@{
+        @{
+            var id_post=1;
+            <div class="go-to-post"><a href="/post/@id_post">View Post/Add Comments</a></div>
+
+        }<!--@{
             var newComment = new Comment();
             newComment.PostId = Model.Id;
             @Html.Partial("NewComment", newComment)

@@ -3,7 +3,7 @@
     min-height: 100vh;
     margin-left: 0;
     width: 70px;
-    background: #212121;
+    background-color: rgb(33, 33, 33,0.9);
     box-shadow:  10px 0 0 #502e63;
     border-left: 10px solid #212121;
     overflow-x: hidden;
