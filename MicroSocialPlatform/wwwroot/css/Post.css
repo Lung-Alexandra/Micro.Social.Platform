@@ -155,59 +155,13 @@
     color: whitesmoke;
     padding: 0 0 0 4px;
 }
-.comment-box{
-    width: 100%;
-    height: 40px;
-    display: flex;
-    position: sticky;
-    bottom:1rem;
-    align-self: flex-end;
-}
-
-#comment-input{
-    width: 100%;
-    height: 42px;
-    background: #9f6f80;
-    box-shadow: inset 20px 20px 20px #9f6f80,
-    inset -10px -10px 15px #49354b;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    padding: 10px;
-    line-height: 40px;
-    border: 1px solid #0d0d0d;
-    z-index:0!important;
-    font-size: 1rem;
-}
-#comment-input::placeholder{
-    color: rgb(4, 4, 4);
-}
-#comment-input:focus{
-    border: 1px solid;
-}
-
-.add-comment-btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:60px;
-    height: 40px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    background: #0d0d0d;
-    box-shadow: inset 20px 20px 20px #292829,
-    inset -20px -18px 25px #0d0d0d;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    color: bisque;
-}
 .new-post-btn{
     width: 70vh;
     height: 6vh;
     box-shadow: inset 10px 10px 10px #79525f,
     15px 25px 10px rgba(138, 89, 118, 0.1),
     15px 20px 20px rgba(151, 95, 147, 0.1),
-    inset -10px -10px 15px rgba(255,255,255,0.5);
+    inset -10px -10px 15px rgba(255, 255, 255, 0.1);
     border-radius: 10px 300px 10px 300px;
     margin: auto auto 0;
     background: rgba(255, 255, 255, 0.05);
@@ -221,6 +175,8 @@
 
 
 .go-to-post{
+    height: 5vh;
+    width: 100%;
     text-align: center;
     cursor: pointer;
     box-shadow: inset 10px 10px 10px #79525f,
@@ -229,8 +185,11 @@
     inset -10px -10px 15px rgba(255,255,255,0.1);
     overflow-wrap : break-word;
     margin: auto auto 0;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(139, 139, 139, 0.73);
     backdrop-filter: blur(10px);
+    position: sticky;
+    position: -webkit-sticky;
+    bottom: 0;
 }
 .go-to-post a{
     text-decoration: none;
