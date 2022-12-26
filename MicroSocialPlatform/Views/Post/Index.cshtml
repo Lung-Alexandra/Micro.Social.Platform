@@ -36,10 +36,13 @@
             {
                 @Html.Partial("CommentPartial", comment)
             }
-            @{
-                var newComment = new Comment();
-                newComment.PostId = Model.Id;
-                @Html.Partial("NewComment", newComment)
+
+            @using (Html.BeginForm("Index", "Post", method: FormMethod.Post, htmlAttributes: new { @class = "comment-box" }))
+            {
+                <input type="hidden" name="PostId" value="@Model.Id"></input>
+                <input name="Content" type="text" id="comment-input"></input>
+                @Html.ValidationMessage("Content", null)
+                <button class="add-comment-btn" type="submit">Post</button>
             }
 
         </div>

@@ -19,7 +19,10 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         // Get the list of posts and comments.
-        var posts = _db.Posts.Include(p => p.User).Include(p => p.Comments).ThenInclude(c => c.User).ToList();
+        var posts = _db.Posts
+            .Include(p => p.User)
+            .Include(p => p.Comments.OrderByDescending(c => c.Date))
+            .ThenInclude(c => c.User).ToList();
         var model = new HomeView(posts);
         return View(model);
     }

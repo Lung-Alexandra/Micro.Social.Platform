@@ -1,8 +1,0 @@
-@model Comment
-
-@using (Html.BeginForm("New", "Comment", method: FormMethod.Post, routeValues: new { PostId = Model.PostId }, htmlAttributes: new { @class = "comment-box" }, antiforgery: true))
-{
-    @Html.EditorFor(p => p.Content, new { htmlAttributes = new { id = "comment-input", @type = "text" } })
-    @Html.ValidationMessageFor(p => p.Content, null)
-    <button class="add-comment-btn" type="submit">Post</button>
-}

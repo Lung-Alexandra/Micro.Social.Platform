@@ -29,18 +29,51 @@ public class PostController : Controller
     }
 
     // Shows a post given by id.
+    [HttpGet]
     public IActionResult Index(int id)
     {
         Post post;
         try
         {
-            post = _db.Posts.Include(p => p.User).
-                Include(p => p.Comments).
-                ThenInclude(c=>c.User).First(p => p.Id == id);
+            post = _db.Posts
+                .Include(p => p.User)
+                .Include(p => p.Comments.OrderByDescending(c => c.Date))
+                .ThenInclude(c => c.User).First(p => p.Id == id);
         }
         catch (InvalidOperationException)
         {
             return View("MyError", new ErrorView("The post does not exist!"));
+        }
+
+        return View(post);
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "User,Admin")]
+    public IActionResult Index([FromForm] Comment new_comment)
+    {
+        Post post;
+        try
+        {
+            post = _db.Posts
+                .Include(p => p.User)
+                .Include(p => p.Comments)
+                .ThenInclude(c => c.User)
+                .First(p => p.Id == new_comment.PostId);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The post does not exist!"));
+        }
+
+        new_comment.Date = DateTime.Now;
+        new_comment.UserId = _userManager.GetUserId(User);
+
+        if (ModelState.IsValid)
+        {
+            _db.Comments.Add(new_comment);
+            _db.SaveChanges();
+            return RedirectToAction("Index", new { id = post.Id });
         }
 
         return View(post);
@@ -112,7 +145,7 @@ public class PostController : Controller
                 post.Title = newPost.Title;
                 post.Content = newPost.Content;
                 _db.SaveChanges();
-                return RedirectToAction("Index", routeValues: new { id });
+                return RedirectToAction("Index", new { id });
             }
 
             return View("MyError", new ErrorView("Cannot edit another user's posts!"));
