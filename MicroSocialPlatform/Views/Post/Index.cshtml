@@ -4,16 +4,16 @@
     Layout = "MyLayout";
 }
 <section class="post-with-comments">
-    <div class="post">
-        <div class="post-header">
+    <div class="post-s">
+        <div class="post-header-s">
             <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
             <p class="username">@Model.User.UserName</p>
-            <div class="edit-post-btn">
+            <div class="edit-post-btn-s">
                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
             </div>
         </div>
-        <div class="post-feed">
-            <div class="post-img-container">
+        <div class="post-feed-s">
+            <div class="post-img-container-s">
                 <div class="text-cont">
                     <p class="text">@Model.Content</p>
                 </div>
@@ -21,8 +21,8 @@
             </div>
         </div>
 
-        <div class="post-detail">
-            <div class="detail-intracables">
+        <div class="post-detail-s">
+            <div class="detail-intracables-s">
                 <ion-icon class="lbut" name="heart-outline"></ion-icon>
                 <ion-icon class="cbut" name="chatbubble-ellipses"></ion-icon>
             </div>
@@ -31,8 +31,16 @@
             <span class="comment-count">300</span>
 
         </div>
-        <div class="comments">
-a
+        <div class="comments-s">
+            @foreach (var comment in Model.Comments)
+            {
+                @Html.Partial("CommentPartial", comment)
+            }
+            @{
+                var newComment = new Comment();
+                newComment.PostId = Model.Id;
+                @Html.Partial("NewComment", newComment)
+            }
 
         </div>
     </div>

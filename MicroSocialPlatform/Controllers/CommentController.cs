@@ -41,7 +41,7 @@ public class CommentController : Controller
         {
             _db.Comments.Add(new_comment);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Post", new {id = new_comment.PostId});
         }
 
         // The model state is not valid.

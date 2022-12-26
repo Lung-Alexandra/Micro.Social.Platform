@@ -34,7 +34,9 @@ public class PostController : Controller
         Post post;
         try
         {
-            post = _db.Posts.Include("User").First(p => p.Id == id);
+            post = _db.Posts.Include(p => p.User).
+                Include(p => p.Comments).
+                ThenInclude(c=>c.User).First(p => p.Id == id);
         }
         catch (InvalidOperationException)
         {

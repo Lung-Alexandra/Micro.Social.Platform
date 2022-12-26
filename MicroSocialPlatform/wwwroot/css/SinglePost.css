@@ -1,14 +1,4 @@
 /*Post part*/
-.main{
-    width: 90%;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding :20px 10vw 100px;
-    margin:auto auto;
-    gap:50px;
-    z-index: 1;
-}
 
 .post-with-comments{
     width: 100%;
@@ -23,15 +13,10 @@
 }
 /*post section*/
 
-.post-container{
-    width: 80%;
-    margin: auto auto;
-}
-
-.post{
+.post-s{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 50%;
     margin-bottom: 30px;
     border-radius: 50px;
     border: 1px solid;
@@ -42,42 +27,42 @@
     4px -4px 30px #9f6f80,
     inset -20px -18px 25px rgba(255,255,255,0.1);
 }
-.post-header{
+.post-header-s{
     display: flex;
     align-items: center;
     padding: 1.2em;
     gap: 10px;
     justify-content: space-around;
 }
-.post-header .user-icon{
+.post-header-s .user-icon{
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
-.post-header .username{
+.post-header-s .username{
     font-size: 0.9em;
     font-weight: 600;
     color: whitesmoke;
     margin: auto;
     width: -webkit-fill-available;
 }
-.edit-post-btn{
+.edit-post-btn-s{
     color: whitesmoke;
     margin-right: 10px;
 }
-.post-feed{
+.post-feed-s{
     width: 100%;
     height: 400px;
     position: relative;
 }
-.post-img-container{
+.post-img-container-s{
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
-.post-img-container img{
+.post-img-container-s img{
     margin-top: 5%;
     min-width: 100%;
     height: 90%;
@@ -85,26 +70,26 @@
     transition: 0.5s;
     border-radius: 20px;
 }
-.post-img-container .text-cont{
+.post-img-container-s .text-cont{
     width: 100%;
     height: 5vh;
 }
-.post-img-container .text-cont .text{
+.post-img-container-s .text-cont .text{
     margin-top: 3px;
     color:whitesmoke;
     scale: 0.9;
     inline-size: 100%;
     overflow-wrap : break-word;
 }
-.post-detail{
+.post-detail-s{
     padding: 1.2rem;
 }
-.detail-intracables{
+.detail-intracables-s{
     display: flex;
     gap:20px;
 }
-.detail-intracables .lbut,
-.detail-intracables .cbut{
+.detail-intracables-s .lbut,
+.detail-intracables-s .cbut{
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -115,12 +100,12 @@
     margin-bottom: 10px;
     margin-right: 15px;
 }
-.comments{
+.comments-s{
     display: flex;
     flex-direction: column;
     position: absolute;
     float:right;
-    right: -55%;
+    right: -50%;
     width: 50%;
     height: 50vh;
     transition: left .3s ease-out;
