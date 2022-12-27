@@ -20,14 +20,19 @@
             </div>
             <div class="gen">
                
-                    @Html.Label("Gender", "My gender",new{htmlAttributes = new{@class ="title-gender"}})
+                @Html.Label("Gender", "My gender",new{htmlAttributes = new{@class ="title-gender"}})
 
               
-                    @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList),new{htmlAttributes = new{@class ="optiuni"}})
+                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList),new{htmlAttributes = new{@class ="optiuni"}})
      
             </div>
-
+            <div class="vizibilitate">
+                <p>Alege vizibilitatea profilului:</p>
+                <p>@Html.RadioButtonFor(Model => Model.Visibility, "Public") public</p>
+                <p>@Html.RadioButtonFor(Model => Model.Visibility, "Private") private </p>
+            </div>
         </div>
+       
         <button type="submit" class="editare-btn">Edit profile</button>
     }
 

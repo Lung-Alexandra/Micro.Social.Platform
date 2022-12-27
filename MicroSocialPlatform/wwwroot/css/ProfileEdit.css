@@ -1,7 +1,7 @@
 ﻿.profile-container-edit{
     margin: auto auto;
     width: 80vh;
-    height: 80vh;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     padding: 0 3vh 20px;
@@ -19,7 +19,7 @@
     color: whitesmoke;
 }
 .title-cont{
-    margin: 10% 20% 3% 20%;
+    margin: 3% 20% 3% 20%;
     font-size: 2rem;
     font-weight: 500;
 }
@@ -34,9 +34,6 @@
     font-weight: 500;
     display: flex;
     flex-direction: column;
-}
-.about .about-text{
-   
 }
 .about .text{
    
@@ -53,6 +50,15 @@
     font-size: 0.6em;
     width: 10%!important;
     height: 10%!important;
+}
+.vizibilitate{
+    display: flex;
+    flex-direction: column;
+    gap:0;
+    line-height: 3px;
+}
+.vizibilitate p{
+    margin-top: 4vh;
 }
 .editare-btn{
     margin: auto auto;

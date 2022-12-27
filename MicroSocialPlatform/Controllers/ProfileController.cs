@@ -88,6 +88,7 @@ public class ProfileController : Controller
             {
                 profile.AboutMe = newProfile.AboutMe;
                 profile.Gender = newProfile.Gender;
+                profile.Visibility = newProfile.Visibility;
                 _db.SaveChanges();
                 return RedirectToAction("Index", new { id });
             }
