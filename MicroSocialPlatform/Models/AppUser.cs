@@ -12,6 +12,11 @@ public class AppUser : IdentityUser
     public Profile? UserProfile { get; set; }
 
     // The posts made by the user.
-    public List<Post> UserPosts { get; set; }
-    public List<Comment> UserComments { get; set; }
+    public List<Post>? UserPosts { get; set; }
+    // The commnets made by the user.
+    public List<Comment>? UserComments { get; set; }
+    // The friends of the user.
+    public List<Friend>? UserFriends { get; set; }
+    // The groups of the user.
+    public List<Group>? UserGroups { get; set; }
 }
