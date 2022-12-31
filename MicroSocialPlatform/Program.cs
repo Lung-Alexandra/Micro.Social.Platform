@@ -124,6 +124,14 @@ app.MapControllerRoute(
     new { controller = "Friendship", action = "New" }
 );
 
+app.MapControllerRoute(
+    name: "accept_friendship",
+    pattern: "/friendship/accept/{id}",
+    defaults:
+    new { controller = "Friendship", action = "AcceptFriendship" }
+);
+
+
 app.MapRazorPages();
 
 app.Run();

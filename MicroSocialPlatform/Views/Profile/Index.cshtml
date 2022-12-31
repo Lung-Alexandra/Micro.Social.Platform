@@ -1,8 +1,9 @@
 @using Microsoft.AspNetCore.Identity
 @using MicroSocialPlatform.Data
+@using Microsoft.EntityFrameworkCore
 @model Profile; 
 @inject UserManager<AppUser> UserManager;
-@inject ApplicationDbContext Context;
+@inject ApplicationDbContext DbContext;
 @{
     ViewData["Title"] = "Show Profile";
     Layout = "MyLayout";
@@ -18,8 +19,8 @@
     // the other user.
     if (!owns_profile)
     {
-        sent = Context.Friendships.FirstOrDefault(f => f.User1Id == my_id && f.User2Id == Model.UserId);
-        received = Context.Friendships.FirstOrDefault(f => f.User1Id == Model.UserId && f.User2Id == my_id);
+        sent = DbContext.Friendships.FirstOrDefault(f => f.User1Id == my_id && f.User2Id == Model.UserId);
+        received = DbContext.Friendships.FirstOrDefault(f => f.User1Id == Model.UserId && f.User2Id == my_id);
     }
 
     // Check if the other user is a friend.
@@ -29,6 +30,8 @@
         friend = true;
     }
 
+    int num_friends = DbContext.Friendships.Count(f => f.Status == FriendshipStatus.Accepted && (f.User1Id == Model.UserId || f.User2Id == Model.UserId));
+    int num_posts = DbContext.Posts.Count(p => p.UserId == Model.UserId);
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
@@ -45,10 +48,10 @@
         </div>
         <div class="number-card">
             <p class="friends-card">
-                2928k<span>Friends</span>
+                @num_friends<span>Friends</span>
             </p>
             <p class="posts-card">
-                28<span>posts</span>
+                @num_posts<span>posts</span>
             </p>
         </div>
     </div>
@@ -81,7 +84,9 @@
             else if (received != null)
             {
                 // There is a pending request from that user.
-                <button class="btn follow-btn">Accept friend request</button>
+                <form asp-route="accept_friendship" asp-route-id="@received.FriendshipId" method="post">
+                    <button class="btn">Accept friend request</button>
+                </form>
             }
             else if (sent != null)
             {

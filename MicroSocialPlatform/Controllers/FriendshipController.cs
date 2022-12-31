@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MicroSocialPlatform.Data;
 using MicroSocialPlatform.Models;
-using MicroSocialPlatform.Data;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace MicroSocialPlatform.Controllers;
 
@@ -68,6 +67,35 @@ public class FriendshipController : Controller
 
         // Redirect to the target user's profile.
         return RedirectToAction("Index", "Profile", new { id = to.UserProfile.Id });
+    }
+
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    public IActionResult AcceptFriendship(int id)
+    {
+        string my_id = _userManager.GetUserId(User);
+
+        // Get the friendship by id.
+        Friendship friendship;
+        try
+        {
+            friendship = _db.Friendships.First(u => u.FriendshipId == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The friend request does not exist!"));
+        }
+
+        if (friendship.User2Id != my_id)
+            return View("MyError", new ErrorView("You are not the receiver of that friend request!"));
+
+        friendship.Status = FriendshipStatus.Accepted;
+        friendship.StartDate = DateTime.Now;
+        _db.SaveChanges();
+
+        // Redirect to the target user's profile.
+        int profile_id = _db.Profiles.First(p => p.UserId == friendship.User1Id).Id;
+        return RedirectToAction("Index", "Profile", new { id = profile_id });
     }
 
     // Shows all friends for the given profile.
