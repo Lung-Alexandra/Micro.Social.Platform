@@ -108,6 +108,30 @@
     color: whitesmoke;
 
 }
+.btn-container .status-f{
+    width: 25vh;
+    height: 5vh;
+    text-transform: capitalize;
+    font-size: 1rem;
+    font-weight: 400;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.5);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 10px 300px 10px 300px;
+    margin: 0 0 15px;
+    color: whitesmoke;
+}
+.status-f p{
+    color: whitesmoke;
+    text-decoration: none;
+    position: relative;
+    text-align: center;
+    top: 10px;
+    margin: auto auto;
+}
 .btn a{
     text-decoration: none;
     color: whitesmoke;

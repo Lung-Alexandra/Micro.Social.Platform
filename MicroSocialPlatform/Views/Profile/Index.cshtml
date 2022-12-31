@@ -67,7 +67,9 @@
         {
             if (friend)
             {
-                <div class="btn"> This user is your friend </div>
+                <div class="status-f">
+                    <p>This user is your friend </p>
+                </div>
             }
             else if (received == null && sent == null)
             {
@@ -84,7 +86,7 @@
             else if (sent != null)
             {
                 // There is a pending request to that user.
-                <div class="btn"> Pending friend request</div>
+                <div class="status-f"> <p>Pending friend request</p></div>
             }
         }
 
