@@ -1,10 +1,34 @@
 @using Microsoft.AspNetCore.Identity
+@using MicroSocialPlatform.Data
 @model Profile; 
 @inject UserManager<AppUser> UserManager;
+@inject ApplicationDbContext Context;
 @{
     ViewData["Title"] = "Show Profile";
     Layout = "MyLayout";
-    var owns_profile = UserManager.GetUserId(User) == Model.UserId;
+
+    var my_id = UserManager.GetUserId(User);
+    var owns_profile = my_id == Model.UserId;
+
+    Friendship? sent = null;
+    Friendship? received = null;
+    bool friend = false;
+
+    // If the user does not own the profile, get the friend request sent/received to/from
+    // the other user.
+    if (!owns_profile)
+    {
+        sent = Context.Friendships.FirstOrDefault(f => f.User1Id == my_id && f.User2Id == Model.UserId);
+        received = Context.Friendships.FirstOrDefault(f => f.User1Id == Model.UserId && f.User2Id == my_id);
+    }
+
+    // Check if the other user is a friend.
+    if ((sent != null && sent.Status == FriendshipStatus.Accepted)
+        || (received != null && received.Status == FriendshipStatus.Accepted))
+    {
+        friend = true;
+    }
+
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
@@ -41,9 +65,27 @@
         }
         else
         {
-            <form asp-route="new_friendship" asp-route-id="@Model.UserId" method="post">
-                <button type="submit" class="btn follow-btn">Follow </button>
-            </form>
+            if (friend)
+            {
+                <div class="btn"> This user is your friend </div>
+            }
+            else if (received == null && sent == null)
+            {
+                // There is no connection.
+                <form asp-route="new_friendship" asp-route-id="@Model.UserId" method="post">
+                    <button type="submit" class="btn follow-btn">Follow </button>
+                </form>
+            }
+            else if (received != null)
+            {
+                // There is a pending request from that user.
+                <button class="btn follow-btn">Accept friend request</button>
+            }
+            else if (sent != null)
+            {
+                // There is a pending request to that user.
+                <div class="btn"> Pending friend request</div>
+            }
         }
 
     </div>
@@ -52,7 +94,6 @@
             @foreach (var postare in Model.User.UserPosts)
             {
                 @Html.Partial("GaleryPostPartial", postare)
-                ;
             }
 
         </div>

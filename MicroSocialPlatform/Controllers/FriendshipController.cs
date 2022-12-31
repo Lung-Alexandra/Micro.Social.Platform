@@ -26,6 +26,14 @@ public class FriendshipController : Controller
     public IActionResult New(string id)
     {
         string from = _userManager.GetUserId(User);
+
+        // An user cannot send a friend request to itself.
+        if (from == id)
+        {
+            return View("MyError", new ErrorView("You cannot send a friend request to yourself!"));
+        }
+
+        // Get the profile of the target user.
         AppUser to;
         try
         {
@@ -38,6 +46,18 @@ public class FriendshipController : Controller
             return View("MyError", new ErrorView("That user does not exist!"));
         }
 
+        // Check if there already is a connection between this user to the target.
+        if (_db.Friendships.Any(f => f.User1Id == from && f.User2Id == id))
+        {
+            return View("MyError", new ErrorView("You already sent a friend request to that user!"));
+        }
+
+        // Check if there already is a connection between the target to this user.
+        if (_db.Friendships.Any(f => f.User1Id == id && f.User2Id == from))
+        {
+            return View("MyError", new ErrorView("That user already sent you a friend request!"));
+        }
+
         Friendship friendship = new Friendship();
         friendship.User1Id = from;
         friendship.User2Id = id;
@@ -45,6 +65,8 @@ public class FriendshipController : Controller
         friendship.StartDate = null;
         _db.Friendships.Add(friendship);
         _db.SaveChanges();
+
+        // Redirect to the target user's profile.
         return RedirectToAction("Index", "Profile", new { id = to.UserProfile.Id });
     }
 
