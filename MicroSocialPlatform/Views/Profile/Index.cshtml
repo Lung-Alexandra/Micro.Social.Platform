@@ -41,16 +41,19 @@
         }
         else
         {
-            <button class="btn follow-btn"> follow </button>
+            <form asp-route="new_friendship" asp-route-id="@Model.UserId" method="post">
+                <button type="submit" class="btn follow-btn">Follow </button>
+            </form>
         }
 
     </div>
     <div class="gcontainer">
         <div class="gallery">
-         @foreach (var postare in Model.User.UserPosts)
-         {
-             @Html.Partial("GaleryPostPartial", postare);
-         }
+            @foreach (var postare in Model.User.UserPosts)
+            {
+                @Html.Partial("GaleryPostPartial", postare)
+                ;
+            }
 
         </div>
     </div>

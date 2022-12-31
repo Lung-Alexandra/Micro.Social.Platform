@@ -117,6 +117,13 @@ app.MapControllerRoute(
     new { controller = "Comment", action = "New" }
 );
 
+app.MapControllerRoute(
+    name: "new_friendship",
+    pattern: "/friendship/new/{id}",
+    defaults:
+    new { controller = "Friendship", action = "New" }
+);
+
 app.MapRazorPages();
 
 app.Run();
