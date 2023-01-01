@@ -1,7 +1,9 @@
+@using MicroSocialPlatform.Data
 @model Post 
-
+@inject ApplicationDbContext DbContext;
 @{
     Layout = "MyLayout";
+    int num_comments = DbContext.Comments.Count(c => c.PostId == Model.Id);
 }
 <section class="post-with-comments">
     <div class="post-s">
@@ -28,7 +30,7 @@
             </div>
 
             <span class="likes">3.4k</span>
-            <span class="comment-count">300</span>
+            <span class="comment-count">@num_comments</span>
 
         </div>
         <div class="comments-s">
