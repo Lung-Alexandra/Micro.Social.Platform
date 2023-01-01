@@ -1,5 +1,9 @@
+@using MicroSocialPlatform.Data
 @model Post 
-
+@inject ApplicationDbContext DbContext;
+@{
+    int num_comments = DbContext.Comments.Count(c => c.PostId == Model.Id);
+}
 <div class="post">
     <div class="post-header">
         <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
@@ -24,7 +28,7 @@
         </div>
 
         <span class="likes">3.4k</span>
-        <span class="comment-count">300</span>
+        <span class="comment-count">@num_comments</span>
 
     </div>
     <div class="comments hid">
