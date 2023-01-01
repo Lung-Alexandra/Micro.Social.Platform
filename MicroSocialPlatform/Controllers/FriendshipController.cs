@@ -73,7 +73,7 @@ public class FriendshipController : Controller
     [HttpPost]
     public IActionResult AcceptFriendship(int id)
     {
-        string my_id = _userManager.GetUserId(User);
+        string myId = _userManager.GetUserId(User);
 
         // Get the friendship by id.
         Friendship friendship;
@@ -86,16 +86,23 @@ public class FriendshipController : Controller
             return View("MyError", new ErrorView("The friend request does not exist!"));
         }
 
-        if (friendship.User2Id != my_id)
+        // Check if the current user is the received of the friend request.
+        if (friendship.User2Id != myId)
             return View("MyError", new ErrorView("You are not the receiver of that friend request!"));
+
+        // Check if the friend request was already accepted.
+        if (friendship.Status == FriendshipStatus.Accepted)
+        {
+            return View("MyError", new ErrorView("The friend request was already accepted!"));
+        }
 
         friendship.Status = FriendshipStatus.Accepted;
         friendship.StartDate = DateTime.Now;
         _db.SaveChanges();
 
         // Redirect to the target user's profile.
-        int profile_id = _db.Profiles.First(p => p.UserId == friendship.User1Id).Id;
-        return RedirectToAction("Index", "Profile", new { id = profile_id });
+        int profileId = _db.Profiles.First(p => p.UserId == friendship.User1Id).Id;
+        return RedirectToAction("Index", "Profile", new { id = profileId });
     }
 
     // Shows all friends for the given profile.
