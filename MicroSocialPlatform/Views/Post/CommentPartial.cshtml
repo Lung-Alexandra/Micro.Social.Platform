@@ -1,9 +1,26 @@
 @model Comment
 
 <div class="comment">
-    <p class="username">@Model.User.UserName</p>
+    <div class="comment-header">
+        <p class="username">@Model.User.UserName</p>
+        <div class="settings-comment-btn">
+            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+        </div>
+        <div class="set-divs-c hid">
+            <form method="get" asp-route="edit_comment" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="edit-comment-button">
+                    <ion-icon name="create-outline"></ion-icon>
+                    <p>Edit</p>
+                </button>
+            </form>
+            <form method="post" asp-route="delete_comment" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="delete-comment-button">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    <p>Delete</p>
+                </button>
+            </form>
+        </div>
+    </div>
     <p class="comment-text">@Model.Content</p>
-    <form method="post" asp-route="delete_comment" asp-route-id="@Model.Id">
-        <button type="submit"> Delete</button>
-    </form>
 </div>
+

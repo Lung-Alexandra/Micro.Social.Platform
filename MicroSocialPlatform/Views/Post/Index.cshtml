@@ -10,7 +10,7 @@
         <div class="post-header-s">
             <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
             <p class="username">@Model.User.UserName</p>
-            <div class="edit-post-btn">
+            <div class="settings-post-btn">
                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
             </div>
         </div>
@@ -68,7 +68,7 @@
 <script>
     const delete_buttons = document.querySelector('.set-divs')
     $(document).ready(function() {
-        document.querySelector('.edit-post-btn').addEventListener("click",function() {
+        document.querySelector('.settings-post-btn').addEventListener("click",function() {
                                                                          
             if(delete_buttons.classList.contains('hid')){
                 delete_buttons.classList.remove('hid');
@@ -80,6 +80,22 @@
             }
                                                                     
         })
+         
     });
 
+    const set_buttons = document.querySelectorAll('.set-divs-c')
+         const action_divs_c = document.querySelectorAll('.settings-comment-btn')
+         $.each(action_divs_c, function(ind, butt) {
+         butt.addEventListener("click",function() {
+               if(set_buttons[ind].classList.contains('hid')){
+                   set_buttons[ind].classList.remove('hid');
+                   set_buttons[ind].classList.add('active');
+               }
+               else{
+                   set_buttons[ind].classList.remove('active');
+                   set_buttons[ind].classList.add('hid');
+               }
+             })
+       })
+ 
 </script>

@@ -9,6 +9,23 @@
     gap:50px;
     z-index: 1;
 }
+.new-post-btn{
+    width: 70vh;
+    height: 6vh;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255, 255, 255, 0.1);
+    border-radius: 10px 300px 10px 300px;
+    margin: auto auto 0;
+    background: rgba(139, 139, 139, 0.23);
+    backdrop-filter: blur(10px);
+}
+.new-post-btn a{
+    text-decoration: none;
+    color: whitesmoke;
+    font-size: 1rem;
+}
 
 /*post section*/
 
@@ -50,11 +67,11 @@
     margin: auto;
     width: -webkit-fill-available;
 }
-.edit-post-btn{
+.settings-post-btn{
     color: whitesmoke;
     margin-right: 10px;
 }
-.edit-post-btn:hover{
+.settings-post-btn:hover{
     cursor: pointer;
 }
 .post-feed{
@@ -176,22 +193,8 @@
     color: whitesmoke;
     padding: 0 0 0 4px;
 }
-.new-post-btn{
-    width: 70vh;
-    height: 6vh;
-    box-shadow: inset 10px 10px 10px #79525f,
-    15px 25px 10px rgba(138, 89, 118, 0.1),
-    15px 20px 20px rgba(151, 95, 147, 0.1),
-    inset -10px -10px 15px rgba(255, 255, 255, 0.1);
-    border-radius: 10px 300px 10px 300px;
-    margin: auto auto 0;
-    background: rgba(139, 139, 139, 0.23);
-    backdrop-filter: blur(10px);
-}
-.new-post-btn a{
-    text-decoration: none;
-    color: whitesmoke;
-    font-size: 1rem;
+.comment:last-child{
+    float: right;
 }
 
 
@@ -217,6 +220,8 @@
     color: whitesmoke;
     font-size: 1rem;
 }
+
+/* settings for post*/
 .set-divs{
     position: absolute;
     float:right;
@@ -293,19 +298,102 @@
 .delete-post-button ion-icon,.edit-post-button ion-icon {
     font-size: 1rem;
 }
+
+/* settings for comments*/
+.comment-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: space-between;
+}
+.settings-comment-btn{
+    margin-top:5px;
+    color: whitesmoke;
+    margin-right: 10px;
+}
+.settings-comment-btn:hover{
+    cursor: pointer;
+}
+.set-divs-c{
+    position: absolute;
+    float:right;
+    margin-top:116px;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
+    border: 1px solid;
+    width: 25%;
+    height: 10vh;
+    background: rgba(255, 255, 255, 0.05);
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+}
+/*buttons for edit-delete comments*/
+.edit-comment-button {
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
+    border: 1px solid;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .3s;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+/*delete button*/
+.delete-comment-button {
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
+    border: 1px solid;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .3s;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.delete-comment-button:hover ,.edit-comment-button:hover{
+    background-color: rgb(245, 207, 207);
+    transform: scale(1.2);
+    box-shadow: 0 0 4px #111;
+    transition: .3s;
+}
+
+.delete-comment-button:focus,.edit-comment-button:focus {
+    width: 150px;
+    height: 50px;
+    transition: .3s;
+}
+.delete-comment-button p,.edit-comment-button p {
+    font-size: 1rem;
+}
+.delete-comment-button ion-icon,.edit-comment-button ion-icon {
+    font-size: 1rem;
+}
+
 /*galery-post-for-profile*/
-/*
-
-All grid code is placed in a 'supports' rule (feature query) at the bottom of the CSS (Line 310). 
-        
-The 'supports' rule will only run if your browser supports CSS grid.
-
-Flexbox and floats are used as a fallback so that browsers which don't support grid will still recieve a similar layout.
-
-*/
-
-
-
 img {
     display: block;
 }
