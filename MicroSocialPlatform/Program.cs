@@ -117,10 +117,10 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
-    name: "new_comment",
-    pattern: "/comment/new/",
+    name: "edit_comment",
+    pattern: "/comment/edit/{id}",
     defaults:
-    new { controller = "Comment", action = "New" }
+    new { controller = "Comment", action = "Edit" }
 );
 
 app.MapControllerRoute(

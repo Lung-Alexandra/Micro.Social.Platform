@@ -18,33 +18,61 @@ public class CommentController : Controller
         _userManager = userManager;
     }
 
-    // Only users and admins can create comments.
+    // Only users and admins can edit comments.
     [Authorize(Roles = "User,Admin")]
-    [HttpPost]
-    public IActionResult New(Comment new_comment)
+    [HttpGet]
+    public IActionResult Edit(int id)
     {
-        Post post;
-        // Get the post referenced by the comment.
+        // First find the comment by id.
+        Comment toEdit;
         try
         {
-            post = _db.Posts.First(p => p.Id == new_comment.PostId);
+            toEdit = _db.Comments.First(c => c.Id == id);
         }
         catch (InvalidOperationException)
         {
-            return View("MyError", new ErrorView("The post does not exist!"));
+            return View("MyError", new ErrorView("That comment does not exist!"));
         }
 
-        new_comment.Date = DateTime.Now;
-        new_comment.UserId = _userManager.GetUserId(User);
+        // Next check if the user is the owner or an admin.
+        if (_userManager.GetUserId(User) == toEdit.UserId || User.IsInRole("Admin"))
+        {
+            return View(toEdit);
+        }
+
+        return View("MyError", new ErrorView("You cannot edit another user's comments!"));
+    }
+
+    // Only users and admins can edit comments.
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    public IActionResult Edit(Comment edited)
+    {
+        // First find the comment by id.
+        Comment toEdit;
+        try
+        {
+            toEdit = _db.Comments.First(c => c.Id == edited.Id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("That comment does not exist!"));
+        }
 
         if (ModelState.IsValid)
         {
-            _db.Comments.Add(new_comment);
-            _db.SaveChanges();
-            return RedirectToAction("Index", "Post", new {id = new_comment.PostId});
+            // Check if the user is the owner or an admin.
+            if (_userManager.GetUserId(User) == toEdit.UserId || User.IsInRole("Admin"))
+            {
+                // Edit the comment and redirect to the post owning the comment.
+                toEdit.Content = edited.Content;
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Post", new { id = toEdit.PostId });
+            }
+
+            return View("MyError", new ErrorView("You cannot edit another user's comments!"));
         }
 
-        // The model state is not valid.
-        return RedirectToAction("Index", "Home");
+        return View(toEdit);
     }
 }

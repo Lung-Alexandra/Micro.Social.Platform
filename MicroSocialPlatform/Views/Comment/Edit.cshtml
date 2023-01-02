@@ -1,0 +1,19 @@
+@model Comment 
+
+@{
+    Layout = "MyLayout";
+}
+
+<div class="edit-comment">
+    <h2> Edit a comment</h2>
+    @using (Html.BeginForm(actionName: "Edit", controllerName: "Comment", method: FormMethod.Post))
+    {
+        @Html.Label("Content", "Content")
+        <br>
+        @Html.EditorFor(c => c.Content)
+        <br/>
+        @Html.ValidationMessageFor(c => c.Content, null)
+        <br/>
+        <button type="submit">Edit Comment</button>
+    }
+</div>
