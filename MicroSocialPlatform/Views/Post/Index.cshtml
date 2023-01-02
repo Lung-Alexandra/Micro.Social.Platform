@@ -10,7 +10,7 @@
         <div class="post-header-s">
             <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
             <p class="username">@Model.User.UserName</p>
-            <div class="edit-post-btn-s">
+            <div class="edit-post-btn">
                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
             </div>
         </div>
@@ -53,5 +53,38 @@
             }
 
         </div>
+        <div class="set-divs hid">
+            <form method="get" asp-route="edit_post" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="edit-post-button">
+                    <ion-icon name="create-outline"></ion-icon>
+                    <p>Edit</p>
+                </button>
+            </form>
+            <form method="post" asp-route="delete_post" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="delete-post-button">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    <p>Delete</p>
+                </button>
+            </form>
+        </div>
     </div>
 </section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    const delete_buttons = document.querySelector('.set-divs')
+    $(document).ready(function() {
+        document.querySelector('.edit-post-btn').addEventListener("click",function() {
+                                                                         
+            if(delete_buttons.classList.contains('hid')){
+                delete_buttons.classList.remove('hid');
+                delete_buttons.classList.add('active');
+            }
+            else{
+                delete_buttons.classList.remove('active');
+                delete_buttons.classList.add('hid');
+            }
+                                                                    
+        })
+    });
+
+</script>

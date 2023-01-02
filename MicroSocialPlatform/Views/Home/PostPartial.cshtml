@@ -37,8 +37,25 @@
             @Html.Partial("CommentPartial", comment)
         }
         @{
-            <div class="go-to-post"><a href="/post/@Model.Id">View Post/Add Comments</a></div>
+            <div class="go-to-post">
+                <a href="/post/@Model.Id">View Post/Add Comments</a>
+            </div>
         }
 
+
+    </div>
+    <div class="set-divs hid">
+        <form method="get" asp-route="edit_post" asp-route-id="@Model.Id" style="display: contents;">
+            <button type="submit" class="edit-post-button">
+                <ion-icon name="create-outline"></ion-icon>
+                <p>Edit</p>
+            </button>
+        </form>
+        <form method="post" asp-route="delete_post" asp-route-id="@Model.Id" style="display: contents;">
+            <button type="submit" class="delete-post-button">
+                <ion-icon name="trash-outline"></ion-icon>
+                <p>Delete</p>
+            </button>
+        </form>
     </div>
 </div>

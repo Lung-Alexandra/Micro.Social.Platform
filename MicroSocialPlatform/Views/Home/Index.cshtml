@@ -14,7 +14,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
      const comments_buttons = document.querySelectorAll('.cbut')
-        const comments_divs = document.querySelectorAll('.comments')
+     const comments_divs = document.querySelectorAll('.comments')
         $(document).ready(function() {
             $.each(comments_buttons, function(ind, butt) {
             butt.addEventListener("click",function() {
@@ -30,4 +30,21 @@
                 })
           })
         });
+     const delete_buttons = document.querySelectorAll('.set-divs')
+     const action_divs = document.querySelectorAll('.edit-post-btn')
+             $(document).ready(function() {
+                 $.each(action_divs, function(ind, butt) {
+                 butt.addEventListener("click",function() {
+                        
+                       if(delete_buttons[ind].classList.contains('hid')){
+                           delete_buttons[ind].classList.remove('hid');
+                           delete_buttons[ind].classList.add('active');
+                       }
+                       else{
+                           delete_buttons[ind].classList.remove('active');
+                           delete_buttons[ind].classList.add('hid');
+                       }
+                     })
+               })
+             });
 </script>
