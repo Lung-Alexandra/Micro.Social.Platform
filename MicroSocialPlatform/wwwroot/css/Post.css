@@ -54,6 +54,9 @@
     color: whitesmoke;
     margin-right: 10px;
 }
+.edit-post-btn:hover{
+    cursor: pointer;
+}
 .post-feed{
     width: 100%;
     height: 400px;
@@ -212,6 +215,82 @@
 .go-to-post a{
     text-decoration: none;
     color: whitesmoke;
+    font-size: 1rem;
+}
+.set-divs{
+    position: absolute;
+    float:right;
+    top:8%;
+    right: -20%;
+    display: flex; 
+    flex-direction: column;
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
+    border: 1px solid;
+    width: 25%;
+    height: 10vh;
+    background: rgba(255, 255, 255, 0.05);
+    justify-content: center;
+    align-items: center;
+}
+.edit-post-button {
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
+    border: 1px solid;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .3s;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+/*delete button*/
+.delete-post-button {
+    border-radius: 20px 20px 20px 20px ;
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgba(138, 89, 118, 0.1),
+    15px 20px 20px rgba(151, 95, 147, 0.1),
+    inset -10px -10px 15px rgba(255,255,255,0.2);
+    border: 1px solid;
+    background-color: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: .3s;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height: 5vh;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.delete-post-button:hover ,.edit-post-button:hover{
+    background-color: rgb(245, 207, 207);
+    transform: scale(1.2);
+    box-shadow: 0 0 4px #111;
+    transition: .3s;
+}
+
+.delete-post-button:focus,.edit-post-button:focus {
+    width: 150px;
+    height: 50px;
+    transition: .3s;
+}
+.delete-post-button p,.edit-post-button p {
+    font-size: 1rem;
+}
+.delete-post-button ion-icon,.edit-post-button ion-icon {
     font-size: 1rem;
 }
 /*galery-post-for-profile*/
