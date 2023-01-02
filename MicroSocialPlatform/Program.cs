@@ -111,6 +111,12 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "delete_post",
+    pattern: "/post/delete/{id}",
+    new { controller = "Post", action = "Delete" }
+);
+
+app.MapControllerRoute(
     name: "new_comment",
     pattern: "/comment/new/",
     defaults:

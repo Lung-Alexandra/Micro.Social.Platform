@@ -153,4 +153,39 @@ public class PostController : Controller
 
         return View(post);
     }
+
+
+    // Need to be a user or an admin to delete a post.
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Delete the post by id.
+    public IActionResult Delete(int id)
+    {
+        Post toDelete;
+        // Find the post in the database.
+        try
+        {
+            // Also include comments to delete them afterwards.
+            toDelete = _db.Posts
+                .Include(p => p.Comments)
+                .First(p => p.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("That post does not exist!"));
+        }
+
+        // Check if user is an admin or owns the post.
+        if (_userManager.GetUserId(User) == toDelete.UserId || User.IsInRole("Admin"))
+        {
+            // Delete the comments of the post.
+            _db.Comments.RemoveRange(toDelete.Comments);
+            // Delete the post.
+            _db.Posts.Remove(toDelete);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Home");
+        }
+
+        return View("MyError", new ErrorView("Cannot delete another user's posts!"));
+    }
 }
