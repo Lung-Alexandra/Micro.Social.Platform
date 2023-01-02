@@ -90,7 +90,8 @@ public class PostController : Controller
         {
             _db.Posts.Add(post);
             _db.SaveChanges();
-            return RedirectToRoute("home");
+            // Redirect to the newly created post.
+            return RedirectToAction("Index", new { id = post.Id });
         }
 
         return View();
