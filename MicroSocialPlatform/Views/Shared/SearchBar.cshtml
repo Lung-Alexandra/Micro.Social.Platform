@@ -1,4 +1,6 @@
-<div class="search-container">
-  <input type="text" placeholder="Search...">
+@model SearchModel 
+
+<form class="search-container" asp-route="@Model.Route" method="get">
+  <input type="text" name="search" placeholder="Search...">
   <div class="search"></div>
-</div>
+</form>

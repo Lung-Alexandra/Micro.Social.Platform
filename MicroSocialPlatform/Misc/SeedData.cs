@@ -1,6 +1,7 @@
 using MicroSocialPlatform.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MicroSocialPlatform.Models;
 
 namespace MicroSocialPlatform.Misc;
 
@@ -26,6 +27,32 @@ public static class SeedData
                     NormalizedName = "USER"
                 }
             );
+
+            // Generate fake users for testing.
+            var hasher = new PasswordHasher<AppUser>();
+            for (int i = 0; i < 200; i++)
+            {
+                AppUser user = new AppUser()
+                {
+                    Id = "FakeUser:" + i.ToString(),
+                    UserName = "FakeUser" + i.ToString(),
+                    NormalizedEmail = "USER" + i.ToString() + "@YAHOO.COM",
+                    Email = "user" + i.ToString() + "@yahoo.com",
+                    NormalizedUserName = "USER" + i.ToString(),
+                    PasswordHash = hasher.HashPassword(null, "lol")
+                };
+                context.Users.Add(user);
+
+                Profile profile = new Profile
+                {
+                    UserId = user.Id,
+                    Gender = Gender.Female,
+                    Visibility = Visibility.Private
+                };
+                context.Profiles.Add(profile);
+            }
+
+
             context.SaveChanges();
         }
     }
