@@ -124,6 +124,13 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "delete_comment",
+    pattern: "/comment/delete/{id}",
+    defaults:
+    new { controller = "Comment", action = "Delete" }
+);
+
+app.MapControllerRoute(
     name: "new_friendship",
     pattern: "/friendship/new/{id}",
     defaults:

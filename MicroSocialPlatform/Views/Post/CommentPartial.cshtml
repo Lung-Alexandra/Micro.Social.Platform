@@ -3,4 +3,7 @@
 <div class="comment">
     <p class="username">@Model.User.UserName</p>
     <p class="comment-text">@Model.Content</p>
+    <form method="post" asp-route="delete_comment" asp-route-id="@Model.Id">
+        <button type="submit"> Delete</button>
+    </form>
 </div>

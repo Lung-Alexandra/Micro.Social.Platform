@@ -75,4 +75,32 @@ public class CommentController : Controller
 
         return View(toEdit);
     }
+
+    [HttpPost]
+    // Only users and admins can delete comments.
+    [Authorize(Roles = "User,Admin")]
+    public IActionResult Delete(int id)
+    {
+        // First find the comment by id.
+        Comment toDelete;
+        try
+        {
+            toDelete = _db.Comments.First(c => c.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("That comment does not exist!"));
+        }
+
+        // Then check if the current user owns the comment or is an admin.
+        if (_userManager.GetUserId(User) == toDelete.UserId || User.IsInRole("Admin"))
+        {
+            // Remove the comment and redirect to the corresponding post.
+            _db.Comments.Remove(toDelete);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Post", new { id = toDelete.PostId });
+        }
+
+        return View("MyError", new ErrorView("Cannot delete another user's comments!"));
+    }
 }
