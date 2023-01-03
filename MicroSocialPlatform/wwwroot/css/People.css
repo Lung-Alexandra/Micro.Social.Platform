@@ -40,7 +40,7 @@
     top:5vh;
 }
 .person-name {
-    color: white;
+    color: var(--all-text-color);
     font-weight: 300;
     position: absolute;
     left: 20px;
@@ -81,13 +81,14 @@
 .view-people-btn{
     height: 5vh;
     width: 90%;
-    box-shadow: inset 10px 10px 10px #79525f, 15px 25px 10px rgb(138 89 118 / 10%), 15px 20px 20px rgb(151 95 147 / 10%), inset -10px -10px 15px rgb(255 255 255 / 10%);
+    box-shadow: inset 10px 10px 10px #79525f,
+    15px 25px 10px rgb(138 89 118 / 10%),
+    15px 20px 20px rgb(151 95 147 / 10%),
+    inset -10px -10px 15px rgb(255 255 255 / 10%);
     border-radius: 10px 300px 10px 300px;
     margin: 30vh auto;
     background: rgba(139, 139, 139, 0.23);
     backdrop-filter: blur(10px);
-    cursor: pointer;
-}
-.view-people-btn p {
-    color: whitesmoke;
+    cursor: pointer; 
+    color: var(--all-text-color);
 }

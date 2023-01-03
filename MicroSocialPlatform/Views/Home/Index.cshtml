@@ -5,9 +5,10 @@
 }
 <section class="main">
     <form method="get" asp-route="new_post" class="link-to-new-post">
-    <button class="new-post-btn" >
-        Create a new post
-    </button></form>
+        <button class="new-post-btn">
+            Create a new post
+        </button>
+    </form>
     <div class="post-container">
         @foreach (var post in Model.Posts)
         {

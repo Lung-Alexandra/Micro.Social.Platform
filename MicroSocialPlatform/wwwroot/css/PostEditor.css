@@ -1,15 +1,15 @@
 
 .new-post {
-    color: white;
+    color:  var(--all-text-color);;
     margin-left: 40%;
 }
 
 .edit-post {
-    color: white;
+    color:  var(--all-text-color);;
     margin-left: 40%;
 }
 
 .show-post {
-    color: white;
+    color:  var(--all-text-color);;
     margin-left: 40%;
 }

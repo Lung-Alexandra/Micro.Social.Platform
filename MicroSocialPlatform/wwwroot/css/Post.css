@@ -414,7 +414,9 @@ img {
     justify-content: center;
     overflow: hidden;
     transition: .3s;
-    width: 90%
+    width: 90%;
+    color:black;
+    font-size: 1rem
 }
 
 .delete-post-button:hover,
@@ -436,12 +438,9 @@ img {
     width: 150px
 }
 
-.delete-post-button p,
-.edit-post-button p,
+
 .delete-post-button ion-icon,
 .edit-post-button ion-icon,
-.delete-comment-button p,
-.edit-comment-button p,
 .delete-comment-button ion-icon,
 .edit-comment-button ion-icon {
     font-size: 1rem
