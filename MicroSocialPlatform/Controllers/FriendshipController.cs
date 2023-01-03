@@ -79,7 +79,7 @@ public class FriendshipController : Controller
         Friendship friendship;
         try
         {
-            friendship = _db.Friendships.First(u => u.FriendshipId == id);
+            friendship = _db.Friendships.First(u => u.Id == id);
         }
         catch (InvalidOperationException)
         {
@@ -124,7 +124,7 @@ public class FriendshipController : Controller
                 .ThenInclude(u1 => u1.UserProfile)
                 .Include(f => f.User2)
                 .ThenInclude(u2 => u2.UserProfile)
-                .First(f => f.FriendshipId == id);
+                .First(f => f.Id == id);
         }
         catch (InvalidOperationException)
         {

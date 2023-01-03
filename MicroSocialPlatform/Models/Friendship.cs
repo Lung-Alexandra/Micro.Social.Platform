@@ -12,7 +12,7 @@ public enum FriendshipStatus
 // This class models the friendship between two users in the app.
 public class Friendship
 {
-    [Key] public int FriendshipId { get; set; }
+    [Key] public int Id { get; set; }
 
     // The first user, the one that sends the request.
     public string User1Id { get; set; }

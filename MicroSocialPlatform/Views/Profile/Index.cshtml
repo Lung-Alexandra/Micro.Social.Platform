@@ -79,7 +79,7 @@
             {
                 // Get the friendship.
                 Friendship frienship = (received != null) ? received : sent;
-                <form asp-route="delete_friendship" asp-route-id="@frienship.FriendshipId" method="post">
+                <form asp-route="delete_friendship" asp-route-id="@frienship.Id" method="post">
                     <button class="btn">Unfriend</button>
                 </form>
             }
@@ -93,18 +93,18 @@
             else if (received != null)
             {
                 // There is a pending request from that user.
-                <form asp-route="accept_friendship" asp-route-id="@received.FriendshipId" method="post">
+                <form asp-route="accept_friendship" asp-route-id="@received.Id" method="post">
                     <button class="btn">Accept friend request</button>
                 </form>
 
-                <form asp-route="delete_friendship" asp-route-id="@received.FriendshipId" method="post">
+                <form asp-route="delete_friendship" asp-route-id="@received.Id" method="post">
                     <button class="btn">Deny friend request</button>
                 </form>
             }
             else if (sent != null)
             {
                 // There is a pending request to that user.
-                <form asp-route="delete_friendship" asp-route-id="@sent.FriendshipId" method="post">
+                <form asp-route="delete_friendship" asp-route-id="@sent.Id" method="post">
                     <button class="btn">Pending friend request</button>
                 </form>
             }
