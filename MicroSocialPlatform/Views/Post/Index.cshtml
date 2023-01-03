@@ -8,7 +8,7 @@
 }
 <section class="post-with-comments">
     <div class="post-s">
-        <div class="post-header-s">
+        <div class="post-header">
             <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
             <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
                 <button type="submit" class="user-button">
@@ -19,8 +19,8 @@
                 <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
             </div>
         </div>
-        <div class="post-feed-s">
-            <div class="post-img-container-s">
+        <div class="post-feed">
+            <div class="post-img-container">
                 <div class="text-cont">
                     <p class="post-title">@Model.Title</p>
                     <p class="text">@Model.Content</p>
@@ -29,8 +29,8 @@
             </div>
         </div>
 
-        <div class="post-detail-s">
-            <div class="detail-intracables-s">
+        <div class="post-detail">
+            <div class="detail-intracables">
                 <ion-icon class="lbut" name="heart-outline"></ion-icon>
                 <ion-icon class="cbut" name="chatbubble-ellipses"></ion-icon>
             </div>

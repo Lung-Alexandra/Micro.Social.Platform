@@ -109,7 +109,7 @@ body{
     transform: translateX(-50%);
     width: 65%;
     height: 5px;
-    background: rgba(178, 107, 233,0.5);
+    background: rgba(178, 107, 233, 0.5);
     border-radius: 5px;
     filter: blur(0.5rem);
 }

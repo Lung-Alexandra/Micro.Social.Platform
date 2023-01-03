@@ -4,7 +4,10 @@
     ViewData["Title"] = "Home Page";
 }
 <section class="main">
-    <button class="new-post-btn"><a asp-route="new_post">Create a new post</a></button>
+    <form method="get" asp-route="new_post" class="link-to-new-post">
+    <button class="new-post-btn" >
+        Create a new post
+    </button></form>
     <div class="post-container">
         @foreach (var post in Model.Posts)
         {

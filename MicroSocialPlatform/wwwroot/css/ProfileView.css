@@ -1,36 +1,34 @@
-﻿.profile-container{
+﻿.profile-container {
     margin-top: 20px;
-    margin-left:15%;
+    margin-left: 15%;
     width: 70%;
     display: flex;
     flex-direction: column;
     padding: 0 3vh 20px;
     border-radius: 50px;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--btn-bg);
     backdrop-filter: blur(10px);
-    box-shadow: inset 10px 20px 20px #9f6f80,
-    11px 2px 15px #9f6f80,
-    4px -4px 30px #9f6f80,
-    inset -20px -18px 25px rgba(255,255,255,0.1);
+    box-shadow: var(--post-box-shadow);
     overflow-x: hidden;
-    
 }
 
-.user-info{
+.user-info {
     display: flex;
     flex-direction: row;
-    margin-top:10px;
+    margin-top: 10px;
     width: auto;
     align-items: center;
     gap: 10px;
     justify-content: space-around;
 }
-.user-dp{
+
+.user-dp {
     width: 15vh;
     height: 15vh;
     border-radius: 100%;
 }
-.info-container{
+
+.info-container {
     min-width: 5vw;
     max-width: 100vh;
     display: flex;
@@ -38,24 +36,28 @@
     color: whitesmoke;
     width: -webkit-fill-available;
 }
-.info-container .username{
+
+.info-container .username {
     width: auto;
     margin-bottom: 10px;
     font-weight: 600;
     font-size: 1rem;
-    color: whitesmoke;
+    color: var(--all-text-color);;
 }
-.info-container .gender{
+
+.info-container .gender {
     font-size: 0.9rem;
     width: auto;
 }
-.info-container .aboutme{
+
+.info-container .aboutme {
     font-size: 0.9rem;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
 }
-.info-container .website-link{
+
+.info-container .website-link {
     width: auto;
     font-size: 0.9rem;
     display: block;
@@ -64,74 +66,76 @@
     color: rgba(255, 72, 0, 0.479);
     font-weight: 500;
 }
-.number-card{
+
+.number-card {
     height: 2%;
     font-size: 1.2rem;
     line-height: 0.01rem;
     display: flex;
     flex-direction: row;
-    gap:10px;
-    color:whitesmoke;
+    gap: 10px;
+    color: var(--all-text-color);;
 }
-.number-card p{
+
+.number-card p {
     display: flex;
     flex-direction: column;
 }
-.number-card span{
+
+.number-card span {
     font-size: 1.2rem;
     text-align: center;
     margin-top: 20px;
     text-transform: capitalize;
 
 }
-.btn-container{
+
+.btn-container {
     margin-top: 20px;
-    gap:10px;
+    gap: 10px;
     display: flex;
     flex-direction: row;
 }
-.btn-container .btn{
+
+.btn-container .btn {
     width: 20vh;
     height: 5vh;
     text-transform: capitalize;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 400;
-    box-shadow: inset 10px 10px 10px #79525f,
-    15px 25px 10px rgba(138, 89, 118, 0.1),
-    15px 20px 20px rgba(151, 95, 147, 0.1),
-    inset -10px -10px 15px rgba(255,255,255,0.5);
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
     backdrop-filter: blur(10px);
-    border-radius: 10px 300px 10px 300px;
+    border-radius: var(--default-border-r);
     margin: 0 0 15px;
-    color: whitesmoke;
+    color: var(--all-text-color);;
 
 }
-.btn-container .status-f{
+
+.btn-container .status-f {
     width: 25vh;
     height: 5vh;
     font-size: 1rem;
     font-weight: 400;
-    box-shadow: inset 10px 10px 10px #79525f,
-    15px 25px 10px rgba(138, 89, 118, 0.1),
-    15px 20px 20px rgba(151, 95, 147, 0.1),
-    inset -10px -10px 15px rgba(255,255,255,0.5);
-    background: rgba(255, 255, 255, 0.05);
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
     backdrop-filter: blur(10px);
-    border-radius: 10px 300px 10px 300px;
+    border-radius: var(--default-border-r);
     margin: 0 0 15px;
-    color: whitesmoke;
+    color: var(--all-text-color);;
 }
-.status-f p{
-    color: whitesmoke;
+
+.status-f p {
+    color: var(--all-text-color);;
     text-decoration: none;
     position: relative;
     text-align: center;
     top: 10px;
     margin: auto auto;
 }
-.btn a{
+
+.btn a {
     text-decoration: none;
-    color: whitesmoke;
+    color: var(--all-text-color);;
 }
