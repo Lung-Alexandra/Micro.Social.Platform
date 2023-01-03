@@ -70,15 +70,17 @@
         {
             if (friend)
             {
-                <div class="status-f">
-                    <p>This user is your friend </p>
-                </div>
+                // Get the friendship.
+                Friendship frienship = (received != null) ? received : sent;
+                <form asp-route="delete_friendship" asp-route-id="@frienship.FriendshipId" method="post">
+                    <button class="btn">Unfriend</button>
+                </form>
             }
             else if (received == null && sent == null)
             {
                 // There is no connection.
                 <form asp-route="new_friendship" asp-route-id="@Model.UserId" method="post">
-                    <button type="submit" class="btn follow-btn">Follow </button>
+                    <button type="submit" class="btn follow-btn">Friend request</button>
                 </form>
             }
             else if (received != null)
@@ -87,11 +89,17 @@
                 <form asp-route="accept_friendship" asp-route-id="@received.FriendshipId" method="post">
                     <button class="btn">Accept friend request</button>
                 </form>
+
+                <form asp-route="delete_friendship" asp-route-id="@received.FriendshipId" method="post">
+                    <button class="btn">Deny friend request</button>
+                </form>
             }
             else if (sent != null)
             {
                 // There is a pending request to that user.
-                <div class="status-f"> <p>Pending friend request</p></div>
+                <form asp-route="delete_friendship" asp-route-id="@sent.FriendshipId" method="post">
+                    <button class="btn">Pending friend request</button>
+                </form>
             }
         }
 

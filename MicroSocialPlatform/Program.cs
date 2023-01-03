@@ -145,6 +145,14 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "delete_friendship",
+    pattern: "/friendship/delete/{id}",
+    defaults:
+    new { controller = "Friendship", action = "Delete" }
+);
+
+
+app.MapControllerRoute(
     name: "people",
     pattern: "/people/",
     defaults:

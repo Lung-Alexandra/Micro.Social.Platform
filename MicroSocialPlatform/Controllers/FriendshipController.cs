@@ -105,23 +105,53 @@ public class FriendshipController : Controller
         return RedirectToAction("Index", "Profile", new { id = profileId });
     }
 
-    // Shows all friends for the given profile.
-    [HttpGet]
-    public IActionResult Index(int id)
+    // Only user and admins can delete friendships.
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Delete a friendship given by id.
+    // A friendship can be deleted by either the sender or the receiver
+    // of the friendship. The friendship does not need to be accepted for it 
+    // to be deleted.
+    public IActionResult Delete(int id)
     {
-        Profile profile;
+        // First find the friendship by id.
+        Friendship friendship;
         try
         {
-            profile = _db.Profiles
-                .Include(p => p.User).ThenInclude(u => u.UserSentFriendships)
-                .Include(p => p.User).ThenInclude(u => u.UserReceivedFriendships)
-                .First(p => p.Id == id);
+            // Also include users to redirect to the corresponding profile.
+            friendship = _db.Friendships
+                .Include(f => f.User1)
+                .ThenInclude(u1 => u1.UserProfile)
+                .Include(f => f.User2)
+                .ThenInclude(u2 => u2.UserProfile)
+                .First(f => f.FriendshipId == id);
         }
         catch (InvalidOperationException)
         {
-            return View("MyError", new ErrorView("That profile does not exist!"));
+            return View("MyError", new ErrorView("That friendship does not exist!"));
         }
 
-        return View();
+        string myId = _userManager.GetUserId(User);
+        bool sender = myId == friendship.User1Id;
+        bool receiver = myId == friendship.User2Id;
+
+        // Then check if the user is either the sender or the receiver of the friendship, or an admin.
+        if (sender || receiver || User.IsInRole("Admin"))
+        {
+            _db.Friendships.Remove(friendship);
+            _db.SaveChanges();
+
+            // If the user is an admin redirect to the home page.
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            // Get the profile id of the other user.
+            int otherId = sender ? friendship.User2.UserProfile.Id : friendship.User1.UserProfile.Id;
+            return RedirectToAction("Index", "Profile", new { id = otherId });
+        }
+
+        return View("MyError", new ErrorView("You are not the sender or the receiver of that friendship!"));
     }
 }
