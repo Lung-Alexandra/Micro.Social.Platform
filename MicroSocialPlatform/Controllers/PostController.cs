@@ -37,9 +37,11 @@ public class PostController : Controller
         {
             post = _db.Posts
                 .Include(p => p.User)
-                .ThenInclude(p=>p.UserProfile)
+                .ThenInclude(p => p.UserProfile)
                 .Include(p => p.Comments.OrderByDescending(c => c.Date))
-                .ThenInclude(c => c.User).First(p => p.Id == id);
+                .ThenInclude(c => c.User)
+                .ThenInclude(u => u.UserProfile)
+                .First(p => p.Id == id);
         }
         catch (InvalidOperationException)
         {
@@ -60,6 +62,7 @@ public class PostController : Controller
                 .Include(p => p.User)
                 .Include(p => p.Comments)
                 .ThenInclude(c => c.User)
+                .ThenInclude(u => u.UserProfile)
                 .First(p => p.Id == new_comment.PostId);
         }
         catch (InvalidOperationException)
