@@ -32,6 +32,9 @@
 
     int num_friends = DbContext.Friendships.Count(f => f.Status == FriendshipStatus.Accepted && (f.User1Id == Model.UserId || f.User2Id == Model.UserId));
     int num_posts = DbContext.Posts.Count(p => p.UserId == Model.UserId);
+
+    //Check if profile information can be displayed
+    bool visible = friend || owns_profile || @Model.Visibility == Visibility.Public;
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
@@ -40,23 +43,27 @@
 
         <div class="info-container">
             <h1 class="name">@Model.User.UserName</h1>
-            <p class="aboutme">
-                About me : @Model.AboutMe
-            </p>
-            <p class="gender">Gender: @Model.Gender</p>
-            <p class="gender">Vizibilitate: @Model.Visibility</p>
+            @if (visible)
+            {
+                <p class="aboutme">
+                    About me : @Model.AboutMe
+                </p>
+                <p class="gender">Gender: @Model.Gender</p>
+            }
         </div>
-        <div class="number-card">
-            <p class="friends-card">
-                @num_friends<span>Friends</span>
-            </p>
-            <p class="posts-card">
-                @num_posts<span>posts</span>
-            </p>
-        </div>
+        @if (visible)
+        {
+            <div class="number-card">
+                <p class="friends-card">
+                    @num_friends<span>Friends</span>
+                </p>
+                <p class="posts-card">
+                    @num_posts<span>posts</span>
+                </p>
+            </div>
+        }
     </div>
     <div class="btn-container">
-
         @if (owns_profile)
         {
             <button class="btn edit-btn">
@@ -104,13 +111,26 @@
         }
 
     </div>
-    <div class="gcontainer">
-        <div class="gallery">
-            @foreach (var postare in Model.User.UserPosts)
-            {
-                @Html.Partial("GaleryPostPartial", postare)
-            }
 
+    @if (visible)
+    {
+        <div class="gcontainer">
+
+            <div class="gallery">
+                @foreach (var postare in Model.User.UserPosts)
+                {
+                    @Html.Partial("GaleryPostPartial", postare)
+                }
+
+            </div>
         </div>
-    </div>
-</div>
+    }
+    else
+    {
+        <div class="gcontainer">
+            <p class="notfriend">This profile is private</p>
+        </div>
+    }
+
+    }
+</div >

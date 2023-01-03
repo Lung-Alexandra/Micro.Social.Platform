@@ -10,7 +10,7 @@
     z-index: 1;
 }
 .new-post-btn{
-    width: 70vh;
+    width: 70vw;
     height: 6vh;
     box-shadow: inset 10px 10px 10px #79525f,
     15px 25px 10px rgba(138, 89, 118, 0.1),
@@ -403,7 +403,13 @@ img {
     margin: 0 auto;
     padding: 0 2rem;
 }
-
+.gcontainer .notfriend{
+    height: 50vh;
+    font-size: 6rem;
+    width: 50vw;
+    text-align: center;
+    margin: auto auto;
+}
 .visually-hidden {
     position: absolute !important;
     height: 1px;

@@ -3,14 +3,11 @@
     Layout = "MyLayout";
 }
 
-
 @Html.Partial("SearchBar", new SearchModel("/people"));
 <div class="people">
     @foreach (var user in Model.Users)
     {
-        <div>
-            <a asp-route="profile" asp-route-id="@user.UserProfile.Id"> @user.UserName</a>
-        </div>
+        @Html.Partial("PeoplePartial",user)
     }
 
 </div>
