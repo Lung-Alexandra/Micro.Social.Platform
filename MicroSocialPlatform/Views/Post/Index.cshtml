@@ -9,7 +9,7 @@
     <div class="post-s">
         <div class="post-header-s">
             <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
-            <form method="post" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
+            <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
                 <button type="submit" class="user-button">
                     <p class="username">@Model.User.UserName</p>
                 </button>
