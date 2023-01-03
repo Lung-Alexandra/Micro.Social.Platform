@@ -22,4 +22,7 @@ public class AppUser : IdentityUser
 
     // The friendships that were received by the user.
     public List<Friendship>? UserReceivedFriendships { get; set; }
+
+    // The group memberships of the user.
+    public List<GroupMembership>? UserMemberships { get; set; }
 }
