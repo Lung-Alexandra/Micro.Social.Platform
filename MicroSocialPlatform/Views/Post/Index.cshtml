@@ -3,6 +3,7 @@
 @inject ApplicationDbContext DbContext;
 @{
     Layout = "MyLayout";
+    ViewData["Title"] = "Show Post";
     int num_comments = DbContext.Comments.Count(c => c.PostId == Model.Id);
 }
 <section class="post-with-comments">

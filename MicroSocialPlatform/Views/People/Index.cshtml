@@ -1,6 +1,7 @@
 @model PeopleView 
 @{
     Layout = "MyLayout";
+    ViewData["Title"] = "Users";
 }
 
 @Html.Partial("SearchBar", new SearchModel("/people"));
