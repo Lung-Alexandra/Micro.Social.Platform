@@ -20,7 +20,6 @@ button {
     border: 2px solid white;
     background: transparent;
     font-family: 'Roboto', sans-serif;
-    color: white;
     width: 20em;
     height: 3em;
     font-size: 1.2em;
@@ -34,6 +33,7 @@ button {
     margin: auto;
     transition: .3s;
     z-index: 1;
+    color: white;
 }
 
 button a {

@@ -13,7 +13,7 @@
     text-align: center;
     line-height: 5rem;
     border-radius: 10px 200px 10px 200px;
-    color: whitesmoke;
+    color:  var(--all-text-color);;
 }
 .title-cont{
     margin: 3% 20% 3% 20%;
@@ -66,6 +66,6 @@
     backdrop-filter: blur(10px);
     border-radius: 10px 300px 10px 300px;
     align-self: flex-end;
-    color: whitesmoke;
+    color:  var(--all-text-color);;
     font-size: 1rem;
 }

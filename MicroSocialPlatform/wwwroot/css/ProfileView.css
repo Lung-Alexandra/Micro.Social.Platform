@@ -33,7 +33,7 @@
     max-width: 100vh;
     display: flex;
     flex-direction: column;
-    color: whitesmoke;
+    color: var(--all-text-color);
     width: -webkit-fill-available;
 }
 

@@ -34,7 +34,7 @@
     left:14px;
     width: 6px;
     height: 2px;
-    background: white;
+    background:  var(--all-text-color);
     transform: rotate(45deg);
     transition: all 0.5s;
 }
@@ -49,7 +49,7 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 2px solid  var(--all-text-color);
     transition: all 0.5s;
 }
 .search-container input {
@@ -64,7 +64,7 @@
     outline: none;
     border: none;
     background: rgba(80,46,99,1);
-    color: white;
+    color:  var(--all-text-color);
     text-shadow: 0 0 10px rgb(80,46,99);
     padding: 0 80px 0 20px;
     border-radius: 30px;
@@ -99,12 +99,12 @@
     width: 25px;
     height: 2px;
     border: none;
-    background: white;
+    background:  var(--all-text-color);
     border-radius: 0;
     transform: rotate(-45deg);
 }
 .search-container input::placeholder {
-    color: white;
+    color:  var(--all-text-color);
     opacity: 0.5;
     font-weight: bolder;
 }
