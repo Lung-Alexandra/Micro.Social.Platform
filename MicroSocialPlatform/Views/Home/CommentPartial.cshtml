@@ -1,6 +1,10 @@
 @model Comment
 
 <div class="comment">
-    <p class="username">@Model.User.UserName</p>
+    <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
+        <button type="submit" class="user-button">
+            <p class="username">@Model.User.UserName</p>
+        </button>
+    </form>
     <p class="comment-text">@Model.Content</p>
 </div>

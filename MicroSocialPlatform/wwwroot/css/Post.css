@@ -208,7 +208,18 @@
     filter: blur(20px);
     z-index: -1;
 }
-
+.comment .link-to-user{
+    margin: auto;
+    width: -webkit-fill-available;
+}
+.comment .user-button{
+    width: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    text-align: -webkit-auto;
+}
 .username{
     font-weight: 600;
     color: whitesmoke;
@@ -231,6 +242,8 @@
     height: 5vh;
     width: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
     cursor: pointer;
     box-shadow: inset 10px 10px 10px #79525f,
     15px 25px 10px rgba(138, 89, 118, 0.1),
@@ -241,13 +254,13 @@
     background: rgba(139, 139, 139, 0.73);
     backdrop-filter: blur(10px);
     position: sticky;
-    position: -webkit-sticky;
     bottom: 0;
 }
 .go-to-post a{
     text-decoration: none;
     color: whitesmoke;
     font-size: 1rem;
+    width: 90%;
 }
 
 /* settings for post*/
@@ -334,6 +347,18 @@
     align-items: center;
     gap: 10px;
     justify-content: space-between;
+}
+.comment-header .link-to-user{
+    margin: auto;
+    width: -webkit-fill-available;
+}
+.comment-header .user-button{
+    width: inherit;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: inherit;
+    text-align: -webkit-auto;
 }
 .settings-comment-btn{
     margin-top:5px;

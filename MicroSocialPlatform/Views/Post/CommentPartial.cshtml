@@ -2,7 +2,11 @@
 
 <div class="comment">
     <div class="comment-header">
-        <p class="username">@Model.User.UserName</p>
+        <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
+            <button type="submit" class="user-button">
+                <p class="username">@Model.User.UserName</p>
+            </button>
+        </form>
         <div class="settings-comment-btn">
             <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
         </div>
@@ -23,4 +27,3 @@
     </div>
     <p class="comment-text">@Model.Content</p>
 </div>
-
