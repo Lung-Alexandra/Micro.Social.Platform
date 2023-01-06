@@ -4,7 +4,105 @@
     Layout = "MyLayout";
 }
 
-<div class="group">
-    <p> Group name : @Model.Name </p>
-    <p> Group description : @Model.Description </p>
+<div class="chat-container">
+    <div class="chatbox">
+        <div class="top-bar">
+            <div class="avatar">
+                <p></p>
+            </div>
+            <div class="chat-name">@Model.Name</div>
+            <div class="icons">
+                <i class="fas fa-phone"></i>
+                <i class="fas fa-video"></i>
+            </div>
+            <div class="menu">
+                <div class="dots"></div>
+            </div>
+        </div>
+        <div class="middle">
+            <div class="text-messages">
+
+                <div class="bubble">
+                    <p>Heyxcvb,..</p>
+                </div>
+                <div class="bubble">
+                    <p>Oh, oops .</p>
+                </div>
+
+                <div class="bubble">
+                    <p class="sent">Na.dxdfcgnvnbnm</p>
+                </div>
+                <div class="bubble">
+                    <p class="sent">Well Oh wait! ...</p>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-bar">
+            <div class="chat">
+                <input type="text" class="chat-input" placeholder="Type a message..."/>
+                <button type="submit" class="chat-button">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="information">
+        <div class="description">
+            <p> Group description : @Model.Description </p>
+        </div>
+        <div class="chat-people">
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
+             <div class="person">
+                            <span class="title">V</span>
+                            <span class="role">Role</span>
+                            <span class="join-date">Joindate:2:50pm</span>
+                        </div>
+        </div>
+    </div>
+
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+              $(".person").on('click', function(){
+              $(this).toggleClass('focus').siblings().removeClass('focus');
+              })
+</script>

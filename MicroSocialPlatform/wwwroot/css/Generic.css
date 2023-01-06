@@ -25,8 +25,8 @@
     --default-border-r:10px 300px 10px 300px;
     /*Message-variables*/
     --chat-bars-color: #343434;
-    --person-hover: #7c6f9a;
-    --person-focus: #5e4085;
+    --person-hover: #b77ec1;
+    --person-focus: rgba(86, 65, 115, 0.87);
     --avatar-background: linear-gradient(to bottom left, #507e7b 20%, #a1e2d9 100%);
     --chat-input-bg: #343434;
 }

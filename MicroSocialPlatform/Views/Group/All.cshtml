@@ -3,12 +3,22 @@
 @{
     Layout = "MyLayout";
 }
-
-<div class="groups">
-    @foreach (var group in Model.Groups)
-    {
-        <div class="group">
-            <a asp-route="group" asp-route-id="@group.Id"> @group.Name</a>
+<section class="groups">
+    <div>
+    <form method="get" asp-route="new_group" class="link-to-new-group">
+        <button class="new-group-btn">
+            Create a new group
+        </button>
+    </form>
+    </div>
+    <div class="groups-container">
+        <div class="chat-groups">
+            @foreach (var group in Model.Groups)
+            {
+                @Html.Partial("GroupPartial", group)
+            }
         </div>
-    }
-</div>
+
+    </div>
+
+</section>
