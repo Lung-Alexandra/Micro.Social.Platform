@@ -159,6 +159,21 @@ app.MapControllerRoute(
     new { controller = "People", action = "Index" }
 );
 
+app.MapControllerRoute(
+    name: "new_group",
+    pattern: "/group/new",
+    defaults:
+    new { controller = "Group", action = "New" }
+);
+
+app.MapControllerRoute(
+    name: "group",
+    pattern: "/group/{id}",
+    defaults:
+    new { controller = "Group", action = "Index" }
+);
+
+
 app.MapRazorPages();
 
 app.Run();

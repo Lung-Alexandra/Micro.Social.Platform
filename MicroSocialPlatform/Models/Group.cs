@@ -1,12 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MicroSocialPlatform.Models;
-
-public enum GroupStatus
-{
-    MessageGroup,
-    PrivateConversation
-};
 
 // This class models a group in the application. 
 public class Group
@@ -26,9 +21,12 @@ public class Group
     // When was the group created.
     public DateTime CreationTime { get; set; }
 
-    // The group can be either a private conversation or a multiple user group.
-    public GroupStatus Status { get; set; }
+    // The id of the user who created the group.
+    public string? UserId;
+
+    // The navigation property to the user who created the group.
+    public AppUser? User;
 
     // The list of memberships.
-    public List<GroupMembership> Memberships { get; set; }
+    public List<GroupMembership>? Memberships { get; set; }
 }

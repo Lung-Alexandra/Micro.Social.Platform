@@ -1,0 +1,26 @@
+@model Group 
+
+@{
+    Layout = "MyLayout";
+}
+
+
+<div class="new-group">
+    @using (Html.BeginForm(actionName: "New", controllerName: "Group", method: FormMethod.Post))
+    {
+        @Html.Label("Title", "Title")
+        <br/>
+        @Html.EditorFor(g => g.Name)
+        <br/>
+        @Html.ValidationMessageFor(g => g.Name)
+        <br/>
+
+        @Html.Label("Description", "Description (optional)")
+        <br/>
+        @Html.EditorFor(g => g.Description)
+        <br/>
+        @Html.ValidationMessageFor(g => g.Description)
+        <br/>
+        <button type="submit">New Group</button>
+    }
+</div>

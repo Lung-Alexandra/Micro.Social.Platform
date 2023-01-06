@@ -21,8 +21,11 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
         builder.Entity<Friendship>().HasOne(f => f.User1).WithMany(u => u.UserSentFriendships);
         builder.Entity<Friendship>().HasOne(f => f.User2).WithMany(u => u.UserReceivedFriendships);
 
+
         builder.Entity<GroupMembership>().HasOne(m => m.Group).WithMany(g => g.Memberships);
         builder.Entity<GroupMembership>().HasOne(m => m.User).WithMany(u => u.UserMemberships);
+        
+        builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups).HasForeignKey(g => g.UserId);
 
         base.OnModelCreating(builder);
     }
