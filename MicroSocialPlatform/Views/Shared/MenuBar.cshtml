@@ -10,6 +10,7 @@
     var profileClass = currentController == "Profile" ? "active" : "";
     var homeClass = currentController == "Home" ? "active" : "";
     var peopleClass = currentController == "People" ? "active" : "";
+    var groupClass= currentController == "Group" ? "active" : "";
     Profile? profile = null;
     if (signedIn)
     {
@@ -28,8 +29,8 @@
                 <span class="title">Home</span>
             </a>
         </li>
-        <li class="list">
-            <a href="#">
+        <li class="list @groupClass">
+            <a href="/groups">
                 <span class="icon">
                     <ion-icon name="people-circle-outline"></ion-icon>
                 </span>

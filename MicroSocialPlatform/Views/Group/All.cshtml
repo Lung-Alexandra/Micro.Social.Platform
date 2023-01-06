@@ -1,0 +1,14 @@
+@model GroupsView 
+
+@{
+    Layout = "MyLayout";
+}
+
+<div class="groups">
+    @foreach (var group in Model.Groups)
+    {
+        <div class="group">
+            <a asp-route="group" asp-route-id="@group.Id"> @group.Name</a>
+        </div>
+    }
+</div>

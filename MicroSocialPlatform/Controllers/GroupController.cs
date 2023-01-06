@@ -17,6 +17,13 @@ public class GroupController : Controller
         _userManager = userManager;
     }
 
+    // Show all created groups.
+    public IActionResult All()
+    {
+        // Get the list of groups.
+        List<Group> groups = _db.Groups.ToList();
+        return View(new GroupsView(groups));
+    }
 
     // Show the group page given by id.
     public IActionResult Index(int id)
@@ -57,7 +64,7 @@ public class GroupController : Controller
             newGroup.UserId = _userManager.GetUserId(User);
             _db.Groups.Add(newGroup);
             _db.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", new { id = newGroup.Id });
         }
 
         // The model is invalid, show errors.

@@ -160,6 +160,13 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "all_groups",
+    pattern: "/groups",
+    defaults:
+    new { controller = "Group", action = "All" }
+);
+
+app.MapControllerRoute(
     name: "new_group",
     pattern: "/group/new",
     defaults:
