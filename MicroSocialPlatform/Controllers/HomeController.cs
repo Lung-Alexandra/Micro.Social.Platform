@@ -21,9 +21,11 @@ public class HomeController : Controller
         // Get the list of posts and comments.
         var posts = _db.Posts
             .Include(p => p.User)
-            .ThenInclude(p=>p.UserProfile)
+            .ThenInclude(u => u.UserProfile)
             .Include(p => p.Comments.OrderByDescending(c => c.Date))
-            .ThenInclude(c => c.User).ToList();
+            .ThenInclude(c => c.User)
+            .ThenInclude(u => u.UserProfile)
+            .ToList();
         var model = new HomeView(posts);
         return View(model);
     }
