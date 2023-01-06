@@ -174,6 +174,13 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "edit_group",
+    pattern: "/group/edit/{id}",
+    defaults:
+    new { controller = "Group", action = "Edit" }
+);
+
+app.MapControllerRoute(
     name: "group",
     pattern: "/group/{id}",
     defaults:

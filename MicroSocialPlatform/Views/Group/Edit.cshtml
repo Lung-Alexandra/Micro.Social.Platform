@@ -1,0 +1,28 @@
+@model Group
+
+@{
+    Layout = "MyLayout";
+    ViewData["Title"] = "Edit Group";
+}
+
+
+<div class="edit-post">
+    <h2> Edit a group</h2>
+    @using (Html.BeginForm(actionName: "Edit", controllerName: "Group", method: FormMethod.Post))
+    {
+        @Html.Label("Title", "Title")
+        <br/>
+        @Html.EditorFor(g => g.Name)
+        <br/>
+        @Html.ValidationMessageFor(g => g.Name, null)
+        <br/>
+
+        @Html.Label("Content", "Content")
+        <br>
+        @Html.EditorFor(g => g.Description)
+        <br/>
+        @Html.ValidationMessageFor(g => g.Description, null)
+        <br/>
+        <button type="submit">Edit Group</button>
+    }
+</div>

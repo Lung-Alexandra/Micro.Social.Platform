@@ -91,18 +91,43 @@
                 <span class="role">Role</span>
                 <span class="join-date">Joindate:2:50pm</span>
             </div>
-             <div class="person">
-                            <span class="title">V</span>
-                            <span class="role">Role</span>
-                            <span class="join-date">Joindate:2:50pm</span>
-                        </div>
+            <div class="person">
+                <span class="title">V</span>
+                <span class="role">Role</span>
+                <span class="join-date">Joindate:2:50pm</span>
+            </div>
         </div>
     </div>
+    <div class="edit-group hid">
+        <form method="get" asp-route="edit_group" asp-route-id="@Model.Id" style="display: contents;">
+            <button type="submit" class="edit-group-button">
+                <ion-icon name="create-outline"></ion-icon>
+                Edit
+            </button>
+        </form>
 
+    </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
-              $(".person").on('click', function(){
-              $(this).toggleClass('focus').siblings().removeClass('focus');
-              })
+      $(".person").on('click', function(){
+      $(this).toggleClass('focus').siblings().removeClass('focus');
+      })
+    
+     const delete_buttons = document.querySelector('.edit-group')
+     const action_divs = document.querySelector('.menu')
+             $(document).ready(function() {
+                 action_divs.addEventListener("click",function() {
+                        
+                       if(delete_buttons.classList.contains('hid')){
+                           delete_buttons.classList.remove('hid');
+                           delete_buttons.classList.add('active');
+                       }
+                       else{
+                           delete_buttons.classList.remove('active');
+                           delete_buttons.classList.add('hid');
+                       }
+                     })
+           
+             });
 </script>
