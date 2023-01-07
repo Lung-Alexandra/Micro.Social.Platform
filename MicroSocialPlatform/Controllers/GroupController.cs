@@ -59,14 +59,26 @@ public class GroupController : Controller
     [HttpPost]
     // Only users and admins can create groups.
     // Create a new group using the post request data.
+    // Creating a group will make the current user join the group as an admin.
     public IActionResult New(Group newGroup)
     {
         newGroup.CreationTime = DateTime.Now;
         // Check if the model state is valid.
         if (ModelState.IsValid)
         {
+            // Add the group.
             newGroup.UserId = _userManager.GetUserId(User);
             _db.Groups.Add(newGroup);
+            _db.SaveChanges();
+
+            // Then make the current user the admin of the group.
+            GroupMembership membership = new GroupMembership();
+            membership.UserId = _userManager.GetUserId(User);
+            membership.JoinDate = DateTime.Now;
+            membership.Status = MembershipStatus.Admin;
+            membership.GroupId = newGroup.Id;
+
+            _db.GroupMemberships.Add(membership);
             _db.SaveChanges();
             return RedirectToAction("Index", new { id = newGroup.Id });
         }

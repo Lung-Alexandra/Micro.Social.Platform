@@ -1,7 +1,14 @@
+@using MicroSocialPlatform.Data
+@using Microsoft.AspNetCore.Identity;
 @model Group 
+@inject UserManager<AppUser> UserManager;
 
 @{
     Layout = "MyLayout";
+    // Get the current user's id.
+    string myId = UserManager.GetUserId(User);
+    // Get the membership of the current user to the group, if it exists.
+    GroupMembership? myMembership = Model.Memberships.FirstOrDefault(m => m.UserId == myId);
 }
 
 <div class="chat-container">
