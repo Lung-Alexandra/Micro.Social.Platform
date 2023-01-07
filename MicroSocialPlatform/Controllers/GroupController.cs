@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using MicroSocialPlatform.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MicroSocialPlatform.Controllers;
 
@@ -80,21 +81,28 @@ public class GroupController : Controller
         // Get the post from the database with the corresponding id.
         try
         {
-            group = _db.Groups.First(g => g.Id == id);
+            group = _db.Groups.Include(g => g.Memberships).First(g => g.Id == id);
         }
         catch (InvalidOperationException)
         {
             return View("MyError", new ErrorView("The group does not exist!"));
         }
 
-        // Check if user is an admin or owns the group.
-        if (_userManager.GetUserId(User) == group.UserId || User.IsInRole("Admin"))
+        // Get the membership of the current user to check if it has the permission to edit.
+        GroupMembership? membership = group.Memberships.FirstOrDefault(m => m.UserId == _userManager.GetUserId(User));
+
+        // Check if the user is a group admin.
+        bool groupAdmin = membership != null && membership.Status == MembershipStatus.Admin;
+
+        // If the user is a group admin or an admin, it can edit the group. 
+        if (groupAdmin || User.IsInRole("Admin"))
         {
             return View(group);
         }
 
-        return View("MyError", new ErrorView("Cannot edit this group info!"));
+        return View("MyError", new ErrorView("Only group admins can edit the group!"));
     }
+
     [Authorize(Roles = "User,Admin")]
     [HttpPost]
     // Edit the post given by the id.
@@ -104,28 +112,35 @@ public class GroupController : Controller
         // Get the post from the database with the corresponding id.
         try
         {
-            group = _db.Groups.First(g => g.Id == id);
+            group = _db.Groups.Include(g => g.Memberships).First(g => g.Id == id);
         }
         catch (InvalidOperationException)
         {
             return View("MyError", new ErrorView("The group does not exist!"));
         }
 
+        // Get the membership of the current user to check if it has the permission to edit.
+        GroupMembership? membership = group.Memberships.FirstOrDefault(m => m.UserId == _userManager.GetUserId(User));
+
+        // Check if the user is a group admin.
+        bool groupAdmin = membership != null && membership.Status == MembershipStatus.Admin;
+
+        // If there are no model state errors.
         if (ModelState.IsValid)
         {
-            // Check if user is an admin or owns the post.
-            if (_userManager.GetUserId(User) == group.UserId || User.IsInRole("Admin"))
+            // Check if user is an admin or a group admin.
+            if (groupAdmin || User.IsInRole("Admin"))
             {
                 group.Name = newGroup.Name;
-                group.Description = group.Description;
+                group.Description = newGroup.Description;
                 _db.SaveChanges();
                 return RedirectToAction("Index", new { id });
             }
 
-            return View("MyError", new ErrorView("Cannot edit another user's posts!"));
+            return View("MyError", new ErrorView("Only group admins can edit the group!"));
         }
 
+        // Then show errors on page.
         return View(group);
     }
-
 }
