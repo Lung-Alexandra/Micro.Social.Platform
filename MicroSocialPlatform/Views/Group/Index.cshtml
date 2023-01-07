@@ -13,50 +13,56 @@
 
 <div class="chat-container">
     <div class="chatbox">
-        <div class="top-bar">
-            <form method="post" asp-route="new_group_membership" asp-route-id="@Model.Id">
-                <button type="submit">
-                    Enter Group
-                </button>
-            </form>
-            <div class="avatar">
-                <p></p>
-            </div>
-            <div class="chat-name">@Model.Name</div>
-            <div class="icons">
-                <i class="fas fa-phone"></i>
-                <i class="fas fa-video"></i>
-            </div>
-            <div class="menu">
-                <div class="dots"></div>
-            </div>
-        </div>
-        <div class="middle">
-            <div class="text-messages">
+       @if(myMembership==null){
+        <form method="post" asp-route="new_group_membership" asp-route-id="@Model.Id" class="join-group">
+            <button type="submit" class="enter-group">
+                Enter Group
+            </button>
+        </form>
+        }
+       else
+       {
+           <div class="top-bar">
 
-                <div class="bubble">
-                    <p>Heyxcvb,..</p>
-                </div>
-                <div class="bubble">
-                    <p>Oh, oops .</p>
-                </div>
+               <div class="avatar">
+                   <p></p>
+               </div>
+               <div class="chat-name">@Model.Name</div>
+               <div class="icons">
+                   <i class="fas fa-phone"></i>
+                   <i class="fas fa-video"></i>
+               </div>
+               <div class="menu">
+                   <div class="dots"></div>
+               </div>
+           </div>
+           <div class="middle">
+               <div class="text-messages">
 
-                <div class="bubble">
-                    <p class="sent">Na.dxdfcgnvnbnm</p>
-                </div>
-                <div class="bubble">
-                    <p class="sent">Well Oh wait! ...</p>
-                </div>
-            </div>
-        </div>
-        <div class="bottom-bar">
-            <div class="chat">
-                <input type="text" class="chat-input" placeholder="Type a message..."/>
-                <button type="submit" class="chat-button">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </div>
+                   <div class="bubble">
+                       <p>Heyxcvb,..</p>
+                   </div>
+                   <div class="bubble">
+                       <p>Oh, oops .</p>
+                   </div>
+
+                   <div class="bubble">
+                       <p class="sent">Na.dxdfcgnvnbnm</p>
+                   </div>
+                   <div class="bubble">
+                       <p class="sent">Well Oh wait! ...</p>
+                   </div>
+               </div>
+           </div>
+           <div class="bottom-bar">
+               <div class="chat">
+                   <input type="text" class="chat-input" placeholder="Type a message..."/>
+                   <button type="submit" class="chat-button">
+                       <i class="fas fa-paper-plane"></i>
+                   </button>
+               </div>
+           </div>
+       }
     </div>
     <div class="information">
         <div class="description">

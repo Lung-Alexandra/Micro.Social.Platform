@@ -535,3 +535,26 @@
 .creat-group-btn:hover {
     cursor:pointer;
 }
+.join-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    height: 100%;
+    background: var(--chat-bars-color);
+}
+.enter-group{
+    margin: auto auto;
+    width: 20vh;
+    height: 5vh;
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 10px 300px 10px 300px;
+    align-self: flex-end;
+    color:  var(--all-text-color);;
+    font-size: 1rem;
+}
+.enter-group:hover {
+    cursor:pointer;
+}
