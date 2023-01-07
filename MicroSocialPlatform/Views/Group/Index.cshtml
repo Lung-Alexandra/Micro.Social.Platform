@@ -67,7 +67,16 @@
         }
         else
         {
-            // TODO add something here.
+            <div class="not-member-yet">
+                <button class="pending-request">
+                    Pending
+                </button>
+                <form method="post" asp-route="delete_group_membership" asp-route-id="@myMembership.Id" style="display: contents">
+                    <button type="submit" class="cancel-request">
+                        Cancel request
+                    </button>
+                </form>
+            </div>
         }
     </div>
     <div class="information">
@@ -89,7 +98,12 @@
                 Edit
             </button>
         </form>
-
+        <form method="get" asp-route="delete_group" asp-route-id="@Model.Id" style="display: contents;">
+            <button type="submit" class="edit-group-button">
+                <ion-icon name="trash-outline"></ion-icon>
+                Delete
+            </button>
+        </form>
     </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -101,17 +115,18 @@
      const delete_buttons = document.querySelector('.edit-group')
      const action_divs = document.querySelector('.menu')
              $(document).ready(function() {
-                 action_divs.addEventListener("click",function() {
-                        
-                       if(delete_buttons.classList.contains('hid')){
-                           delete_buttons.classList.remove('hid');
-                           delete_buttons.classList.add('active');
-                       }
-                       else{
-                           delete_buttons.classList.remove('active');
-                           delete_buttons.classList.add('hid');
-                       }
+                 if (action_divs !=null){
+                     action_divs.addEventListener("click",function() {
+                            
+                           if(delete_buttons.classList.contains('hid')){
+                               delete_buttons.classList.remove('hid');
+                               delete_buttons.classList.add('active');
+                           }
+                           else{
+                               delete_buttons.classList.remove('active');
+                               delete_buttons.classList.add('hid');
+                           }
                      })
-           
+                 }                 
              });
 </script>

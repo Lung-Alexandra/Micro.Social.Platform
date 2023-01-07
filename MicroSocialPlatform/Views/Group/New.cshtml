@@ -11,21 +11,21 @@
     {
         <div class="titlu-group">
             @Html.Label("Title", "Title")
-           
+
             @Html.EditorFor(g => g.Name)
-        
+
             @Html.ValidationMessageFor(g => g.Name)
-          
+
         </div>
         <div class="add-description">
             @Html.Label("Description", "Description (optional)")
-          
+
             @Html.EditorFor(g => g.Description)
-            
+
             @Html.ValidationMessageFor(g => g.Description)
-          
+
         </div>
-        
+
         <button type="submit" class="creat-group-btn">New Group</button>
     }
 </div>

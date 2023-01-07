@@ -6,10 +6,17 @@
     <span class="join-date">@Model.JoinDate</span>
     @if (Model.Status == MembershipStatus.Pending)
     {
+        <div class="control-btns">
         <form method="post" asp-route="accept_group_membership" asp-route-id="@Model.Id">
-            <button type="submit">
+            <button type="submit" class="accept-request">
                 Accept Membership
             </button>
         </form>
+        <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.Id">
+            <button type="submit" class="accept-request">
+                Kick
+            </button>
+        </form>
+        </div>
     }
 </div>
