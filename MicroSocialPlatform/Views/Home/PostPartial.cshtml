@@ -16,7 +16,7 @@
                 <p class="username">@Model.User.UserName</p>
             </button>
         </form>
-        
+
         @if (canEdit)
         {
             // Show the options button.
@@ -61,18 +61,22 @@
 
 
     </div>
-    <div class="set-divs hid">
-        <form method="get" asp-route="edit_post" asp-route-id="@Model.Id" style="display: contents;">
-            <button type="submit" class="edit-post-button">
-                <ion-icon name="create-outline"></ion-icon>
-                Edit
-            </button>
-        </form>
-        <form method="post" asp-route="delete_post" asp-route-id="@Model.Id" style="display: contents;">
-            <button type="submit" class="delete-post-button">
-                <ion-icon name="trash-outline"></ion-icon>
-                Delete
-            </button>
-        </form>
-    </div>
+    @if (canEdit)
+    {
+        // Show the options.
+        <div class="set-divs hid">
+            <form method="get" asp-route="edit_post" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="edit-post-button">
+                    <ion-icon name="create-outline"></ion-icon>
+                    Edit
+                </button>
+            </form>
+            <form method="post" asp-route="delete_post" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="delete-post-button">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    Delete
+                </button>
+            </form>
+        </div>
+    }
 </div>
