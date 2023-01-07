@@ -62,38 +62,44 @@
             }
 
         </div>
-        <div class="set-divs hid">
-            <form method="get" asp-route="edit_post" asp-route-id="@Model.Id" style="display: contents;">
-                <button type="submit" class="edit-post-button">
-                    <ion-icon name="create-outline"></ion-icon>
-                    <p>Edit</p>
-                </button>
-            </form>
-            <form method="post" asp-route="delete_post" asp-route-id="@Model.Id" style="display: contents;">
-                <button type="submit" class="delete-post-button">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    <p>Delete</p>
-                </button>
-            </form>
-        </div>
+        @if (canEdit)
+        {
+            <div class="set-divs hid">
+                <form method="get" asp-route="edit_post" asp-route-id="@Model.Id" style="display: contents;">
+                    <button type="submit" class="edit-post-button">
+                        <ion-icon name="create-outline"></ion-icon>
+                        <p>Edit</p>
+                    </button>
+                </form>
+                <form method="post" asp-route="delete_post" asp-route-id="@Model.Id" style="display: contents;">
+                    <button type="submit" class="delete-post-button">
+                        <ion-icon name="trash-outline"></ion-icon>
+                        <p>Delete</p>
+                    </button>
+                </form>
+            </div>
+        }
     </div>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
     const delete_buttons = document.querySelector('.set-divs')
+    const post_settings_button = document.querySelector('.settings-post-btn');
+    
     $(document).ready(function() {
-        document.querySelector('.settings-post-btn').addEventListener("click",function() {
-                                                                         
-            if(delete_buttons.classList.contains('hid')){
-                delete_buttons.classList.remove('hid');
-                delete_buttons.classList.add('active');
-            }
-            else{
-                delete_buttons.classList.remove('active');
-                delete_buttons.classList.add('hid');
-            }
-                                                                    
-        })
+        if (post_settings_button!=null){
+            post_settings_button.addEventListener("click",function() {
+                if(delete_buttons.classList.contains('hid')){
+                    delete_buttons.classList.remove('hid');
+                    delete_buttons.classList.add('active');
+                }
+                else{
+                    delete_buttons.classList.remove('active');
+                    delete_buttons.classList.add('hid');
+                }
+                                                                        
+            })
+      }
          
     });
 
