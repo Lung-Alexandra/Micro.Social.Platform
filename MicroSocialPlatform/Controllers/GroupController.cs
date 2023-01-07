@@ -81,7 +81,7 @@ public class GroupController : Controller
     public IActionResult Edit(int id)
     {
         Group group;
-        // Get the post from the database with the corresponding id.
+        // Get the group from the database with the corresponding id.
         try
         {
             group = _db.Groups.Include(g => g.Memberships).First(g => g.Id == id);
@@ -108,11 +108,11 @@ public class GroupController : Controller
 
     [Authorize(Roles = "User,Admin")]
     [HttpPost]
-    // Edit the post given by the id.
+    // Edit the group given by the id.
     public IActionResult Edit(int id, Group newGroup)
     {
         Group group;
-        // Get the post from the database with the corresponding id.
+        // Get the group from the database with the corresponding id.
         try
         {
             group = _db.Groups.Include(g => g.Memberships).First(g => g.Id == id);
