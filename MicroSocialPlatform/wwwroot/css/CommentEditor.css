@@ -2,3 +2,82 @@
     color: white;
     margin-left: 40%;
 }
+.new-group-container {
+    margin: auto auto;
+    width: 80vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 3vh 20px;
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
+    backdrop-filter: blur(10px);
+    overflow-x: hidden;
+    align-items: center;
+    text-align: center;
+    line-height: 5rem;
+    border-radius: 10px 200px 10px 200px;
+    color: var(--all-text-color);;
+}
+
+.title-cont {
+    margin: 3% 20% 3% 20%;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.titlu-group {
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+.titlu-group .text {
+
+    width: 30vh;
+    height: 20vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.add-description {
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-description .text {
+    width: 30vh;
+    height: 20vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.membri{
+    height: 5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.optiuni{
+    background: transparent;
+    border-radius: 10px 200px 10px 200px;
+    position: relative;
+    overflow: hidden;
+    font-size: 0.6em;
+    width: 10%!important;
+    height: 10%!important;
+}
+.creat-group-btn{
+    margin: auto auto;
+    width: 20vh;
+    height: 5vh;
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 10px 300px 10px 300px;
+    align-self: flex-end;
+    color:  var(--all-text-color);;
+    font-size: 1rem;
+}

@@ -5,22 +5,27 @@
 }
 
 
-<div class="new-group">
+<div class="new-group-container">
+    <h1 class="title-cont">Create new group</h1>
     @using (Html.BeginForm(actionName: "New", controllerName: "Group", method: FormMethod.Post))
     {
-        @Html.Label("Title", "Title")
-        <br/>
-        @Html.EditorFor(g => g.Name)
-        <br/>
-        @Html.ValidationMessageFor(g => g.Name)
-        <br/>
-
-        @Html.Label("Description", "Description (optional)")
-        <br/>
-        @Html.EditorFor(g => g.Description)
-        <br/>
-        @Html.ValidationMessageFor(g => g.Description)
-        <br/>
-        <button type="submit">New Group</button>
+        <div class="titlu-group">
+            @Html.Label("Title", "Title")
+           
+            @Html.EditorFor(g => g.Name)
+        
+            @Html.ValidationMessageFor(g => g.Name)
+          
+        </div>
+        <div class="add-description">
+            @Html.Label("Description", "Description (optional)")
+          
+            @Html.EditorFor(g => g.Description)
+            
+            @Html.ValidationMessageFor(g => g.Description)
+          
+        </div>
+        
+        <button type="submit" class="creat-group-btn">New Group</button>
     }
 </div>
