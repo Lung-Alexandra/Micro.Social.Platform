@@ -70,4 +70,62 @@ public class GroupController : Controller
         // The model is invalid, show errors.
         return View(newGroup);
     }
+
+    [Authorize(Roles = "User,Admin")]
+    [HttpGet]
+    // Edit a group given by the id.
+    public IActionResult Edit(int id)
+    {
+        Group group;
+        // Get the post from the database with the corresponding id.
+        try
+        {
+            group = _db.Groups.First(g => g.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The group does not exist!"));
+        }
+
+        // Check if user is an admin or owns the group.
+        if (_userManager.GetUserId(User) == group.UserId || User.IsInRole("Admin"))
+        {
+            return View(group);
+        }
+
+        return View("MyError", new ErrorView("Cannot edit this group info!"));
+    }
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Edit the post given by the id.
+    public IActionResult Edit(int id, Group newGroup)
+    {
+        Group group;
+        // Get the post from the database with the corresponding id.
+        try
+        {
+            group = _db.Groups.First(g => g.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The group does not exist!"));
+        }
+
+        if (ModelState.IsValid)
+        {
+            // Check if user is an admin or owns the post.
+            if (_userManager.GetUserId(User) == group.UserId || User.IsInRole("Admin"))
+            {
+                group.Name = newGroup.Name;
+                group.Description = group.Description;
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id });
+            }
+
+            return View("MyError", new ErrorView("Cannot edit another user's posts!"));
+        }
+
+        return View(group);
+    }
+
 }
