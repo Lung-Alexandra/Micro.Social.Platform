@@ -1,5 +1,10 @@
+@using Microsoft.AspNetCore.Identity
 @model Comment
-
+@inject UserManager<AppUser> UserManager;
+@{
+    // Only the admin or the owner can edit the comment.
+    bool canEdit = UserManager.GetUserId(User) == Model.UserId || User.IsInRole("Admin");
+}
 <div class="comment">
     <div class="comment-header">
         <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
@@ -7,23 +12,27 @@
                 <p class="username">@Model.User.UserName</p>
             </button>
         </form>
-        <div class="settings-comment-btn">
-            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
-        </div>
-        <div class="set-divs-c hid">
-            <form method="get" asp-route="edit_comment" asp-route-id="@Model.Id" style="display: contents;">
-                <button type="submit" class="edit-comment-button">
-                    <ion-icon name="create-outline"></ion-icon>
-                    Edit
-                </button>
-            </form>
-            <form method="post" asp-route="delete_comment" asp-route-id="@Model.Id" style="display: contents;">
-                <button type="submit" class="delete-comment-button">
-                    <ion-icon name="trash-outline"></ion-icon>
-                    Delete
-                </button>
-            </form>
-        </div>
+        @if (canEdit)
+        {
+            // Show the options.
+            <div class="settings-comment-btn">
+                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+            </div>
+            <div class="set-divs-c hid">
+                <form method="get" asp-route="edit_comment" asp-route-id="@Model.Id" style="display: contents;">
+                    <button type="submit" class="edit-comment-button">
+                        <ion-icon name="create-outline"></ion-icon>
+                        Edit
+                    </button>
+                </form>
+                <form method="post" asp-route="delete_comment" asp-route-id="@Model.Id" style="display: contents;">
+                    <button type="submit" class="delete-comment-button">
+                        <ion-icon name="trash-outline"></ion-icon>
+                        Delete
+                    </button>
+                </form>
+            </div>
+        }
     </div>
     <p class="comment-text">@Model.Content</p>
 </div>
