@@ -1,5 +1,7 @@
+@model GroupMembership
+
 <div class="person">
-    <span class="title">V</span>
-    <span class="role">Role</span>
-    <span class="join-date">Joindate:2:50pm</span>
+    <span class="title">@Model.User.UserName</span>
+    <span class="role">@Model.Status</span>
+    <span class="join-date">@Model.JoinDate</span>
 </div>

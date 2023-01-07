@@ -51,51 +51,11 @@
             <p> Group description : @Model.Description </p>
         </div>
         <div class="chat-people">
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
-            <div class="person">
-                <span class="title">V</span>
-                <span class="role">Role</span>
-                <span class="join-date">Joindate:2:50pm</span>
-            </div>
+            @foreach (var membership in Model.Memberships)
+            {
+                @Html.Partial("PersonPartial", membership);
+            }
+
         </div>
     </div>
     <div class="edit-group hid">

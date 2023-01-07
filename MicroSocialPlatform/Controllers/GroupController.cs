@@ -33,7 +33,10 @@ public class GroupController : Controller
         Group group;
         try
         {
-            group = _db.Groups.First(g => g.Id == id);
+            group = _db.Groups
+                .Include(g => g.Memberships)
+                .ThenInclude(m => m.User)
+                .First(g => g.Id == id);
         }
         catch (InvalidOperationException)
         {
