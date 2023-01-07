@@ -71,7 +71,7 @@ public class FriendshipController : Controller
 
     [Authorize(Roles = "User,Admin")]
     [HttpPost]
-    public IActionResult AcceptFriendship(int id)
+    public IActionResult Accept(int id)
     {
         string myId = _userManager.GetUserId(User);
 

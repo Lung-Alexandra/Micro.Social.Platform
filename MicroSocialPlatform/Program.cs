@@ -141,7 +141,7 @@ app.MapControllerRoute(
     name: "accept_friendship",
     pattern: "/friendship/accept/{id}",
     defaults:
-    new { controller = "Friendship", action = "AcceptFriendship" }
+    new { controller = "Friendship", action = "Accept" }
 );
 
 app.MapControllerRoute(
