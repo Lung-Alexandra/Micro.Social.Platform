@@ -98,4 +98,42 @@ public class GroupMembershipController : Controller
 
         return View("MyError", new ErrorView("Only group admins can accept memberships!"));
     }
+
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Deletes the membership given by id.
+    public IActionResult Delete(int id)
+    {
+        GroupMembership membership;
+        // Get the group from the database with the corresponding id.
+        try
+        {
+            membership = _db.GroupMemberships
+                .Include(m => m.Group)
+                .ThenInclude(g => g.Memberships)
+                .First(m => m.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The membership does not exist!"));
+        }
+
+        string myId = _userManager.GetUserId(User);
+        bool groupAdmin = membership.Group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
+        bool ownsMembership = membership.UserId == myId;
+
+        // The memberships can be deleted by either
+        // 1) the user who owns them (he can leave the group)
+        // 2) a group admin (he can kick users out).
+        // 3) an admin.
+
+        if (ownsMembership || groupAdmin || User.IsInRole("Admin"))
+        {
+            _db.GroupMemberships.Remove(membership);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Group", new { id = membership.GroupId });
+        }
+
+        return View("MyError", new ErrorView("Only group admins and owners can delete memberships!"));
+    }
 }

@@ -201,6 +201,14 @@ app.MapControllerRoute(
     new { controller = "GroupMembership", action = "Accept" }
 );
 
+app.MapControllerRoute(
+    name: "delete_group_membership",
+    pattern: "/group_membership/delete/{id}",
+    defaults:
+    new { controller = "GroupMembership", action = "Delete" }
+);
+
+
 app.MapRazorPages();
 
 app.Run();
