@@ -187,6 +187,12 @@ app.MapControllerRoute(
     new { controller = "Group", action = "Index" }
 );
 
+app.MapControllerRoute(
+    name: "new_group_membership",
+    pattern: "/group_membership/new/{id}",
+    defaults:
+    new { controller = "GroupMembership", action = "New" }
+);
 
 app.MapRazorPages();
 

@@ -14,6 +14,11 @@
 <div class="chat-container">
     <div class="chatbox">
         <div class="top-bar">
+            <form method="post" asp-route="new_group_membership" asp-route-id="@Model.Id">
+                <button type="submit">
+                    Enter Group
+                </button>
+            </form>
             <div class="avatar">
                 <p></p>
             </div>
@@ -60,7 +65,7 @@
         <div class="chat-people">
             @foreach (var membership in Model.Memberships)
             {
-                @Html.Partial("PersonPartial", membership);
+                @Html.Partial("PersonPartial", membership)
             }
 
         </div>
