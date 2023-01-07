@@ -55,4 +55,47 @@ public class GroupMembershipController : Controller
         // Redirect to the group page.
         return RedirectToAction("Index", "Group", new { id });
     }
+
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Accepts the pending membership given by id.
+    public IActionResult Accept(int id)
+    {
+        GroupMembership membership;
+        // Get the group from the database with the corresponding id.
+        try
+        {
+            membership = _db.GroupMemberships
+                .Include(m => m.Group)
+                .ThenInclude(g => g.Memberships)
+                .First(m => m.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The membership does not exist!"));
+        }
+
+        // Then check if the membership is pending.
+        if (membership.Status != MembershipStatus.Pending)
+        {
+            return View("MyError", new ErrorView("The membership is not pending!"));
+        }
+
+        string myId = _userManager.GetUserId(User);
+
+        // See if the current user is a group admin.
+        bool groupAdmin = membership.Group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
+
+        // Only group admins and admins can accept pending memberships.
+        if (groupAdmin || User.IsInRole("Admin"))
+        {
+            membership.Status = MembershipStatus.Member;
+            membership.JoinDate = DateTime.Now;
+            _db.SaveChanges();
+            // Redirect to the group.
+            return RedirectToAction("Index", "Group", new { id = membership.GroupId });
+        }
+
+        return View("MyError", new ErrorView("Only group admins can accept memberships!"));
+    }
 }
