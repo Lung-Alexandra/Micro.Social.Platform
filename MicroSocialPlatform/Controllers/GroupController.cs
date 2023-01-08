@@ -36,8 +36,8 @@ public class GroupController : Controller
             group = _db.Groups
                 .Include(g => g.Memberships)
                 .ThenInclude(m => m.User)
-                .Include(g=>g.Messages)
-                .ThenInclude(m=>m.User)
+                .Include(g => g.Messages)
+                .ThenInclude(m => m.User)
                 .First(g => g.Id == id);
         }
         catch (InvalidOperationException)
@@ -60,6 +60,7 @@ public class GroupController : Controller
 
         return View(group);
     }
+
     [HttpPost]
     [Authorize(Roles = "User,Admin")]
     public IActionResult Index([FromForm] Message new_message)
@@ -78,17 +79,46 @@ public class GroupController : Controller
         {
             return View("MyError", new ErrorView("The group does not exists!"));
         }
-        new_message.UserId =_userManager.GetUserId(User);
-        if (ModelState.IsValid)
+
+        // Setting the attributes of the objects in the page.
+        string myId = _userManager.GetUserId(User);
+        GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
+        group.userMembership = myMembership;
+
+        bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
+        // The user can modify the group if it is a group admin or an admin.
+        bool canModify = groupAdmin || User.IsInRole("Admin");
+
+        foreach (var membership in group.Memberships)
         {
-            _db.Messages.Add(new_message);
-            _db.SaveChanges(); 
-            return RedirectToAction("Index", new { id = group.Id });
+            membership.userCanModify = canModify;
         }
 
+
+        // Handling the request.
+        new_message.UserId = _userManager.GetUserId(User);
+        new_message.SentTime = DateTime.Now;
+
+        // Check if the model state is valid.
+        if (ModelState.IsValid)
+        {
+            bool member = myMembership != null && myMembership.Status != MembershipStatus.Pending;
+
+            // Only admins and users who have a membership can send messages.
+            if (member || User.IsInRole("Admin"))
+            {
+                _db.Messages.Add(new_message);
+                _db.SaveChanges();
+                return RedirectToAction("Index", new { id = group.Id });
+            }
+
+            return View("MyError", new ErrorView("Only group members can post messages!"));
+        }
+
+        // Show errors in page.
         return View(group);
     }
-    
+
     [Authorize(Roles = "User,Admin")]
     [HttpGet]
     // Only users and admins can create groups.
@@ -203,6 +233,4 @@ public class GroupController : Controller
         // Then show errors on page.
         return View(group);
     }
-
-    
 }

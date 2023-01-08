@@ -34,7 +34,7 @@
                 <div class="text-messages">
                     @foreach (var message in Model.Messages)
                     {
-                        @Html.Partial("MessagePartial",message)
+                        @Html.Partial("MessagePartial", message)
                     }
                 </div>
             </div>
@@ -43,6 +43,7 @@
                 {
                     <input type="hidden" name="GroupId" value="@Model.Id">
                     <input name="Content" type="text" class="chat-input" placeholder="Type a message..."/>
+                    @Html.ValidationMessage("Content",null)
                     <button type="submit" class="chat-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
