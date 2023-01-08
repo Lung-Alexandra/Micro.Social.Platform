@@ -25,7 +25,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
         builder.Entity<GroupMembership>().HasOne(m => m.Group).WithMany(g => g.Memberships);
         builder.Entity<GroupMembership>().HasOne(m => m.User).WithMany(u => u.UserMemberships);
         
-        builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups).HasForeignKey(g => g.UserId);
+        builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups);
 
         base.OnModelCreating(builder);
     }

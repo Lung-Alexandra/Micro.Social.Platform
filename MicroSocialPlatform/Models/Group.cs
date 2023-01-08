@@ -22,10 +22,10 @@ public class Group
     public DateTime CreationTime { get; set; }
 
     // The id of the user who created the group.
-    public string? UserId;
+    public string? UserId { get; set; }
 
     // The navigation property to the user who created the group.
-    public AppUser? User;
+    public AppUser? User { get; set; }
 
     // The list of memberships.
     public List<GroupMembership>? Memberships { get; set; }

@@ -28,5 +28,5 @@ public class Comment
     public int? PostId { get; set; }
 
     // The post that contains the comment.
-    public Post? Post;
+    public Post? Post { get; set; }
 }
