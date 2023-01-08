@@ -463,7 +463,7 @@
 }
 
 
-.new-group-container,.edit-group-container {
+.new-group-container,.edit-group-container, .edit-message-container{
     margin: auto auto;
     width: 80vh;
     height: 90vh;

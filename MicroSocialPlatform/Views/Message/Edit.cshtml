@@ -1,0 +1,17 @@
+@model Message 
+
+@{
+    Layout = "MyLayout";
+}
+
+<div class="edit-message-container">
+    <h1 class="title-cont">Edit a message</h1>
+    @using (Html.BeginForm(actionName: "Edit", controllerName: "Message", method: FormMethod.Post))
+    {
+        @Html.Label("Content", "Content")
+        @Html.EditorFor(m => m.Content)
+        @Html.ValidationMessageFor(m => m.Content, null)
+        <button type="submit"></button>
+    }
+
+</div>

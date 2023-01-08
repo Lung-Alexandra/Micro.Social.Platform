@@ -208,6 +208,11 @@ app.MapControllerRoute(
     new { controller = "GroupMembership", action = "Delete" }
 );
 
+app.MapControllerRoute(
+    name: "edit_message",
+    pattern: "/message/edit/{id}",
+    defaults: new { controller = "Message", action = "Edit" }
+);
 
 app.MapRazorPages();
 

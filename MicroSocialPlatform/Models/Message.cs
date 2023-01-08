@@ -8,7 +8,6 @@ public class Message
 
     //Message itself
     [Required(ErrorMessage = "Message needs to have a content")]
-    [MinLength(1, ErrorMessage = "The content must have at least 1 characters!")]
     [MaxLength(60, ErrorMessage = "The content must not exceed 60 characters.")]
     public string Content { get; set; }
 
