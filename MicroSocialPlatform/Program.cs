@@ -181,6 +181,13 @@ app.MapControllerRoute(
 );
 
 app.MapControllerRoute(
+    name: "delete_group",
+    pattern: "/group/delete/{id}",
+    defaults:
+    new { controller = "Group", action = "Delete" }
+);
+
+app.MapControllerRoute(
     name: "group",
     pattern: "/group/{id}",
     defaults:

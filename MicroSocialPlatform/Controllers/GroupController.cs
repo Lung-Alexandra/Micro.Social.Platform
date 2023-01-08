@@ -60,7 +60,7 @@ public class GroupController : Controller
         foreach (var message in group.Messages)
         {
             message.userOwns = myId == message.UserId;
-            message.userCanDelete = message.userOwns || groupAdmin; 
+            message.userCanDelete = message.userOwns || groupAdmin;
         }
 
         return View(group);
@@ -101,7 +101,7 @@ public class GroupController : Controller
         foreach (var message in group.Messages)
         {
             message.userOwns = myId == message.UserId;
-            message.userCanDelete = message.userOwns || groupAdmin; 
+            message.userCanDelete = message.userOwns || groupAdmin;
         }
 
         // Handling the request.
@@ -187,11 +187,8 @@ public class GroupController : Controller
             return View("MyError", new ErrorView("The group does not exist!"));
         }
 
-        // Get the membership of the current user to check if it has the permission to edit.
-        GroupMembership? membership = group.Memberships.FirstOrDefault(m => m.UserId == _userManager.GetUserId(User));
-
-        // Check if the user is a group admin.
-        bool groupAdmin = membership != null && membership.Status == MembershipStatus.Admin;
+        string myId = _userManager.GetUserId(User);
+        bool groupAdmin = group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
 
         // If the user is a group admin, it can edit the group. 
         if (groupAdmin)
@@ -218,11 +215,8 @@ public class GroupController : Controller
             return View("MyError", new ErrorView("The group does not exist!"));
         }
 
-        // Get the membership of the current user to check if it has the permission to edit.
-        GroupMembership? membership = group.Memberships.FirstOrDefault(m => m.UserId == _userManager.GetUserId(User));
-
-        // Check if the user is a group admin.
-        bool groupAdmin = membership != null && membership.Status == MembershipStatus.Admin;
+        string myId = _userManager.GetUserId(User);
+        bool groupAdmin = group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
 
         // If there are no model state errors.
         if (ModelState.IsValid)
@@ -241,5 +235,40 @@ public class GroupController : Controller
 
         // Then show errors on page.
         return View(group);
+    }
+
+    // Delete the group given by id.
+    public IActionResult Delete(int id)
+    {
+        Group group;
+        // Get the group from the database with the corresponding id.
+        try
+        {
+            group = _db.Groups
+                .Include(g => g.Memberships)
+                .Include(g => g.Messages)
+                .First(g => g.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The group does not exist!"));
+        }
+
+        string myId = _userManager.GetUserId(User);
+        bool groupAdmin = group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
+        // Only group admins can delete the group.
+        if (groupAdmin)
+        {
+            // Delete the group memberships.
+            _db.GroupMemberships.RemoveRange(group.Memberships);
+            // Delete the group messages.
+            _db.Messages.RemoveRange(group.Messages);
+            // Delete group then redirect to the group list.
+            _db.Groups.Remove(group);
+            _db.SaveChanges();
+            return RedirectToAction("All");
+        }
+
+        return View("MyError", new ErrorView("Only group admins can delete the group!"));
     }
 }
