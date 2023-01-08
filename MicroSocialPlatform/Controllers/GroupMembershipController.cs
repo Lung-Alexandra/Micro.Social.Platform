@@ -47,7 +47,15 @@ public class GroupMembershipController : Controller
         GroupMembership membership = new GroupMembership();
         membership.UserId = myId;
         membership.GroupId = id;
-        membership.Status = MembershipStatus.Pending;
+        // Admin memberships are automatically accepted.
+        if (User.IsInRole("Admin"))
+        {
+            membership.Status = MembershipStatus.Admin;
+        }
+        else
+        {
+            membership.Status = MembershipStatus.Pending;
+        }
 
         _db.GroupMemberships.Add(membership);
         _db.SaveChanges();
