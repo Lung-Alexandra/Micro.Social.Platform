@@ -453,7 +453,7 @@
 }
 
 
-.new-group-container {
+.new-group-container,.edit-group-container {
     margin: auto auto;
     width: 80vh;
     height: 90vh;
@@ -477,21 +477,52 @@
     font-weight: 500;
 }
 
-.titlu-group {
+.title-group {
     font-size: 1rem;
     font-weight: 500;
     display: flex;
     flex-direction: column;
 }
 
-.titlu-group .text {
+.title-group .text {
 
     width: 30vh;
     height: 20vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }
-
+.add-description label,.title-group label{
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    color: var(--all-text-color);
+    padding: 3px 5px;
+}
+.add-description input,.title-group input{
+    border: none;
+    outline: none;
+    background: rgb(76, 52, 93);
+    width: 100%;
+    font-size: 1em;
+    color: var(--all-text-color);
+    padding: 10px 15px;
+    border-radius: 25px!important;
+    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
+    inset -2px -5px 10px rgba(178, 107, 233, 1),
+    15px 15px 10px rgba(0,0,0,0.05),
+    15px 10px 15px rgba(0,0,0,0.025)!important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: black!important;
+    -webkit-border-radius: 25px!important;
+    -webkit-box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
+    inset -2px -5px 10px rgba(178, 107, 233, 1),
+    15px 15px 10px rgba(0,0,0,0.05),
+    15px 10px 15px rgba(0,0,0,0.025)!important;
+}
 .add-description {
     font-size: 1rem;
     font-weight: 500;
@@ -504,21 +535,6 @@
     height: 20vh;
     overflow-x: hidden;
     overflow-y: scroll;
-}
-.membri{
-    height: 5vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.optiuni{
-    background: transparent;
-    border-radius: 10px 200px 10px 200px;
-    position: relative;
-    overflow: hidden;
-    font-size: 0.6em;
-    width: 10%!important;
-    height: 10%!important;
 }
 .creat-group-btn{
     margin: auto auto;

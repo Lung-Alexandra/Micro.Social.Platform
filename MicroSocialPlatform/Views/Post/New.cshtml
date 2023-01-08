@@ -4,23 +4,26 @@
     ViewData["Title"] = "New Post";
 }
 
-<div class="new-post">
-    <h2> Create a new post</h2>
+<div class="new-post-container">
+    <h1 class="title-cont"> Create a new post</h1>
     @using (Html.BeginForm(actionName: "New", controllerName: "Post", method: FormMethod.Post))
     {
+        <div class="title-post">
         @Html.Label("Title", "Title")
-        <br/>
+     
         @Html.EditorFor(p => p.Title)
-        <br/>
+   
         @Html.ValidationMessageFor(p => p.Title, null)
-        <br/>
-
+      
+        </div>
+        <div class="add-content">
         @Html.Label("Content", "Content")
-        <br>
+      
         @Html.EditorFor(p => p.Content)
-        <br/>
+   
         @Html.ValidationMessageFor(p => p.Content, null)
-        <br/>
-        <button type="submit">New Post</button>
+        
+        </div>
+        <button type="submit" class="creat-post-btn">New Post</button>
     }
 </div>

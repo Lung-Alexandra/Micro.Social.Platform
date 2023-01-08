@@ -9,7 +9,7 @@
     <h1 class="title-cont">Create new group</h1>
     @using (Html.BeginForm(actionName: "New", controllerName: "Group", method: FormMethod.Post))
     {
-        <div class="titlu-group">
+        <div class="title-group">
             @Html.Label("Title", "Title")
 
             @Html.EditorFor(g => g.Name)

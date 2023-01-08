@@ -445,3 +445,97 @@ img {
 .edit-comment-button ion-icon {
     font-size: 1rem
 }
+
+/*new post*/
+
+.new-post-container,.edit-post-container {
+    margin: auto auto;
+    width: 80vh;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0 3vh 20px;
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
+    backdrop-filter: blur(10px);
+    overflow-x: hidden;
+    align-items: center;
+    text-align: center;
+    line-height: 5rem;
+    border-radius: 10px 200px 10px 200px;
+    color: var(--all-text-color);;
+}
+
+.title-cont {
+    margin: 3% 20% 3% 20%;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.title-post {
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-post .text {
+
+    width: 30vh;
+    height: 20vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.add-content label,.title-post label{
+    border: none;
+    outline: none;
+    font-size: 1.2em;
+    color: var(--all-text-color);
+    padding: 3px 5px;
+}
+.add-content input,.title-post input{
+    border: none;
+    outline: none;
+    background: rgb(76, 52, 93);
+    width: 100%;
+    font-size: 1em;
+    color: var(--all-text-color);
+    padding: 10px 15px;
+    border-radius: 25px!important;
+    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
+    inset -2px -5px 10px rgba(178, 107, 233, 1),
+    15px 15px 10px rgba(0,0,0,0.05),
+    15px 10px 15px rgba(0,0,0,0.025)!important;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-text-fill-color: black!important;
+    -webkit-border-radius: 25px!important;
+    -webkit-box-shadow: inset 2px 5px 10px rgba(0,0,0,0.1),
+    inset -2px -5px 10px rgba(178, 107, 233, 1),
+    15px 15px 10px rgba(0,0,0,0.05),
+    15px 10px 15px rgba(0,0,0,0.025)!important;
+}
+.add-content {
+    font-size: 1rem;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+}
+.creat-post-btn{
+    margin: auto auto;
+    width: 20vh;
+    height: 5vh;
+    box-shadow: var(--profile-box-shadow);
+    background: var(--btn-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 10px 300px 10px 300px;
+    align-self: flex-end;
+    color:  var(--all-text-color);;
+    font-size: 1rem;
+}
+.creat-post-btn:hover {
+    cursor:pointer;
+}
