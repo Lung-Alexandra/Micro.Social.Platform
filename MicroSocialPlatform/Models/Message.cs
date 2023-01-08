@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MicroSocialPlatform.Models;
 
@@ -25,4 +26,8 @@ public class Message
 
     // The navigation property to the group where the message was sent.
     public Group? Group { get; set; }
+
+    [NotMapped]
+    // If the current user owns this message.
+    public bool userOwns;
 }

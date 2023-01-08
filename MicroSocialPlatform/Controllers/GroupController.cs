@@ -47,14 +47,19 @@ public class GroupController : Controller
 
         string myId = _userManager.GetUserId(User);
         GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
-        group.UserMembership= myMembership;
+        group.UserMembership = myMembership;
 
         // The user can modify the group if it is a group admin.
         bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
 
         foreach (var membership in group.Memberships)
         {
-            membership.UserCanModify= groupAdmin;
+            membership.UserCanModify = groupAdmin;
+        }
+
+        foreach (var message in group.Messages)
+        {
+            message.userOwns = myId == message.UserId;
         }
 
         return View(group);
@@ -82,16 +87,20 @@ public class GroupController : Controller
         // Setting the attributes of the objects in the page.
         string myId = _userManager.GetUserId(User);
         GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
-        group.UserMembership= myMembership;
+        group.UserMembership = myMembership;
 
         // The user can modify the group if it is a group admin.
         bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
 
         foreach (var membership in group.Memberships)
         {
-            membership.UserCanModify= groupAdmin;
+            membership.UserCanModify = groupAdmin;
         }
 
+        foreach (var message in group.Messages)
+        {
+            message.userOwns = myId == message.UserId;
+        }
 
         // Handling the request.
         new_message.UserId = _userManager.GetUserId(User);
