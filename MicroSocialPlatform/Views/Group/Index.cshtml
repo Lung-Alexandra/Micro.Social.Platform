@@ -6,7 +6,7 @@
 
 <div class="chat-container">
     <div class="chatbox">
-        @if (Model.userMembership == null)
+        @if (Model.UserMembership== null)
         {
             <form method="post" asp-route="new_group_membership" asp-route-id="@Model.Id" class="join-group">
                 <button type="submit" class="enter-group">
@@ -14,7 +14,7 @@
                 </button>
             </form>
         }
-        else if (Model.userMembership.Status != MembershipStatus.Pending)
+        else if (Model.UserMembership.Status != MembershipStatus.Pending)
         {
             <div class="top-bar">
 
@@ -57,7 +57,7 @@
                 <button class="pending-request">
                     Pending
                 </button>
-                <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.userMembership.Id" style="display: contents">
+                <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.UserMembership.Id" style="display: contents">
                     <button type="submit" class="cancel-request">
                         Cancel request
                     </button>

@@ -94,8 +94,8 @@ public class GroupMembershipController : Controller
         // See if the current user is a group admin.
         bool groupAdmin = membership.Group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
 
-        // Only group admins and admins can accept pending memberships.
-        if (groupAdmin || User.IsInRole("Admin"))
+        // Only group admins can accept pending memberships.
+        if (groupAdmin)
         {
             membership.Status = MembershipStatus.Member;
             membership.JoinDate = DateTime.Now;
@@ -133,9 +133,8 @@ public class GroupMembershipController : Controller
         // The memberships can be deleted by either
         // 1) the user who owns them (he can leave the group)
         // 2) a group admin (he can kick users out).
-        // 3) an admin.
 
-        if (ownsMembership || groupAdmin || User.IsInRole("Admin"))
+        if (ownsMembership || groupAdmin)
         {
             _db.GroupMemberships.Remove(membership);
             _db.SaveChanges();

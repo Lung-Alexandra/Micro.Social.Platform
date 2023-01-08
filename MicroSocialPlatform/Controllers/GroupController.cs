@@ -47,15 +47,14 @@ public class GroupController : Controller
 
         string myId = _userManager.GetUserId(User);
         GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
-        group.userMembership = myMembership;
+        group.UserMembership= myMembership;
 
+        // The user can modify the group if it is a group admin.
         bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
-        // The user can modify the group if it is a group admin or an admin.
-        bool canModify = groupAdmin || User.IsInRole("Admin");
 
         foreach (var membership in group.Memberships)
         {
-            membership.userCanModify = canModify;
+            membership.UserCanModify= groupAdmin;
         }
 
         return View(group);
@@ -83,15 +82,14 @@ public class GroupController : Controller
         // Setting the attributes of the objects in the page.
         string myId = _userManager.GetUserId(User);
         GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
-        group.userMembership = myMembership;
+        group.UserMembership= myMembership;
 
+        // The user can modify the group if it is a group admin.
         bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
-        // The user can modify the group if it is a group admin or an admin.
-        bool canModify = groupAdmin || User.IsInRole("Admin");
 
         foreach (var membership in group.Memberships)
         {
-            membership.userCanModify = canModify;
+            membership.UserCanModify= groupAdmin;
         }
 
 
@@ -104,8 +102,8 @@ public class GroupController : Controller
         {
             bool member = myMembership != null && myMembership.Status != MembershipStatus.Pending;
 
-            // Only admins and users who have a membership can send messages.
-            if (member || User.IsInRole("Admin"))
+            // Only members can send messages.
+            if (member)
             {
                 _db.Messages.Add(new_message);
                 _db.SaveChanges();
@@ -184,8 +182,8 @@ public class GroupController : Controller
         // Check if the user is a group admin.
         bool groupAdmin = membership != null && membership.Status == MembershipStatus.Admin;
 
-        // If the user is a group admin or an admin, it can edit the group. 
-        if (groupAdmin || User.IsInRole("Admin"))
+        // If the user is a group admin, it can edit the group. 
+        if (groupAdmin)
         {
             return View(group);
         }

@@ -35,5 +35,5 @@ public class Group
 
     [NotMapped]
     // The membership of the current user to this group. It can not exist, so it can be null.
-    public GroupMembership? userMembership;
+    public GroupMembership? UserMembership;
 }

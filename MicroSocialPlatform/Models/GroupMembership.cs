@@ -37,5 +37,5 @@ public class GroupMembership
 
     [NotMapped]
     // If the current user can modify the membership.
-    public bool userCanModify;
+    public bool UserCanModify;
 }
