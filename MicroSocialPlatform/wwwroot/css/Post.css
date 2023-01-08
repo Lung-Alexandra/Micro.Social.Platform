@@ -448,7 +448,7 @@ img {
 
 /*new post*/
 
-.new-post-container,.edit-post-container {
+.new-post-container,.edit-post-container,.edit-comment-container {
     margin: auto auto;
     width: 80vh;
     height: 90vh;
@@ -472,28 +472,27 @@ img {
     font-weight: 500;
 }
 
-.title-post {
+.title-post,.title-comm {
     font-size: 1rem;
     font-weight: 500;
     display: flex;
     flex-direction: column;
 }
 
-.title-post .text {
-
+.title-post .text,.title-comm .text{
     width: 30vh;
     height: 20vh;
     overflow-x: hidden;
     overflow-y: scroll;
 }
-.add-content label,.title-post label{
+.add-content label,.title-post label,.title-comm label{
     border: none;
     outline: none;
     font-size: 1.2em;
     color: var(--all-text-color);
     padding: 3px 5px;
 }
-.add-content input,.title-post input{
+.add-content input,.title-post input,.title-comm input{
     border: none;
     outline: none;
     background: rgb(76, 52, 93);
@@ -524,7 +523,7 @@ input:-webkit-autofill:active {
     display: flex;
     flex-direction: column;
 }
-.creat-post-btn{
+.creat-post-btn,.edit-comm-btn{
     margin: auto auto;
     width: 20vh;
     height: 5vh;
@@ -536,6 +535,6 @@ input:-webkit-autofill:active {
     color:  var(--all-text-color);;
     font-size: 1rem;
 }
-.creat-post-btn:hover {
+.creat-post-btn:hover ,.edit-comm-btn:hover{
     cursor:pointer;
 }

@@ -5,16 +5,17 @@
     ViewData["Title"] = "Edit Comment";
 }
 
-<div class="edit-comment">
-    <h2> Edit a comment</h2>
+<div class="edit-comment-container">
+    <h1 class="title-cont"> Edit a comment</h1>
     @using (Html.BeginForm(actionName: "Edit", controllerName: "Comment", method: FormMethod.Post))
     {
+        <div class="title-comm">
         @Html.Label("Content", "Content")
-        <br>
+       
         @Html.EditorFor(c => c.Content)
-        <br/>
+     
         @Html.ValidationMessageFor(c => c.Content, null)
-        <br/>
-        <button type="submit">Edit Comment</button>
+        </div>
+        <button type="submit" class="edit-comm-btn">Edit Comment</button>
     }
 </div>
