@@ -28,4 +28,7 @@ public class AppUser : IdentityUser
 
     // The group memberships of the user.
     public List<GroupMembership>? UserMemberships { get; set; }
+
+    // The group messages sent by this user.
+    public List<Message>? UserMessages { get; set; }
 }

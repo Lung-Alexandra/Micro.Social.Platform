@@ -29,6 +29,9 @@ public class Group
 
     // The list of memberships.
     public List<GroupMembership>? Memberships { get; set; }
+    
+    // The list of messages in this group.
+    public List<Message>? Messages{ get; set; }
 
     [NotMapped]
     // The membership of the current user to this group. It can not exist, so it can be null.

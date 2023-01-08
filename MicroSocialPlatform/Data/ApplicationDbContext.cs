@@ -24,8 +24,11 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
 
         builder.Entity<GroupMembership>().HasOne(m => m.Group).WithMany(g => g.Memberships);
         builder.Entity<GroupMembership>().HasOne(m => m.User).WithMany(u => u.UserMemberships);
-        
+
         builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups);
+
+        builder.Entity<Message>().HasOne(m => m.User).WithMany(u => u.UserMessages);
+        builder.Entity<Message>().HasOne(m => m.Group).WithMany(g => g.Messages);
 
         base.OnModelCreating(builder);
     }
@@ -40,4 +43,6 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
     public DbSet<Group> Groups { get; set; }
 
     public DbSet<GroupMembership> GroupMemberships { get; set; }
+
+    public DbSet<Message> Messages { get; set; }
 }
