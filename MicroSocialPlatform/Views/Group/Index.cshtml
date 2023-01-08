@@ -5,16 +5,11 @@
 
 @{
     Layout = "MyLayout";
-    // Get the current user's id.
-    string myId = UserManager.GetUserId(User);
-    // Get the membership of the current user to the group, if it exists.
-    GroupMembership? myMembership = Model.Memberships.FirstOrDefault(m => m.UserId == myId);
-    bool inGroup = myMembership != null && myMembership.Status != MembershipStatus.Pending;
 }
 
 <div class="chat-container">
     <div class="chatbox">
-        @if (myMembership == null)
+        @if (Model.userMembership == null)
         {
             <form method="post" asp-route="new_group_membership" asp-route-id="@Model.Id" class="join-group">
                 <button type="submit" class="enter-group">
@@ -22,7 +17,7 @@
                 </button>
             </form>
         }
-        else if (inGroup)
+        else if (Model.userMembership.Status != MembershipStatus.Pending)
         {
             <div class="top-bar">
 
@@ -71,7 +66,7 @@
                 <button class="pending-request">
                     Pending
                 </button>
-                <form method="post" asp-route="delete_group_membership" asp-route-id="@myMembership.Id" style="display: contents">
+                <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.userMembership.Id" style="display: contents">
                     <button type="submit" class="cancel-request">
                         Cancel request
                     </button>

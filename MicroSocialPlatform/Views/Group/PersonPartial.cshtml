@@ -4,19 +4,32 @@
     <span class="title">@Model.User.UserName</span>
     <span class="role">@Model.Status</span>
     <span class="join-date">@Model.JoinDate</span>
-    @if (Model.Status == MembershipStatus.Pending)
-    {
-        <div class="control-btns">
-        <form method="post" asp-route="accept_group_membership" asp-route-id="@Model.Id">
-            <button type="submit" class="accept-request">
-                Accept Membership
-            </button>
-        </form>
-        <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.Id">
-            <button type="submit" class="accept-request">
-                Kick
-            </button>
-        </form>
-        </div>
-    }
+
+    <div class="control-btns">
+        @if (Model.userCanModify)
+        {
+            @if (Model.Status == MembershipStatus.Pending)
+            {
+                <form method="post" asp-route="accept_group_membership" asp-route-id="@Model.Id">
+                    <button type="submit" class="accept-request">
+                        Accept Membership
+                    </button>
+                </form>
+                <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.Id">
+                    <button type="submit" class="accept-request">
+                        Deny Membership
+                    </button>
+                </form>
+            }
+            else
+            {
+                <form method="post" asp-route="delete_group_membership" asp-route-id="@Model.Id">
+                    <button type="submit" class="accept-request">
+                        Kick
+                    </button>
+                </form>
+            }
+        }
+
+    </div>
 </div>

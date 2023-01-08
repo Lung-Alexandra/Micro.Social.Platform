@@ -43,6 +43,19 @@ public class GroupController : Controller
             return View("MyError", new ErrorView("That group does not exist!"));
         }
 
+        string myId = _userManager.GetUserId(User);
+        GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
+        group.userMembership = myMembership;
+
+        bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
+        // The user can modify the group if it is a group admin or an admin.
+        bool canModify = groupAdmin || User.IsInRole("Admin");
+
+        foreach (var membership in group.Memberships)
+        {
+            membership.userCanModify = canModify;
+        }
+
         return View(group);
     }
 

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace MicroSocialPlatform.Models;
@@ -33,4 +34,8 @@ public class GroupMembership
 
     // The status of the membership.
     public MembershipStatus Status { get; set; }
+
+    [NotMapped]
+    // If the current user can modify the membership.
+    public bool userCanModify;
 }
