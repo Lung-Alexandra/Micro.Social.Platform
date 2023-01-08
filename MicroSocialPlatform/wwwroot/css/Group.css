@@ -233,7 +233,7 @@
     left: 60px;
 }
 
-.menu {
+.menu,.mess-menu{
     position: absolute;
     right: 10px;
     top: 20px;
@@ -242,7 +242,7 @@
     cursor: pointer;
 }
 
-.menu:hover {
+.menu:hover,.mess-menu:hover {
     transform: scale(1.1);
     transition: all 0.3s ease-in;
 }
@@ -266,14 +266,19 @@
     transition: all 0.3s ease-in;
 }
 
-.dots {
+.menu .dots,.mess-menu .dots{
     width: 4px;
     height: 4px;
     border-radius: 50%;
+}
+.menu .dots{
     background-color: #79c7c5;
     box-shadow: 0 7px 0 #79c7c5, 0 14px 0 #79c7c5;
 }
-
+.mess-menu .dots{
+    background-color: whitesmoke;
+    box-shadow: 0 7px 0 whitesmoke, 0 14px 0 whitesmoke;
+}
 .middle {
     position: absolute;
     background: var(--chat-bars-color);
@@ -410,7 +415,7 @@
     color: #79c7c5;
 }
 
-.edit-group {
+.edit-group,.edit-mess-group {
     align-items: center;
     float: right;
     justify-content: center;

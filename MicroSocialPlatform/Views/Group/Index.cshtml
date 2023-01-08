@@ -115,6 +115,25 @@
                      })
                  }                 
              });
+      const mess_buttons = document.querySelectorAll('.edit-mess-group')
+           const mess_divs = document.querySelectorAll('.mess-menu')
+                   $(document).ready(function() {
+                       if (mess_divs !=null){
+                           $.each(mess_divs, function(ind, butt) {
+                              butt.addEventListener("click",function() {
+                                  
+                                 if(mess_buttons[ind].classList.contains('hid')){
+                                     mess_buttons[ind].classList.remove('hid');
+                                     mess_buttons[ind].classList.add('active');
+                                 }
+                                 else{
+                                     mess_buttons[ind].classList.remove('active');
+                                     mess_buttons[ind].classList.add('hid');
+                                 }
+                              })
+                           })
+                       }                 
+                   });
      let messages = document.querySelectorAll('.bubble');
      let last = messages.length - 1;
      messages[last].scrollIntoView(true);
