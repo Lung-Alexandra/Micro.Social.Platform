@@ -296,7 +296,6 @@
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    overflow-x: hidden;
 }
 .bubble .info {
     padding: 10px 10px 10px 12px;
@@ -415,7 +414,7 @@
     color: #79c7c5;
 }
 
-.edit-group,.edit-mess-group {
+.edit-group{
     align-items: center;
     float: right;
     justify-content: center;
@@ -426,7 +425,18 @@
     display: flex;
     flex-direction: column;
 }
-
+.edit-mess-group {
+    align-items: center;
+    float: right;
+    justify-content: center;
+    position: absolute;
+    right: -13%;
+    top: 39px;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+}
 .edit-group-button {
     align-items: center;
     background-color: #fff;
