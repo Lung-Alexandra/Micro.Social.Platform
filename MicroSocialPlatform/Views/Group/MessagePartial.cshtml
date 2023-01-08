@@ -1,34 +1,36 @@
 @model Message
 @{
     var messageClass = Model.userOwns ? "sent" : "";
+    var visibleSettings = Model.userOwns || Model.userCanDelete;
+    var settingsClass = visibleSettings ? "" : "hid";
 }
 <div class="bubble">
     <div class="info @messageClass">
-        @if (Model.userOwns)
-        {
-            <div class="mess-menu">
-                <div class="dots"></div>
-            </div>
-        }
+        <div class="mess-menu @settingsClass">
+            <div class="dots"></div>
+        </div>
         <p class="user-mess">~@Model.User.UserName</p>
         <p class="cont-mess">@Model.Content</p>
     </div>
-    
-@if (Model.userOwns)
-{
+
     <div class="edit-mess-group hid">
-        <form method="get" asp-route="edit_message" asp-route-id="@Model.Id" style="display: contents;">
-            <button type="submit" class="edit-group-button">
-                <ion-icon name="create-outline"></ion-icon>
-                Edit
-            </button>
-        </form>
-        <form method="get" asp-route="delete_message" asp-route-id="@Model.Id" style="display: contents;">
-            <button type="submit" class="edit-group-button">
-                <ion-icon name="trash-outline"></ion-icon>
-                Delete
-            </button>
-        </form>
+        @if (Model.userOwns)
+        {
+            <form method="get" asp-route="edit_message" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="edit-group-button">
+                    <ion-icon name="create-outline"></ion-icon>
+                    Edit
+                </button>
+            </form>
+        }
+        @if (Model.userCanDelete)
+        {
+            <form method="get" asp-route="delete_message" asp-route-id="@Model.Id" style="display: contents;">
+                <button type="submit" class="edit-group-button">
+                    <ion-icon name="trash-outline"></ion-icon>
+                    Delete
+                </button>
+            </form>
+        }
     </div>
-}
 </div>

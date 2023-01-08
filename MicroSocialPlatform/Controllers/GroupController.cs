@@ -60,6 +60,7 @@ public class GroupController : Controller
         foreach (var message in group.Messages)
         {
             message.userOwns = myId == message.UserId;
+            message.userCanDelete = message.userOwns || groupAdmin; 
         }
 
         return View(group);
@@ -100,6 +101,7 @@ public class GroupController : Controller
         foreach (var message in group.Messages)
         {
             message.userOwns = myId == message.UserId;
+            message.userCanDelete = message.userOwns || groupAdmin; 
         }
 
         // Handling the request.

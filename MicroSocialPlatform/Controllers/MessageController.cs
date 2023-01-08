@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using MicroSocialPlatform.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace MicroSocialPlatform.Controllers;
 
@@ -35,8 +36,8 @@ public class MessageController : Controller
 
         string myId = _userManager.GetUserId(User);
 
-        // Only the owner and admins can edit messages.
-        if (myId == message.UserId || User.IsInRole("Admin"))
+        // Only the owner can edit its messages.
+        if (myId == message.UserId) 
         {
             return View(message);
         }
@@ -50,7 +51,7 @@ public class MessageController : Controller
     // Edits the message using the data received in the post request. 
     public IActionResult Edit(Message edited)
     {
-        // Search the new comment by id.
+        // Search the new message by id.
         Message toEdit;
         try
         {
@@ -65,8 +66,8 @@ public class MessageController : Controller
         if (ModelState.IsValid)
         {
             string myId = _userManager.GetUserId(User);
-            // Only the owner and admins can edit messages.
-            if (myId == toEdit.UserId || User.IsInRole("Admin"))
+            // Only the owner can edit its messages.
+            if (myId == toEdit.UserId) 
             {
                 toEdit.Content = edited.Content;
                 _db.SaveChanges();
@@ -78,5 +79,37 @@ public class MessageController : Controller
 
         // else show validation errors.
         return View(toEdit);
+    }
+
+    [HttpPost]
+    // Deletes the message given by id.
+    public IActionResult Delete(int id)
+    {
+        // Search the new message by id.
+        Message toDelete;
+        try
+        {
+            toDelete = _db.Messages
+                .Include(m => m.Group)
+                .ThenInclude(g => g.Memberships)
+                .First(m => m.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The message does not exist!"));
+        }
+
+        string myId = _userManager.GetUserId(User);
+        bool groupAdmin = toDelete.Group.Memberships.Any(m => m.UserId == myId && m.Status == MembershipStatus.Admin);
+
+        // Only group admins and the owner can delete the message.
+        if (myId == toDelete.UserId || groupAdmin)
+        {
+            _db.Messages.Remove(toDelete);
+            _db.SaveChanges();
+            return RedirectToAction("Index", "Group", new { id = toDelete.GroupId });
+        }
+
+        return View("MyError", new ErrorView("You cannot delete another user's messages!"));
     }
 }

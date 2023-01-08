@@ -214,6 +214,12 @@ app.MapControllerRoute(
     defaults: new { controller = "Message", action = "Edit" }
 );
 
+app.MapControllerRoute(
+    name: "delete_message",
+    pattern: "/message/delete/{id}",
+    defaults: new { controller = "Message", action = "Delete" }
+);
+
 app.MapRazorPages();
 
 app.Run();

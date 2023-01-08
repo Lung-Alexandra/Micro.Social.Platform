@@ -30,4 +30,7 @@ public class Message
     [NotMapped]
     // If the current user owns this message.
     public bool userOwns;
+
+    [NotMapped] 
+    public bool userCanDelete;
 }
