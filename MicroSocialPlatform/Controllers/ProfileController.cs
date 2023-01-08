@@ -34,6 +34,13 @@ public class ProfileController : Controller
             return View("MyError", new ErrorView("The profile does not exist."));
         }
 
+        string myId = _userManager.GetUserId(User);
+        profile.userOwnsProfile = myId == profile.UserId;
+        profile.userSent = _db.Friendships.FirstOrDefault(f => f.User1Id == myId && f.User2Id == profile.UserId);
+        profile.userReceived = _db.Friendships.FirstOrDefault(f => f.User1Id == profile.UserId && f.User2Id == myId);
+        profile.numPosts = profile.User.UserPosts.Count;
+        profile.numFriends = _db.Friendships.Count(f => f.Status == FriendshipStatus.Accepted && (f.User1Id == profile.UserId || f.User2Id == profile.UserId));
+
         return View(profile);
     }
 

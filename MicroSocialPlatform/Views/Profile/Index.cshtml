@@ -1,40 +1,17 @@
-@using Microsoft.AspNetCore.Identity
-@using MicroSocialPlatform.Data
-@using Microsoft.EntityFrameworkCore
 @model Profile; 
-@inject UserManager<AppUser> UserManager;
-@inject ApplicationDbContext DbContext;
 @{
     ViewData["Title"] = "Show Profile";
     Layout = "MyLayout";
+    Friendship? received = Model.userReceived;
+    Friendship? sent = Model.userSent;
 
-    var my_id = UserManager.GetUserId(User);
-    var owns_profile = my_id == Model.UserId;
-
-    Friendship? sent = null;
-    Friendship? received = null;
-    bool friend = false;
-
-    // If the user does not own the profile, get the friend request sent/received to/from
-    // the other user.
-    if (!owns_profile)
-    {
-        sent = DbContext.Friendships.FirstOrDefault(f => f.User1Id == my_id && f.User2Id == Model.UserId);
-        received = DbContext.Friendships.FirstOrDefault(f => f.User1Id == Model.UserId && f.User2Id == my_id);
-    }
-
-    // Check if the other user is a friend.
-    if ((sent != null && sent.Status == FriendshipStatus.Accepted)
-        || (received != null && received.Status == FriendshipStatus.Accepted))
-    {
-        friend = true;
-    }
-
-    int num_friends = DbContext.Friendships.Count(f => f.Status == FriendshipStatus.Accepted && (f.User1Id == Model.UserId || f.User2Id == Model.UserId));
-    int num_posts = DbContext.Posts.Count(p => p.UserId == Model.UserId);
+    // Check if the user is a friend to the current user.
+    bool friend =
+        (sent != null && sent.Status == FriendshipStatus.Accepted)
+        || (received != null && received.Status == FriendshipStatus.Accepted);
 
     //Check if profile information can be displayed
-    bool visible = friend || owns_profile || @Model.Visibility == Visibility.Public;
+    bool visible = friend || Model.userOwnsProfile || Model.Visibility == Visibility.Public;
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
@@ -55,16 +32,16 @@
         {
             <div class="number-card">
                 <p class="friends-card">
-                    @num_friends<span>Friends</span>
+                    @Model.numFriends<span>Friends</span>
                 </p>
                 <p class="posts-card">
-                    @num_posts<span>posts</span>
+                    @Model.numPosts<span>posts</span>
                 </p>
             </div>
         }
     </div>
     <div class="btn-container">
-        @if (owns_profile)
+        @if (Model.userOwnsProfile)
         {
             <button class="btn edit-btn">
                 <a asp-route="edit_profile" asp-route-id="@Model.Id">edit profile </a>
@@ -78,7 +55,7 @@
             if (friend)
             {
                 // Get the friendship.
-                Friendship frienship = (received != null) ? received : sent;
+                Friendship? frienship = (received!= null) ? received: sent;
                 <form asp-route="delete_friendship" asp-route-id="@frienship.Id" method="post">
                     <button class="btn">Unfriend</button>
                 </form>

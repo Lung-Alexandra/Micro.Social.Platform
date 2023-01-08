@@ -39,4 +39,24 @@ public class Profile
 
     // If the profile is private or not.
     public Visibility Visibility { get; set; }
+
+    [NotMapped]
+    // If the current user owns this profile.
+    public bool userOwnsProfile;
+
+    [NotMapped]
+    // The friendship received by the current user, send by the user with this profile. 
+    public Friendship? userReceived;
+
+    [NotMapped]
+    // The friendship sent by the current user, to the user with this profile. 
+    public Friendship? userSent;
+
+    [NotMapped]
+    // The number of posts made by the user owning this profile.
+    public int numPosts;
+
+    [NotMapped]
+    // The number of friends of the user owning this profile.
+    public int numFriends;
 }
