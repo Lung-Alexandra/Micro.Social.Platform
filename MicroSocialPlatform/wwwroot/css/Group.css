@@ -290,12 +290,13 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 .bubble .info {
     padding: 10px 10px 10px 12px;
     background: #b2b2b2;
     width: 50%;
-    min-width: max-content;
     display: flex;
     flex-direction: column;
     border-radius: 20px;
