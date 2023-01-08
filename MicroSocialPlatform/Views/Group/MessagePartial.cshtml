@@ -6,11 +6,14 @@
 }
 <div class="bubble">
     <div class="info @messageClass">
-        <div class="mess-menu @settingsClass">
-            <div class="dots"></div>
+        <div class="top-part-mess">
+            <p class="user-mess">~@Model.User.UserName</p>
+            <div class="mess-menu @settingsClass">
+                <div class="dots"></div>
+            </div>
         </div>
-        <p class="user-mess">~@Model.User.UserName</p>
         <p class="cont-mess">@Model.Content</p>
+        <p class="time">@Model.SentTime</p>
     </div>
 
     <div class="edit-mess-group hid">
