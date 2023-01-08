@@ -1,13 +1,5 @@
-@using MicroSocialPlatform.Data
-@using Microsoft.AspNetCore.Identity
 @model Post 
-@inject ApplicationDbContext DbContext;
-@inject UserManager<AppUser> UserManager;
-@{
-    int numComments = DbContext.Comments.Count(c => c.PostId == Model.Id);
-    // Only the owner or the admin can edit the post.
-    bool canEdit = UserManager.GetUserId(User) == Model.UserId || User.IsInRole("Admin");
-}
+
 <div class="post">
     <div class="post-header">
         <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
@@ -17,7 +9,7 @@
             </button>
         </form>
 
-        @if (canEdit)
+        @if (Model.userCanEdit)
         {
             // Show the options button.
             <div class="settings-post-btn">
@@ -45,7 +37,7 @@
         </div>
 
         <span class="likes">3.4k</span>
-        <span class="comment-count">@numComments</span>
+        <span class="comment-count">@Model.numComments</span>
 
     </div>
     <div class="comments hid">
@@ -61,7 +53,7 @@
 
 
     </div>
-    @if (canEdit)
+    @if (Model.userCanEdit)
     {
         // Show the options.
         <div class="set-divs hid">
