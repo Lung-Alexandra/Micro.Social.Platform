@@ -25,9 +25,15 @@ public static class SeedData
                     Id = "3dd2a19c-e100-4644-afd0-b5bc72f11120",
                     Name = "User",
                     NormalizedName = "USER"
+                },
+                new IdentityRole
+                {
+                    Id = "3dd2a19c-e100-4644-afd0-b5bc72f11121",
+                    Name = "Admin",
+                    NormalizedName = "ADMIN"
                 }
             );
-
+            
             // Generate fake users for testing.
             var hasher = new PasswordHasher<AppUser>();
             for (int i = 0; i < 200; i++)
@@ -42,7 +48,12 @@ public static class SeedData
                     PasswordHash = hasher.HashPassword(null, "lol")
                 };
                 context.Users.Add(user);
-
+                var roleuser = new IdentityUserRole<string>
+                {
+                    RoleId = "3dd2a19c-e100-4644-afd0-b5bc72f11121",
+                    UserId = user.Id
+                };
+                context.UserRoles.Add(roleuser);
                 Profile profile = new Profile
                 {
                     UserId = user.Id,
@@ -51,7 +62,30 @@ public static class SeedData
                 };
                 context.Profiles.Add(profile);
             }
-
+            //Generate admin
+            AppUser admin = new AppUser()
+            {
+                Id = "8eadd5eb-92a4-49a9-85d4-4c29dd7f86b0",
+                UserName = "Admin",
+                NormalizedEmail = "ADMIN90@YAHOO.COM",
+                Email="admin90@yahoo.com",
+                NormalizedUserName = "ADMIN",
+                PasswordHash = hasher.HashPassword(null, "!admin90")
+            };
+            context.Users.Add(admin);
+            var roleadmin = new IdentityUserRole<string>
+            {
+                RoleId = "3dd2a19c-e100-4644-afd0-b5bc72f11121",
+                UserId = admin.Id
+            };
+            context.UserRoles.Add(roleadmin);
+            Profile adminprofile = new Profile
+            {
+                UserId = admin.Id,
+                Gender = Gender.Unspecified,
+                Visibility = Visibility.Private
+            };
+            context.Profiles.Add(adminprofile);
 
             context.SaveChanges();
         }
