@@ -48,6 +48,11 @@ public class PostController : Controller
             return View("MyError", new ErrorView("The post does not exist!"));
         }
 
+        // Count the number of comments.
+        post.numComments = _db.Comments.Count(c => c.PostId == id);
+        // Only the owner or admins can edit the post.
+        post.userCanEdit = _userManager.GetUserId(User) == post.UserId || User.IsInRole("Admin");
+
         return View(post);
     }
 
@@ -69,6 +74,12 @@ public class PostController : Controller
         {
             return View("MyError", new ErrorView("The post does not exist!"));
         }
+
+        // Count the number of comments.
+        post.numComments = _db.Comments.Count(c => c.PostId == post.Id);
+        // Only the owner or admins can edit the post.
+        post.userCanEdit = _userManager.GetUserId(User) == post.UserId || User.IsInRole("Admin");
+
 
         new_comment.Date = DateTime.Now;
         new_comment.UserId = _userManager.GetUserId(User);

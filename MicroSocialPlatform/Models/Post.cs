@@ -1,5 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace MicroSocialPlatform.Models;
+
 using System.ComponentModel.DataAnnotations;
+
 // This class models a post in the application.
 public class Post
 {
@@ -31,4 +35,12 @@ public class Post
 
     // The comments for a post.
     public List<Comment>? Comments { get; set; }
+
+    [NotMapped]
+    // The number of comments in this post.
+    public int numComments;
+
+    [NotMapped]
+    // If the current user can edit this post.
+    public bool userCanEdit;
 }
