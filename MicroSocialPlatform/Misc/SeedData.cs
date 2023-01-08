@@ -50,7 +50,7 @@ public static class SeedData
                 context.Users.Add(user);
                 var roleuser = new IdentityUserRole<string>
                 {
-                    RoleId = "3dd2a19c-e100-4644-afd0-b5bc72f11121",
+                    RoleId = "3dd2a19c-e100-4644-afd0-b5bc72f11120",
                     UserId = user.Id
                 };
                 context.UserRoles.Add(roleuser);
