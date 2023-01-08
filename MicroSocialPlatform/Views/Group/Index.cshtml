@@ -32,29 +32,22 @@
             </div>
             <div class="middle">
                 <div class="text-messages">
-
-                    <div class="bubble">
-                        <p>Heyxcvb,..</p>
-                    </div>
-                    <div class="bubble">
-                        <p>Oh, oops .</p>
-                    </div>
-
-                    <div class="bubble">
-                        <p class="sent">Na.dxdfcgnvnbnm</p>
-                    </div>
-                    <div class="bubble">
-                        <p class="sent">Well Oh wait! ...</p>
-                    </div>
+                    @foreach (var message in Model.Messages)
+                    {
+                        @Html.Partial("MessagePartial",message)
+                    }
                 </div>
             </div>
             <div class="bottom-bar">
-                <div class="chat">
-                    <input type="text" class="chat-input" placeholder="Type a message..."/>
+                @using (Html.BeginForm("Index", "Group", method: FormMethod.Post, htmlAttributes: new { @class = "chat" }))
+                {
+                    <input type="hidden" name="GroupId" value="@Model.Id">
+                    <input name="Content" type="text" class="chat-input" placeholder="Type a message..."/>
                     <button type="submit" class="chat-button">
                         <i class="fas fa-paper-plane"></i>
                     </button>
-                </div>
+                }
+
             </div>
         }
         else

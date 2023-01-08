@@ -36,6 +36,8 @@ public class GroupController : Controller
             group = _db.Groups
                 .Include(g => g.Memberships)
                 .ThenInclude(m => m.User)
+                .Include(g=>g.Messages)
+                .ThenInclude(m=>m.User)
                 .First(g => g.Id == id);
         }
         catch (InvalidOperationException)
@@ -109,7 +111,9 @@ public class GroupController : Controller
         // Get the group from the database with the corresponding id.
         try
         {
-            group = _db.Groups.Include(g => g.Memberships).First(g => g.Id == id);
+            group = _db.Groups
+                .Include(g => g.Memberships)
+                .First(g => g.Id == id);
         }
         catch (InvalidOperationException)
         {
@@ -169,6 +173,34 @@ public class GroupController : Controller
         }
 
         // Then show errors on page.
+        return View(group);
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "User,Admin")]
+    public IActionResult Index([FromForm] Message new_message)
+    {
+        Group group;
+        try
+        {
+            group = _db.Groups
+                .Include(g => g.User)
+                .Include(g => g.Messages)
+                .ThenInclude(m => m.User)
+                .First(g => g.Id == new_message.GroupId);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The group does not exists!"));
+        }
+        new_message.UserId =_userManager.GetUserId(User);
+        if (ModelState.IsValid)
+        {
+            _db.Messages.Add(new_message);
+            _db.SaveChanges(); 
+            return RedirectToAction("Index", new { id = group.Id });
+        }
+
         return View(group);
     }
 }

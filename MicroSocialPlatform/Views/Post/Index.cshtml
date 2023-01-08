@@ -48,8 +48,8 @@
 
             @using (Html.BeginForm("Index", "Post", method: FormMethod.Post, htmlAttributes: new { @class = "comment-box" }))
             {
-                <input type="hidden" name="PostId" value="@Model.Id"></input>
-                <input name="Content" type="text" id="comment-input"></input>
+                <input type="hidden" name="PostId" value="@Model.Id">
+                <input name="Content" type="text" id="comment-input">
                 @Html.ValidationMessage("Content", null)
                 <button class="add-comment-btn" type="submit">Post</button>
             }
