@@ -60,7 +60,35 @@ public class GroupController : Controller
 
         return View(group);
     }
+    [HttpPost]
+    [Authorize(Roles = "User,Admin")]
+    public IActionResult Index([FromForm] Message new_message)
+    {
+        Group group;
+        try
+        {
+            group = _db.Groups
+                .Include(g => g.Memberships)
+                .ThenInclude(m => m.User)
+                .Include(g => g.Messages)
+                .ThenInclude(m => m.User)
+                .First(g => g.Id == new_message.GroupId);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The group does not exists!"));
+        }
+        new_message.UserId =_userManager.GetUserId(User);
+        if (ModelState.IsValid)
+        {
+            _db.Messages.Add(new_message);
+            _db.SaveChanges(); 
+            return RedirectToAction("Index", new { id = group.Id });
+        }
 
+        return View(group);
+    }
+    
     [Authorize(Roles = "User,Admin")]
     [HttpGet]
     // Only users and admins can create groups.
@@ -176,31 +204,5 @@ public class GroupController : Controller
         return View(group);
     }
 
-    [HttpPost]
-    [Authorize(Roles = "User,Admin")]
-    public IActionResult Index([FromForm] Message new_message)
-    {
-        Group group;
-        try
-        {
-            group = _db.Groups
-                .Include(g => g.User)
-                .Include(g => g.Messages)
-                .ThenInclude(m => m.User)
-                .First(g => g.Id == new_message.GroupId);
-        }
-        catch (InvalidOperationException)
-        {
-            return View("MyError", new ErrorView("The group does not exists!"));
-        }
-        new_message.UserId =_userManager.GetUserId(User);
-        if (ModelState.IsValid)
-        {
-            _db.Messages.Add(new_message);
-            _db.SaveChanges(); 
-            return RedirectToAction("Index", new { id = group.Id });
-        }
-
-        return View(group);
-    }
+    
 }
