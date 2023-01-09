@@ -1,0 +1,20 @@
+@model FriendsView 
+@{
+    Layout = "MyLayout";
+    ViewData["Title"] = "Users";
+}
+
+@Html.Partial("SearchBar", new SearchModel("/friends"));
+<div class="people">
+    @if (Model.Users.Count != 0)
+    {
+        @foreach (var user in Model.Users)
+        {
+            @Html.Partial("PeoplePartial", user)
+        }
+    }
+    else
+    {
+        <p style="color:whitesmoke">nu ai prieteni</p>
+    }
+</div>
