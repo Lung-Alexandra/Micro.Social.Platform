@@ -17,7 +17,7 @@
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
 
-        <img class="user-dp" src="@IOHelper.imageOrDefault(Model.ImageFilename)" alt="">
+        <img class="user-dp" src="@IOHelper.imageOrDefault(Model.ImageFilename,IOHelper.DefaultProfileImage)" alt="">
 
         <div class="info-container">
             <h1 class="name">@Model.User.UserName</h1>

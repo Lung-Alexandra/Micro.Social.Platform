@@ -3,7 +3,7 @@
 
 <div class="post">
     <div class="post-header">
-        <img src="@IOHelper.imageOrDefault(Model.User.UserProfile.ImageFilename)" class="user-icon" alt="">
+        <img src="@IOHelper.imageOrDefault(Model.User.UserProfile.ImageFilename, IOHelper.DefaultProfileImage)" class="user-icon" alt="">
         <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
             <button type="submit" class="user-button">
                 <p class="username">@Model.User.UserName</p>
@@ -27,7 +27,7 @@
                     <p class="text">@Model.Content</p>
                 </button>
             </form>
-            <img src="@IOHelper.imageOrDefault(Model.ImageFilename)" alt="">
+            <img src="@IOHelper.imageOrDefault(Model.ImageFilename,IOHelper.DefaultPostImage)" alt="">
         </div>
     </div>
 

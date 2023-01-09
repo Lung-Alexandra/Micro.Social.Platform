@@ -27,7 +27,7 @@
                     <p class="post-title">@Model.Title</p>
                     <p class="text">@Model.Content</p>
                 </div>
-                <img src="@IOHelper.imageOrDefault(Model.ImageFilename)" alt="">
+                <img src="@IOHelper.imageOrDefault(Model.ImageFilename,IOHelper.DefaultPostImage)" alt="">
             </div>
         </div>
 

@@ -2,7 +2,8 @@ namespace MicroSocialPlatform.Misc;
 
 public static class IOHelper
 {
-    public static string DefaultImageSource = "https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg";
+    public static string DefaultPostImage = "https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg";
+    public static string DefaultProfileImage = "https://img.freepik.com/free-icon/user_318-790139.jpg?w=2000";
 
     // Returns the filename string that will be placed in the database.
     public static string getImageDatabasePath(string fileName)
@@ -21,11 +22,11 @@ public static class IOHelper
     }
 
     // If the given string is null, returns the path to the default image, else returns the image.
-    public static string imageOrDefault(string? image)
+    public static string imageOrDefault(string? image, string defaultImage)
     {
         if (image == null)
         {
-            return DefaultImageSource;
+            return defaultImage;
         }
 
         return image;
