@@ -1,0 +1,16 @@
+@model AppUser
+<div class="card">
+    <a asp-route="profile" asp-route-id="@Model.UserProfile.Id" class = "pnume">
+        <h3 class="person-name">@Model.UserName</h3>
+    </a>
+    <div class="bar">
+        <div class="emptybar"></div>
+        <div class="filledbar"></div>
+    </div>
+    <form asp-route="profile" asp-route-id="@Model.UserProfile.Id" style="display: contents;" method="get">
+        <button type="submit" class="view-people-btn">
+            View profile
+        </button>
+    </form>
+
+</div>
