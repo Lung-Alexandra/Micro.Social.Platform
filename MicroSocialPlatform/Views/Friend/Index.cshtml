@@ -4,7 +4,7 @@
     ViewData["Title"] = "Users";
 }
 
-@Html.Partial("SearchBar", new SearchModel("/friends"));
+@Html.Partial("SearchBar", new SearchModel("/friends"))
 <div class="people">
     @if (Model.Users.Count != 0)
     {
@@ -15,6 +15,6 @@
     }
     else
     {
-        <p style="color:whitesmoke">nu ai prieteni</p>
+        <p class="nofriends">Nu ai prieteni</p>
     }
 </div>

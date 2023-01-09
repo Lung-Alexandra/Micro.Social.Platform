@@ -1,11 +1,13 @@
 .people {
     position: absolute;
-    height: 1000vh;
-    width: 70%;
+    height: 100%;
+    width: 85%;
     top: 60px;
-    left: 10%;
+    margin-left: 7%;
     display: flex;
     flex-flow: row wrap;
+    overflow-y: scroll;
+    background-color: transparent;
 }
 .people>* {
     flex: 0 0 200px;
@@ -21,10 +23,6 @@
     position: relative;
 }
 
-.card:not(:first-child) {
-    margin-left: -50px;
-}
-
 .card:hover {
     transform: translateY(-20px);
     transition: 0.4s ease-out;
@@ -32,7 +30,6 @@
 
 .card:hover ~ .card {
     position: relative;
-    left: 50px;
     transition: 0.4s ease-out;
 }
 .pnume{
@@ -91,4 +88,9 @@
     backdrop-filter: blur(10px);
     cursor: pointer; 
     color: var(--all-text-color);
+}
+.nofriends{
+    margin:auto auto;
+    font-size:1.5rem;
+    color: whitesmoke;
 }

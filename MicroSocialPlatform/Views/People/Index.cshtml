@@ -4,11 +4,17 @@
     ViewData["Title"] = "Users";
 }
 
-@Html.Partial("SearchBar", new SearchModel("/people"));
+@Html.Partial("SearchBar", new SearchModel("/people"))
 <div class="people">
-    @foreach (var user in Model.Users)
+    @if (Model.Users.Count != 0)
     {
-        @Html.Partial("PeoplePartial",user)
+        @foreach (var user in Model.Users)
+        {
+            @Html.Partial("PeoplePartial", user)
+        }
     }
-
+    else
+    {
+        <p class="nofriends">Nu exista persoane</p>
+    }
 </div>
