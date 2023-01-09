@@ -40,6 +40,9 @@ public class Profile
     // If the profile is private or not.
     public Visibility Visibility { get; set; }
 
+    // The file name of the profile image.
+    public string? ImageFilename { get; set; }
+
     [NotMapped]
     // If the current user owns this profile.
     public bool userOwnsProfile;

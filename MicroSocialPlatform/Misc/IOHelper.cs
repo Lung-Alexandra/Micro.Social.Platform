@@ -2,11 +2,7 @@ namespace MicroSocialPlatform.Misc;
 
 public static class IOHelper
 {
-    // Returns the actual path to the file.
-    public static string getImageFilePath(IWebHostEnvironment env, string fileName)
-    {
-        return Path.Combine(env.WebRootPath, "images", fileName);
-    }
+    public static string DefaultImageSource = "https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg";
 
     // Returns the filename string that will be placed in the database.
     public static string getImageDatabasePath(string fileName)
@@ -14,11 +10,24 @@ public static class IOHelper
         return "/images/" + fileName;
     }
 
-    public static async void writeToPath(string path, IFormFile file)
+    // Saves the given file into the images folder.
+    public static async void saveImage(IWebHostEnvironment env, IFormFile file)
     {
+        string path = Path.Combine(env.WebRootPath, "images", file.FileName);
         using (var fileStream = new FileStream(path, FileMode.Create))
         {
             await file.CopyToAsync(fileStream);
         }
+    }
+
+    // If the given string is null, returns the path to the default image, else returns the image.
+    public static string imageOrDefault(string? image)
+    {
+        if (image == null)
+        {
+            return DefaultImageSource;
+        }
+
+        return image;
     }
 }

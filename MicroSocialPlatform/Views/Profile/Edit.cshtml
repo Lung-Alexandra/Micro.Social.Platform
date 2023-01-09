@@ -9,31 +9,34 @@
 
     @using (Html.BeginForm("Edit",
         "Profile",
-        method: FormMethod.Post))
+        method: FormMethod.Post,
+        new { enctype = "multipart/form-data" }
+        ))
     {
         <div class="date-editare">
             <div class="about">
-                @Html.Label("AboutMe", "About me",new{htmlAttributes = new{@class ="about-text"}})
-                
-                @Html.EditorFor(m => m.AboutMe,new{htmlAttributes = new{@class ="text"}})
-              
+                @Html.Label("AboutMe", "About me", new { htmlAttributes = new { @class = "about-text" } })
+
+                @Html.EditorFor(m => m.AboutMe, new { htmlAttributes = new { @class = "text" } })
+
                 @Html.ValidationMessageFor(m => m.AboutMe, null)
             </div>
             <div class="gen">
-               
-                @Html.Label("Gender", "My gender",new{htmlAttributes = new{@class ="title-gender"}})
 
-              
-                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList),new{htmlAttributes = new{@class ="optiuni"}})
-     
+                @Html.Label("Gender", "My gender", new { htmlAttributes = new { @class = "title-gender" } })
+
+
+                @Html.DropDownListFor(m => m.Gender, new SelectList(ViewBag.GenderList), new { htmlAttributes = new { @class = "optiuni" } })
+
             </div>
             <div class="vizibilitate">
                 <p>Alege vizibilitatea profilului:</p>
                 <p>@Html.RadioButtonFor(Model => Model.Visibility, "Public") public</p>
                 <p>@Html.RadioButtonFor(Model => Model.Visibility, "Private") private </p>
             </div>
+            <input class="form-control" type="file" name="profileImage"/>
         </div>
-       
+
         <button type="submit" class="editare-btn">Edit profile</button>
     }
 

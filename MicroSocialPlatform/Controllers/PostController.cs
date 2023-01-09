@@ -14,13 +14,13 @@ public class PostController : Controller
 {
     private readonly ApplicationDbContext _db;
     private readonly UserManager<AppUser> _userManager;
-    private readonly IWebHostEnvironment _web_env;
+    private readonly IWebHostEnvironment _webEnv;
 
     public PostController(ApplicationDbContext db, UserManager<AppUser> userManager, IWebHostEnvironment web_env)
     {
         _db = db;
         _userManager = userManager;
-        _web_env = web_env;
+        _webEnv = web_env;
     }
 
     // Only users and admins can create posts.
@@ -162,12 +162,10 @@ public class PostController : Controller
             if (_userManager.GetUserId(User) == post.UserId || User.IsInRole("Admin"))
             {
                 // Check if there was an image in the form.
-                if (postImage!=null && postImage.Length > 0)
+                if (postImage != null && postImage.Length > 0)
                 {
-                    var storagePath = IOHelper.getImageFilePath(_web_env, postImage.FileName);
-                    var databaseString = IOHelper.getImageDatabasePath(postImage.FileName);
-                    IOHelper.writeToPath(storagePath,postImage);
-                    post.ImageFilename = databaseString;
+                    IOHelper.saveImage(_webEnv, postImage);
+                    post.ImageFilename = IOHelper.getImageDatabasePath(postImage.FileName);
                 }
 
                 post.Title = newPost.Title;

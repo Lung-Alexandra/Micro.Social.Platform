@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using MicroSocialPlatform.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MicroSocialPlatform.Misc;
 
 namespace MicroSocialPlatform.Controllers;
 
@@ -13,12 +14,14 @@ public class ProfileController : Controller
     private readonly ApplicationDbContext _db;
     private readonly UserManager<AppUser> _userManager;
     private readonly List<Gender> _genderList;
+    private readonly IWebHostEnvironment _webEnv;
 
-    public ProfileController(ApplicationDbContext db, UserManager<AppUser> userManager)
+    public ProfileController(ApplicationDbContext db, UserManager<AppUser> userManager, IWebHostEnvironment webEnv)
     {
         _db = db;
         _userManager = userManager;
         _genderList = new List<Gender> { Gender.Male, Gender.Female, Gender.Unspecified };
+        _webEnv = webEnv;
     }
 
     // Shows the profile given by id.
@@ -39,7 +42,8 @@ public class ProfileController : Controller
         profile.userSent = _db.Friendships.FirstOrDefault(f => f.User1Id == myId && f.User2Id == profile.UserId);
         profile.userReceived = _db.Friendships.FirstOrDefault(f => f.User1Id == profile.UserId && f.User2Id == myId);
         profile.numPosts = profile.User.UserPosts.Count;
-        profile.numFriends = _db.Friendships.Count(f => f.Status == FriendshipStatus.Accepted && (f.User1Id == profile.UserId || f.User2Id == profile.UserId));
+        profile.numFriends = _db.Friendships.Count(f =>
+            f.Status == FriendshipStatus.Accepted && (f.User1Id == profile.UserId || f.User2Id == profile.UserId));
 
         return View(profile);
     }
@@ -74,7 +78,7 @@ public class ProfileController : Controller
     [Authorize(Roles = "User,Admin")]
     [HttpPost]
     // Edits the profile with the given id.
-    public IActionResult Edit(int id, Profile newProfile)
+    public IActionResult Edit(int id, Profile newProfile, IFormFile? profileImage)
     {
         Profile profile;
         // Try to read the profile from the database.
@@ -93,6 +97,14 @@ public class ProfileController : Controller
             var userId = _userManager.GetUserId(User);
             if (userId == profile.UserId || User.IsInRole("Admin"))
             {
+                // Check if there was an image in the form. 
+                if (profileImage != null && profileImage.Length > 0)
+                {
+                    IOHelper.saveImage(_webEnv, profileImage);
+                    profile.ImageFilename = IOHelper.getImageDatabasePath(profileImage.FileName);
+                }
+
+
                 profile.AboutMe = newProfile.AboutMe;
                 profile.Gender = newProfile.Gender;
                 profile.Visibility = newProfile.Visibility;

@@ -1,3 +1,4 @@
+@using MicroSocialPlatform.Misc
 @model Profile; 
 @{
     ViewData["Title"] = "Show Profile";
@@ -16,7 +17,7 @@
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
 
-        <img class="user-dp" src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" alt="">
+        <img class="user-dp" src="@IOHelper.imageOrDefault(Model.ImageFilename)" alt="">
 
         <div class="info-container">
             <h1 class="name">@Model.User.UserName</h1>
