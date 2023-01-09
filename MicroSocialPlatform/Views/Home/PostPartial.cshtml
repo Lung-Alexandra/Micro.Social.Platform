@@ -1,4 +1,8 @@
 @model Post 
+@{
+    string defaultImageSource = "https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg";
+    string postImagePath = Model.ImageFilename != null ? Model.ImageFilename : defaultImageSource;
+}
 
 <div class="post">
     <div class="post-header">
@@ -26,7 +30,7 @@
                     <p class="text">@Model.Content</p>
                 </button>
             </form>
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" alt="">
+            <img src="@postImagePath" alt="">
         </div>
     </div>
 

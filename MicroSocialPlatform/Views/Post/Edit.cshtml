@@ -8,22 +8,25 @@
 
 <div class="edit-post-container">
     <h1 class="title-cont">Edit a post</h1>
-    @using (Html.BeginForm(actionName: "Edit", controllerName: "Post", method: FormMethod.Post))
+    @using (Html.BeginForm(actionName: "Edit", controllerName: "Post", method: FormMethod.Post,new { enctype = "multipart/form-data" }))
     {
         <div class="title-post">
-        @Html.Label("Title", "Title")
-        
-        @Html.EditorFor(p => p.Title)
-        
-        @Html.ValidationMessageFor(p => p.Title, null)
+            @Html.Label("Title", "Title")
+
+            @Html.EditorFor(p => p.Title)
+
+            @Html.ValidationMessageFor(p => p.Title, null)
         </div>
         <div class="add-content">
-        @Html.Label("Content", "Content")
-        
-        @Html.EditorFor(p => p.Content)
-        
-        @Html.ValidationMessageFor(p => p.Content, null)
+            @Html.Label("Content", "Content")
+
+            @Html.EditorFor(p => p.Content)
+
+            @Html.ValidationMessageFor(p => p.Content, null)
+
+            <input class="form-control" type="file" name="postImage"/>
         </div>
+
         <button type="submit" class="creat-post-btn">Edit Post</button>
     }
 </div>

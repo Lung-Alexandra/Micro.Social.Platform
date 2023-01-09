@@ -24,6 +24,9 @@ public class Post
     // The content of the post.
     public string Content { get; set; }
 
+    // The file name of the image of the post.
+    public string? ImageFilename { get; set; }
+
     // The date of the post.
     public DateTime Date { get; set; }
 

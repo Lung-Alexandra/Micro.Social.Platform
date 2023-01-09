@@ -2,6 +2,8 @@
 @{
     Layout = "MyLayout";
     ViewData["Title"] = "Show Post";
+    string defaultImageSource = "https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg";
+    string postImagePath = Model.ImageFilename != null ? Model.ImageFilename : defaultImageSource; 
 }
 <section class="post-with-comments">
     <div class="post-s">
@@ -26,7 +28,7 @@
                     <p class="post-title">@Model.Title</p>
                     <p class="text">@Model.Content</p>
                 </div>
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" alt="">
+                <img src="@postImagePath" alt="">
             </div>
         </div>
 

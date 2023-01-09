@@ -28,7 +28,7 @@
         }
         @if (Model.userCanDelete)
         {
-            <form method="get" asp-route="delete_message" asp-route-id="@Model.Id" style="display: contents;">
+            <form method="post" asp-route="delete_message" asp-route-id="@Model.Id" style="display: contents;">
                 <button type="submit" class="edit-group-button">
                     <ion-icon name="trash-outline"></ion-icon>
                     Delete
