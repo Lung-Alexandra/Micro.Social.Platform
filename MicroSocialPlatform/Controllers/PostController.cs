@@ -1,3 +1,4 @@
+using Ganss.Xss;
 using Microsoft.AspNetCore.Authorization;
 using MicroSocialPlatform.Models;
 using MicroSocialPlatform.Data;
@@ -102,6 +103,8 @@ public class PostController : Controller
     [HttpPost]
     public IActionResult New(Post post)
     {
+        var sanitizer = new HtmlSanitizer();
+        post.Content = sanitizer.Sanitize(post.Content);
         post.UserId = _userManager.GetUserId(User);
         post.Date = DateTime.Now;
         if (ModelState.IsValid)
@@ -145,6 +148,7 @@ public class PostController : Controller
     // Edit the post given by the id.
     public async Task<IActionResult> Edit(int id, Post newPost, IFormFile? postImage)
     {
+        var sanitizer = new HtmlSanitizer();
         Post post;
         // Get the post from the database with the corresponding id.
         try
@@ -169,7 +173,7 @@ public class PostController : Controller
                 }
 
                 post.Title = newPost.Title;
-                post.Content = newPost.Content;
+                post.Content = sanitizer.Sanitize(newPost.Content);
                 _db.SaveChanges();
                 return RedirectToAction("Index", new { id });
             }

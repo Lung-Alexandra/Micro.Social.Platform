@@ -450,8 +450,8 @@ img {
 
 .new-post-container,.edit-post-container,.edit-comment-container {
     margin: auto auto;
-    width: 80vh;
-    height: 90vh;
+    width: 80vw;
+    height: 100%;
     display: flex;
     flex-direction: column;
     padding: 0 3vh 20px;
@@ -459,11 +459,12 @@ img {
     background: var(--btn-bg);
     backdrop-filter: blur(10px);
     overflow-x: hidden;
+    overflow-y: scroll;
     align-items: center;
     text-align: center;
     line-height: 5rem;
     border-radius: 10px 200px 10px 200px;
-    color: var(--all-text-color);;
+    color: var(--all-text-color);
 }
 
 .title-cont {
@@ -537,4 +538,9 @@ input:-webkit-autofill:active {
 }
 .creat-post-btn:hover ,.edit-comm-btn:hover{
     cursor:pointer;
+}
+
+
+.note-editor.note-airframe .note-editing-area .note-editable, .note-editor.note-frame .note-editing-area .note-editable {
+    background-color:whitesmoke!important;
 }
