@@ -60,6 +60,9 @@ public class GroupController : Controller
         foreach (var message in group.Messages)
         {
             message.userOwns = myId == message.UserId;
+            // Only admins and the owner can edit this message.
+            message.userCanEdit = message.userOwns || User.IsInRole("Admin");
+            // Only admins and the owner can delete this message.
             message.userCanDelete = message.userOwns || groupAdmin;
         }
 
@@ -101,6 +104,9 @@ public class GroupController : Controller
         foreach (var message in group.Messages)
         {
             message.userOwns = myId == message.UserId;
+            // Only admins and the owner can edit this message.
+            message.userCanEdit = message.userOwns || User.IsInRole("Admin");
+            // Only admins and the owner can delete this message.
             message.userCanDelete = message.userOwns || groupAdmin;
         }
 
@@ -222,7 +228,7 @@ public class GroupController : Controller
         if (ModelState.IsValid)
         {
             // Check if user is an admin or a group admin.
-            if (groupAdmin || User.IsInRole("Admin"))
+            if (groupAdmin)
             {
                 group.Name = newGroup.Name;
                 group.Description = newGroup.Description;

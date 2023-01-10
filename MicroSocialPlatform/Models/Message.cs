@@ -31,6 +31,9 @@ public class Message
     // If the current user owns this message.
     public bool userOwns;
 
-    [NotMapped] 
-    public bool userCanDelete;
+    [NotMapped]
+    // If the current user can edit this message.
+    public bool userCanEdit;
+
+    [NotMapped] public bool userCanDelete;
 }

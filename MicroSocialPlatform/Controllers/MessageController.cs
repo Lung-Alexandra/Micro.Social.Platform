@@ -36,8 +36,8 @@ public class MessageController : Controller
 
         string myId = _userManager.GetUserId(User);
 
-        // Only the owner can edit its messages.
-        if (myId == message.UserId) 
+        // Only the owner and the admin can edit this message.
+        if (myId == message.UserId || User.IsInRole("Admin"))
         {
             return View(message);
         }
@@ -66,8 +66,8 @@ public class MessageController : Controller
         if (ModelState.IsValid)
         {
             string myId = _userManager.GetUserId(User);
-            // Only the owner can edit its messages.
-            if (myId == toEdit.UserId) 
+            // Only the admin and the owner can edit this message.
+            if (myId == toEdit.UserId || User.IsInRole("Admin"))
             {
                 toEdit.Content = edited.Content;
                 _db.SaveChanges();

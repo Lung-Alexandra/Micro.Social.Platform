@@ -1,7 +1,7 @@
 @model Message
 @{
     var messageClass = Model.userOwns ? "sent" : "";
-    var visibleSettings = Model.userOwns || Model.userCanDelete;
+    var visibleSettings = Model.userCanEdit || Model.userCanDelete;
     var settingsClass = visibleSettings ? "" : "hid";
 }
 <div class="bubble">
@@ -17,7 +17,7 @@
     </div>
 
     <div class="edit-mess-group hid">
-        @if (Model.userOwns)
+        @if (Model.userCanEdit)
         {
             <form method="get" asp-route="edit_message" asp-route-id="@Model.Id" style="display: contents;">
                 <button type="submit" class="edit-group-button">
