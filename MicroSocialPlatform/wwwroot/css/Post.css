@@ -294,7 +294,7 @@ img {
     height: 1px;
     overflow: hidden;
     position: absolute !important;
-    width: 1px
+    width: 1px;
 }
 
 .gallery {
@@ -342,7 +342,8 @@ img {
     position: absolute;
     right: 1rem;
     text-shadow: .2rem .2rem .2rem rgba(0, 0, 0, 0.1);
-    top: 1rem
+    top: 1rem;
+    z-index:100;
 }
 
 .fa-clone, .fa-comment {
