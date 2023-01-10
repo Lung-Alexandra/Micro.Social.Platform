@@ -12,7 +12,7 @@
         || (received != null && received.Status == FriendshipStatus.Accepted);
 
     //Check if profile information can be displayed
-    bool visible = friend || Model.userOwnsProfile || Model.Visibility == Visibility.Public;
+    bool visible = friend || Model.userOwnsProfile || Model.userCanEdit ||  Model.Visibility == Visibility.Public;
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
@@ -42,14 +42,22 @@
         }
     </div>
     <div class="btn-container">
-        @if (Model.userOwnsProfile)
+        @if (Model.userCanEdit)
         {
             <button class="btn edit-btn">
                 <a asp-route="edit_profile" asp-route-id="@Model.Id">edit profile </a>
             </button>
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start")" method="post">
-                <button type="submit" class="btn logout-btn">Logout</button>
-            </form>
+            <form method ="post" style="display: contents" asp-route="delete_profile" asp-route-id="@Model.Id"> 
+                <button type = "submit" class="btn edit-btn">
+                    Delete profile
+                </button>
+                </form>
+            @if (Model.userOwnsProfile)
+            {
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start")" method="post">
+                    <button type="submit" class="btn logout-btn">Logout</button>
+                </form>
+            }
         }
         else
         {

@@ -39,6 +39,7 @@ public class ProfileController : Controller
 
         string myId = _userManager.GetUserId(User);
         profile.userOwnsProfile = myId == profile.UserId;
+        profile.userCanEdit = profile.userOwnsProfile || User.IsInRole("Admin");
         profile.userSent = _db.Friendships.FirstOrDefault(f => f.User1Id == myId && f.User2Id == profile.UserId);
         profile.userReceived = _db.Friendships.FirstOrDefault(f => f.User1Id == profile.UserId && f.User2Id == myId);
         profile.numPosts = profile.User.UserPosts.Count;
@@ -117,5 +118,34 @@ public class ProfileController : Controller
 
         ViewBag.GenderList = _genderList;
         return View(profile);
+    }
+    // Need to be a user or an admin to delete a profile.
+    [Authorize(Roles = "User,Admin")]
+    [HttpPost]
+    // Delete the profile by id.
+    public IActionResult Delete(int id)
+    {
+        Profile toDelete;
+        // Try to read the profile from the database.
+        try
+        {
+            toDelete = _db.Profiles.Include(u=>u.User)
+               .First(x => x.Id == id);
+        }
+        catch (InvalidOperationException)
+        {
+            return View("MyError", new ErrorView("The profile does not exist."));
+        }
+
+        // Check if user is an admin or owns the profile.
+        if (_userManager.GetUserId(User) == toDelete.UserId || User.IsInRole("Admin"))
+        {
+            // Delete the profile.
+            _db.Profiles.Remove(toDelete);
+            _db.SaveChanges();
+            return RedirectToRoute("home");
+        }
+
+        return View("MyError", new ErrorView("Cannot delete another user's profile!"));
     }
 }

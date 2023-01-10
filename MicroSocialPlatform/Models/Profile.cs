@@ -48,6 +48,10 @@ public class Profile
     public bool userOwnsProfile;
 
     [NotMapped]
+    // If the current can edit this profile.
+    public bool userCanEdit;
+
+    [NotMapped]
     // The friendship received by the current user, send by the user with this profile. 
     public Friendship? userReceived;
 

@@ -89,7 +89,12 @@ app.MapControllerRoute(
     defaults:
     new { controller = "Profile", action = "Edit" }
 );
-
+app.MapControllerRoute(
+    name: "delete_profile",
+    pattern: "/profile/delete/{id}",
+    defaults:
+    new { controller = "Profile", action = "Delete" }
+);
 app.MapControllerRoute(
     name: "new_post",
     pattern: "/post/new",
