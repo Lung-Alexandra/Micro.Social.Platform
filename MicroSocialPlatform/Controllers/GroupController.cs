@@ -265,10 +265,6 @@ public class GroupController : Controller
         // Only group admins can delete the group.
         if (groupAdmin)
         {
-            // Delete the group memberships.
-            _db.GroupMemberships.RemoveRange(group.Memberships);
-            // Delete the group messages.
-            _db.Messages.RemoveRange(group.Messages);
             // Delete group then redirect to the group list.
             _db.Groups.Remove(group);
             _db.SaveChanges();

@@ -208,8 +208,6 @@ public class PostController : Controller
         // Check if user is an admin or owns the post.
         if (_userManager.GetUserId(User) == toDelete.UserId || User.IsInRole("Admin"))
         {
-            // Delete the comments of the post.
-            _db.Comments.RemoveRange(toDelete.Comments);
             // Delete the post.
             _db.Posts.Remove(toDelete);
             _db.SaveChanges();

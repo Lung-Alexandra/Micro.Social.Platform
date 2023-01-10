@@ -13,10 +13,10 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<Post>().HasOne(p => p.User).WithMany(u => u.UserPosts);
-        builder.Entity<Profile>().HasOne(p => p.User).WithOne(u => u.UserProfile).HasForeignKey<Profile>(p => p.UserId);
-        builder.Entity<Comment>().HasOne(c => c.Post).WithMany(p => p.Comments);
-        builder.Entity<Comment>().HasOne(c => c.User).WithMany(p => p.UserComments);
+        builder.Entity<Post>().HasOne(p => p.User).WithMany(u => u.UserPosts).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<Profile>().HasOne(p => p.User).WithOne(u => u.UserProfile).HasForeignKey<Profile>(p => p.UserId).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<Comment>().HasOne(c => c.Post).WithMany(p => p.Comments).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<Comment>().HasOne(c => c.User).WithMany(p => p.UserComments).OnDelete(DeleteBehavior.Cascade);
 
         builder.Entity<Friendship>().HasOne(f => f.User1).WithMany(u => u.UserSentFriendships);
         builder.Entity<Friendship>().HasOne(f => f.User2).WithMany(u => u.UserReceivedFriendships);
@@ -25,10 +25,10 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
         builder.Entity<GroupMembership>().HasOne(m => m.Group).WithMany(g => g.Memberships);
         builder.Entity<GroupMembership>().HasOne(m => m.User).WithMany(u => u.UserMemberships);
 
-        builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups);
+        builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups).OnDelete(DeleteBehavior.Cascade);
 
-        builder.Entity<Message>().HasOne(m => m.User).WithMany(u => u.UserMessages);
-        builder.Entity<Message>().HasOne(m => m.Group).WithMany(g => g.Messages);
+        builder.Entity<Message>().HasOne(m => m.User).WithMany(u => u.UserMessages).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<Message>().HasOne(m => m.Group).WithMany(g => g.Messages).OnDelete(DeleteBehavior.Cascade);
 
         base.OnModelCreating(builder);
     }

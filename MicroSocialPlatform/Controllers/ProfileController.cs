@@ -15,13 +15,16 @@ public class ProfileController : Controller
     private readonly UserManager<AppUser> _userManager;
     private readonly List<Gender> _genderList;
     private readonly IWebHostEnvironment _webEnv;
+    private readonly SignInManager<AppUser> _signInManager;
 
-    public ProfileController(ApplicationDbContext db, UserManager<AppUser> userManager, IWebHostEnvironment webEnv)
+    public ProfileController(ApplicationDbContext db, UserManager<AppUser> userManager, IWebHostEnvironment webEnv,
+        SignInManager<AppUser> sinSignInManager)
     {
         _db = db;
         _userManager = userManager;
         _genderList = new List<Gender> { Gender.Male, Gender.Female, Gender.Unspecified };
         _webEnv = webEnv;
+        _signInManager = sinSignInManager;
     }
 
     // Shows the profile given by id.
@@ -119,31 +122,40 @@ public class ProfileController : Controller
         ViewBag.GenderList = _genderList;
         return View(profile);
     }
+
     // Need to be a user or an admin to delete a profile.
     [Authorize(Roles = "User,Admin")]
     [HttpPost]
     // Delete the profile by id.
-    public IActionResult Delete(int id)
+    public async Task<ActionResult> Delete(int id)
     {
-        Profile toDelete;
+        Profile profile;
         // Try to read the profile from the database.
         try
         {
-            toDelete = _db.Profiles.Include(u=>u.User)
-               .First(x => x.Id == id);
+            profile = _db.Profiles.Include(u => u.User)
+                .First(x => x.Id == id);
         }
         catch (InvalidOperationException)
         {
             return View("MyError", new ErrorView("The profile does not exist."));
         }
 
+        // Check if this is our profile.
+        bool myUser = _userManager.GetUserId(User) == profile.UserId;
         // Check if user is an admin or owns the profile.
-        if (_userManager.GetUserId(User) == toDelete.UserId || User.IsInRole("Admin"))
+        if (myUser || User.IsInRole("Admin"))
         {
-            // Delete the profile.
-            _db.Profiles.Remove(toDelete);
+            // Delete the user.
+            await _userManager.DeleteAsync(profile.User);
             _db.SaveChanges();
-            return RedirectToRoute("home");
+            if (myUser)
+            {
+                // If we deleted our own user, sign out.
+                await _signInManager.SignOutAsync();
+            }
+
+            return RedirectToAction("Index", "Start");
         }
 
         return View("MyError", new ErrorView("Cannot delete another user's profile!"));

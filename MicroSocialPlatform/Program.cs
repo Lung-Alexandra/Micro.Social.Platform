@@ -34,6 +34,8 @@ builder.Services.AddDefaultIdentity<AppUser>(options =>
     .AddSignInManager<MySignInManager>()
     .AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+builder.Services.Configure<SecurityStampValidatorOptions>(o => o.ValidationInterval = TimeSpan.Zero);
+
 
 var app = builder.Build();
 
