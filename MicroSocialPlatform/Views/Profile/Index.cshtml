@@ -12,12 +12,12 @@
         || (received != null && received.Status == FriendshipStatus.Accepted);
 
     //Check if profile information can be displayed
-    bool visible = friend || Model.userOwnsProfile || Model.userCanEdit ||  Model.Visibility == Visibility.Public;
+    bool visible = friend ||  Model.userCanEdit || Model.Visibility == Visibility.Public;
 }
 <div class="profile-container" xmlns="http://www.w3.org/1999/html">
     <div class="user-info">
 
-        <img class="user-dp" src="@IOHelper.imageOrDefault(Model.ImageFilename,IOHelper.DefaultProfileImage)" alt="">
+        <img class="user-dp" src="@IOHelper.imageOrDefault(Model.ImageFilename, IOHelper.DefaultProfileImage)" alt="">
 
         <div class="info-container">
             <h1 class="name">@Model.User.UserName</h1>
@@ -47,24 +47,24 @@
             <button class="btn edit-btn">
                 <a asp-route="edit_profile" asp-route-id="@Model.Id">edit profile </a>
             </button>
-            <form method ="post" style="display: contents" asp-route="delete_profile" asp-route-id="@Model.Id"> 
-                <button type = "submit" class="btn edit-btn">
+            <form method="post" style="display: contents" asp-route="delete_profile" asp-route-id="@Model.Id">
+                <button type="submit" class="btn edit-btn">
                     Delete profile
                 </button>
-                </form>
-            @if (Model.userOwnsProfile)
-            {
-                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start")" method="post">
-                    <button type="submit" class="btn logout-btn">Logout</button>
-                </form>
-            }
+            </form>
+        }
+        @if (Model.userOwnsProfile)
+        {
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Start")" method="post">
+                <button type="submit" class="btn logout-btn">Logout</button>
+            </form>
         }
         else
         {
             if (friend)
             {
                 // Get the friendship.
-                Friendship? frienship = (received!= null) ? received: sent;
+                Friendship? frienship = (received != null) ? received : sent;
                 <form asp-route="delete_friendship" asp-route-id="@frienship.Id" method="post">
                     <button class="btn">Unfriend</button>
                 </form>
