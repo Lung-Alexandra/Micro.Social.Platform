@@ -7,7 +7,7 @@
 <section class="post-with-comments">
     <div class="post-s">
         <div class="post-header">
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/21/59/tree-736877__480.jpg" class="user-icon" alt="">
+            <img src="@IOHelper.imageOrDefault(Model.User.UserProfile.ImageFilename, IOHelper.DefaultProfileImage)" class="user-icon" alt="">
             <form method="get" asp-route="profile" asp-route-id="@Model.User.UserProfile.Id" class="link-to-user">
                 <button type="submit" class="user-button">
                     <p class="username">@Model.User.UserName</p>
