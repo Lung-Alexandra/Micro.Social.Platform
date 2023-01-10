@@ -135,17 +135,11 @@ public class FriendshipController : Controller
         bool sender = myId == friendship.User1Id;
         bool receiver = myId == friendship.User2Id;
 
-        // Then check if the user is either the sender or the receiver of the friendship, or an admin.
-        if (sender || receiver || User.IsInRole("Admin"))
+        // Then check if the user is either the sender or the receiver of the friendship.
+        if (sender || receiver) 
         {
             _db.Friendships.Remove(friendship);
             _db.SaveChanges();
-
-            // If the user is an admin redirect to the home page.
-            if (User.IsInRole("Admin"))
-            {
-                return RedirectToAction("Index", "Home");
-            }
 
             // Get the profile id of the other user.
             int otherId = sender ? friendship.User2.UserProfile.Id : friendship.User1.UserProfile.Id;
