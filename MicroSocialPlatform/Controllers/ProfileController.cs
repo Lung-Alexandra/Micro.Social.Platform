@@ -133,7 +133,12 @@ public class ProfileController : Controller
         // Try to read the profile from the database.
         try
         {
-            profile = _db.Profiles.Include(u => u.User)
+            profile = _db.Profiles
+                .Include(u => u.User).ThenInclude(u => u.UserReceivedFriendships)
+                .Include(u => u.User).ThenInclude(u => u.UserSentFriendships)
+                .Include(u => u.User).ThenInclude(u=>u.UserGroups).ThenInclude(g => g.Memberships)
+                .Include(u => u.User).ThenInclude(u=>u.UserGroups).ThenInclude(g => g.Messages)
+                .Include(u=>u.User).ThenInclude(u=>u.UserPosts).ThenInclude(p=> p.Comments)
                 .First(x => x.Id == id);
         }
         catch (InvalidOperationException)
@@ -146,6 +151,8 @@ public class ProfileController : Controller
         // Check if user is an admin or owns the profile.
         if (myUser || User.IsInRole("Admin"))
         {
+            _db.Friendships.RemoveRange(profile.User.UserReceivedFriendships);
+            _db.Friendships.RemoveRange(profile.User.UserSentFriendships);
             // Delete the user.
             await _userManager.DeleteAsync(profile.User);
             _db.SaveChanges();

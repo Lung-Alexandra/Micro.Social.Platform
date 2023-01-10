@@ -22,13 +22,13 @@
                     <p></p>
                 </div>
                 <div class="chat-name">@Model.Name</div>
-                <div class="icons">
-                    <i class="fas fa-phone"></i>
-                    <i class="fas fa-video"></i>
-                </div>
-                <div class="menu">
-                    <div class="dots"></div>
-                </div>
+                
+                @if (Model.UserCanEdit)
+                {
+                    <div class="menu">
+                        <div class="dots"></div>
+                    </div>
+                }
             </div>
             <div class="middle">
                 <div class="text-messages">
@@ -77,8 +77,10 @@
 
         </div>
     </div>
-    <div class="edit-group hid">
-        <form method="get" asp-route="edit_group" asp-route-id="@Model.Id" style="display: contents;">
+    @if (Model.UserCanEdit)
+    {
+        <div class="edit-group hid">
+            <form method="get" asp-route="edit_group" asp-route-id="@Model.Id" style="display: contents;">
             <button type="submit" class="edit-group-button">
                 <ion-icon name="create-outline"></ion-icon>
                 Edit
@@ -91,6 +93,7 @@
             </button>
         </form>
     </div>
+    }
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>

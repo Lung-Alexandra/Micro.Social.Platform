@@ -17,13 +17,13 @@ public class GroupMembership
     [Key] public int Id { get; set; }
 
     // The user who owns the membership.
-    public string UserId { get; set; }
+    public string? UserId { get; set; }
 
     // The navigation property to the user.
     public AppUser? User { get; set; }
 
     // The group to which the user has a membership. 
-    public int GroupId { get; set; }
+    public int? GroupId { get; set; }
 
     // The navigation property to the group.
     public Group? Group { get; set; }

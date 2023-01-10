@@ -22,13 +22,13 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
         builder.Entity<Friendship>().HasOne(f => f.User2).WithMany(u => u.UserReceivedFriendships);
 
 
-        builder.Entity<GroupMembership>().HasOne(m => m.Group).WithMany(g => g.Memberships);
-        builder.Entity<GroupMembership>().HasOne(m => m.User).WithMany(u => u.UserMemberships);
+        builder.Entity<GroupMembership>().HasOne(m => m.Group).WithMany(g => g.Memberships).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<GroupMembership>().HasOne(m => m.User).WithMany(u => u.UserMemberships).OnDelete(DeleteBehavior.Cascade);
 
         builder.Entity<Group>().HasOne(g => g.User).WithMany(u => u.UserGroups).OnDelete(DeleteBehavior.Cascade);
 
-        builder.Entity<Message>().HasOne(m => m.User).WithMany(u => u.UserMessages).OnDelete(DeleteBehavior.Cascade);
-        builder.Entity<Message>().HasOne(m => m.Group).WithMany(g => g.Messages).OnDelete(DeleteBehavior.Cascade);
+        builder.Entity<Message>().HasOne(m => m.User).WithMany(u => u.UserMessages);
+        builder.Entity<Message>().HasOne(m => m.Group).WithMany(g => g.Messages).OnDelete(DeleteBehavior.Cascade); ;
 
         base.OnModelCreating(builder);
     }

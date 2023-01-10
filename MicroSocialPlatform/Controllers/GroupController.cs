@@ -48,10 +48,10 @@ public class GroupController : Controller
         string myId = _userManager.GetUserId(User);
         GroupMembership myMembership = group.Memberships.FirstOrDefault(m => m.UserId == myId);
         group.UserMembership = myMembership;
-
+       
         // The user can modify the group if it is a group admin.
         bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
-
+        group.UserCanEdit = groupAdmin;
         foreach (var membership in group.Memberships)
         {
             membership.UserCanModify = groupAdmin;
@@ -95,7 +95,7 @@ public class GroupController : Controller
 
         // The user can modify the group if it is a group admin.
         bool groupAdmin = myMembership != null && myMembership.Status == MembershipStatus.Admin;
-
+        group.UserCanEdit = groupAdmin;
         foreach (var membership in group.Memberships)
         {
             membership.UserCanModify = groupAdmin;
