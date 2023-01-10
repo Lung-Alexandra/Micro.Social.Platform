@@ -25,7 +25,9 @@
             <div class="post-img-container">
                 <div class="text-cont">
                     <p class="post-title">@Model.Title</p>
-                    <p class="text">@Model.Content</p>
+                    <div class="text">
+                        @Html.Raw(Model.Content)
+                    </div>
                 </div>
                 <img src="@IOHelper.imageOrDefault(Model.ImageFilename,IOHelper.DefaultPostImage)" alt="">
             </div>

@@ -20,7 +20,7 @@
         <div class="add-content">
             @Html.Label("Content", "Content")
 
-            @Html.EditorFor(p => p.Content)
+            @Html.TextArea("Content",Model.Content,new {@class ="summernote"})
 
             @Html.ValidationMessageFor(p => p.Content, null)
 
