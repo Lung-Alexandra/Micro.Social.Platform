@@ -10,7 +10,7 @@
     var profileClass = currentController == "Profile" ? "active" : "";
     var homeClass = currentController == "Home" ? "active" : "";
     var peopleClass = currentController == "People" ? "active" : "";
-    var friendClass = currentController == "Friends" ? "active" : "";
+    var friendClass = currentController == "Friend" ? "active" : "";
     var groupClass = currentController == "Group" ? "active" : "";
     Profile? profile = null;
     if (signedIn)
@@ -46,14 +46,17 @@
                 <span class="title">People</span>
             </a>
         </li>
-        <li class="list @friendClass">
-            <a href="/friends">
-                <span class="icon">
-                    <ion-icon name="person-circle-outline"></ion-icon>
-                </span>
-                <span class="title">Friends</span>
-            </a>
-        </li>
+        @if (signedIn)
+        {
+            <li class="list @friendClass">
+                <a href="/friends">
+                    <span class="icon">
+                        <ion-icon name="person-circle-outline"></ion-icon>
+                    </span>
+                    <span class="title">Friends</span>
+                </a>
+            </li>
+        }
         <li class="list">
             <a href="#">
                 <span class="icon">

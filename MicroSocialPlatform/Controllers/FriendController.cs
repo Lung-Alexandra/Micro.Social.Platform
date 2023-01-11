@@ -19,6 +19,7 @@ public class FriendController : Controller
         _userManager = userManager;
     }
 
+    [Authorize(Roles = "User,Admin")]
     public IActionResult Index()
     {
         // Get the search parameter from the request.
